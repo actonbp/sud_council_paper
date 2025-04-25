@@ -1,0 +1,13 @@
+pandas
+openai
+python-dotenv
+scikit-learn
+matplotlib
+seaborn
+jupyter
+PyYAML
+tabulate
+imbalanced-learn
+xgboost
+sentence-transformers
+mord 

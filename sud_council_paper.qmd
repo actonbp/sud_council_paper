@@ -1,0 +1,313 @@
+---
+title: "Understanding Student Interest in Substance Use Disorder Counseling: A Mixed-Methods Approach Using Machine Learning and Qualitative Interviews"
+shorttitle: "Student Interest in SUD Counseling" # Optional, for running head
+author:
+  - name: Erika Hernandez Acton
+    corresponding: true
+    email: erika@binghamton.edu # <<< TODO: Fill in Corresponding Author Email
+    affiliations:
+      - name: Binghamton University
+        # department: Your Department # Optional
+  - name: Bryan Acton
+    affiliations:
+      - name: Binghamton University
+  - name: Rory Eckhardt
+    affiliations:
+      - name: Binghamton University
+  - name: Linda Reynolds
+    affiliations:
+      - name: Binghamton University
+  - name: Giovanni Scaringi
+    affiliations:
+      - name: Binghamton University
+  - name: Nadine Mastroleo
+    affiliations:
+      - name: Binghamton University
+abstract: |
+  The demand for Substance Use Disorder (SUD) counselors is rapidly growing, yet significant challenges remain in expanding the workforce to meet this need. Despite substantial investment in recruitment, heterogeneity in student interest hinders pipeline development. To effectively attract and retain future SUD counselors, a deeper understanding of the factors influencing career interest is crucial. This paper presents findings from a two-part, mixed-methods study investigating student interest in SUD counseling. Study 1 employed a survey administered to students at a major state university (N=?) and utilized Random Forest analysis, an advanced machine learning technique, to identify the most salient predictors of interest in pursuing SUD counseling. Study 2 involved qualitative interviews (N=?) exploring students' perceived barriers, facilitators, and general interest related to SUD and mental health counseling careers. Findings reveal key predictive factors from the quantitative analysis and rich thematic insights from the qualitative data regarding student perspectives. Together, these studies provide critical insights into the complex landscape of student interest in SUD counseling, offering actionable recommendations for targeted workforce development strategies aimed at expanding this vital field.
+keywords: [substance use disorder, counseling, workforce development, student interest, career choice, machine learning, random forest, qualitative interviews, mixed-methods] # Add relevant keywords
+# author-note: # Optional section for disclosures, acknowledgements etc.
+#  disclosures:
+#    conflict of interest: The author declares no conflict of interest.
+#  acknowledgements: |
+#    Thanks to...
+bibliography: references.bib
+format:
+  apaquarto-docx: default
+  apaquarto-html: default # You can uncomment other formats later
+  # apaquarto-pdf: default
+engine: jupyter
+---
+
+# Introduction
+
+The field of Substance Use Disorder (SUD) counseling represents a critical component of the behavioral health workforce, addressing a significant public health challenge. National trends indicate a growing demand for qualified SUD counselors, driven by increased awareness, policy changes, and the ongoing opioid crisis [@citation_needed_1]. However, expanding the workforce to meet this demand faces considerable hurdles [@citation_needed_2]. Millions are invested annually in recruitment efforts, yet attracting sufficient numbers of students, particularly those with sustained interest, remains difficult. This difficulty may stem partly from a heterogeneity in student interest levels and a lack of clear understanding regarding the specific factors that draw individuals to, or deter them from, pursuing a career in SUD counseling. Addressing this knowledge gap is essential for developing effective strategies to build and sustain the SUD counseling pipeline. This study employs a mixed-methods approach to identify these critical factors, utilizing both quantitative machine learning techniques (Study 1) and qualitative interviews (Study 2) to provide a comprehensive understanding of student perspectives.
+
+You can cite references like this: [@example_key]. See the `paper/references.bib` file.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+# Add any R setup code here, like loading libraries
+# library(tidyverse)
+# library(readxl)
+```
+
+# Methods
+
+This study employed a mixed-methods approach involving two main components: a quantitative survey analysis using machine learning and qualitative interviews. Ethical approval was obtained from the Institutional Review Board at Binghamton University.
+
+### Data Processing
+
+The raw survey data, collected via Qualtrics and stored in `data/survey/survey_raw.csv`, underwent several preprocessing steps to prepare it for analysis using Python libraries, primarily `pandas`.
+
+First, initial data cleaning was performed by filtering respondents based on survey completion metrics. Only responses with 100% `Progress`, a `Finished` status of True, and a `CarelessResponderDC` value of 0 (indicating the response time exceeded a predefined threshold, likely 120 seconds) were retained for analysis. This filtering resulted in a sample of N=397 participant responses available for subsequent steps.
+
+Next, variables relevant to the analysis were selected and renamed for clarity based on a predefined inclusion list (`data/survey/initial_analysis_vars_to_include.csv`). Variables excluded at this stage included survey metadata (e.g., `ResponseId`, `RecordedDate`), direct identifiers, free-text responses (e.g., `demo_anythingelse`, `_TEXT` variables), and specific ranking or qualitative follow-up questions not intended for the primary quantitative analysis. Renaming involved converting original survey variable names (e.g., `Duration (in seconds)`, `career_2`) to more programmatic names (e.g., `duration_seconds`, `sud_counselor_interest`).
+
+Selected variables were then recoded based on their intended type for analysis, as specified in the inclusion list. Ordinal and Likert scale variables (e.g., `sud_counselor_interest`, `sud_counselor_familiarity`, `stress_*` variables) were converted from their original text descriptions (e.g., "Slightly interested", "Moderately Stressful") to numerical values representing the scale levels (e.g., 1, 2, 3, 4, 5), allowing them to be treated as quantitative data where appropriate. For these specific ordinal/Likert variables, responses corresponding to "I prefer not to answer" were recoded as missing data (`NaN`) to preserve the numeric nature of these scales. In contrast, nominal categorical variables (e.g., `gender_identity`, `race`, `current_year`) were retained with their original text values, including "I prefer not to answer" where applicable, as these categories do not have an inherent numerical order. Numerical variables were kept as numbers.
+
+*Handling Sparse Categories:* To address potential model instability and improve interpretability arising from sparse categories in key demographic variables, several categories were grouped prior to imputation and encoding [@citation_needed_for_grouping]. For `race`, the categories 'Black' (n=12 in training set), 'Other (please specify):' (n=11), 'Middle Eastern' (n=5), and 'I prefer not to answer' (n=2) were combined into a single group labeled 'Other/Multiple/Unknown Race'. For `gender_identity`, the categories 'I prefer not to answer' (n=3), 'Nonbinary' (n=2), 'Gender queer' (n=1), 'Transgender' (n=1), and 'Agender' (n=1) were combined into a single group labeled 'Gender Diverse/Unknown'. This grouping step was applied before imputation and one-hot encoding.
+
+Mising values within these predictors were imputed using the median for numeric/ordinal features and the mode for nominal categorical features (after the grouping step described above). Following imputation, the nominal categorical features were converted into numerical format using one-hot encoding, resulting in a final feature set of 99 predictor variables. Validation checks confirmed the absence of missing values and the appropriate numeric data types in the final feature set.
+
+The resulting processed dataset, containing 38 variables for N=397 participants, was saved as `data/survey/analysis_ready_data.csv`. This dataset formed the basis for subsequent descriptive statistics and was the starting point for further processing specific to the machine learning analysis pipeline.
+
+### Study 1: Quantitative Survey and Machine Learning Analysis
+
+**Participants.** Participants were recruited from the undergraduate student population at Binghamton University through the SONA Systems research participation pool. After the initial data processing described above (N=397), participants with missing data on the primary outcome variable (`sud_counselor_interest` recoded as `NaN`) were excluded, resulting in a final analytical sample of N=391 for the machine learning analysis. The data was then split into training (80%, N=312) and testing (20%, N=79) sets using stratified sampling based on the dichotomized outcome variable. Within the training set (N=312), the distribution for self-reported race included White (n=174), Asian (n=78), Latino or Hispanic (n=30), Black (n=12), Other (n=11), Middle Eastern (n=5), and 'I prefer not to answer' (n=2). For gender identity, the training set included Woman (n=228), Man (n=76), 'I prefer not to answer' (n=3), Nonbinary (n=2), Gender queer (n=1), Transgender (n=1), and Agender (n=1). The sparsity of several categories within race and gender identity necessitates careful consideration in subsequent modeling steps.
+
+**Measures.** The survey included demographic questions, items assessing interest and familiarity with SUD counseling (original variables `career_1`, `career_2`), perceived barriers and facilitators (`career_5_*`, `career_6_*` - though excluded from ML predictors), knowledge of SUD/MH professionals (`career_3`), interest in MH careers (`mh_1`), and wellbeing indicators (`wellbeing_*`). See Appendix A for detailed variable descriptions based on the processed data.
+
+**Machine Learning Preprocessing.** Further processing was performed using `scikit-learn` to prepare the data specifically for the classification model. The primary dependent variable, `sud_counselor_interest`, was dichotomized into a binary variable `interest_dv`. Responses indicating any level of interest ("Slightly interested," "Moderately interested," or "Definitely interested") were coded as 1, while responses indicating "Not interested" were coded as 0. The resulting distribution was 62.5% (n=244) in the "Not interested" class (0) and 37.5% (n=147) in the "Any interest" class (1) within the N=391 analytical sample.
+
+Predictor variables included the 34 selected features from the initial processing step (excluding the target variable and filtering columns like `progress`, `careless_responder`, `completed`). Missing values within these predictors were imputed using the median for numeric/ordinal features and the mode for nominal categorical features. Following imputation, the nominal categorical features were converted into numerical format using one-hot encoding, resulting in a final feature set of 99 predictor variables. Validation checks confirmed the absence of missing values and the appropriate numeric data types in the final feature set.
+
+The fully processed dataset (N=391) was then split into a training set (80%, n=312) and a testing set (20%, n=79). Stratified sampling based on the binary `interest_dv` variable was used to ensure that the proportion of interested versus not-interested participants was approximately equal in both the training and testing sets.
+
+**Machine Learning Analysis.** To identify key predictors of student interest in SUD counseling, a Random Forest classification model was employed using the `scikit-learn` library in Python [@citation_needed_1]. Random Forest, an ensemble method based on multiple decision trees, was chosen for its ability to handle high-dimensional data with mixed predictor types (implicitly, before encoding), capture non-linear relationships between predictors and the outcome, and provide robust estimates of feature importance. The model was trained on the preprocessed training set (n=312) to learn patterns distinguishing between students with any interest versus no interest in SUD counseling. 
+
+The performance of the trained model was then evaluated on the independent testing set (n=79). Key performance metrics including overall accuracy, precision, recall, F1-score for each class, and the Area Under the Receiver Operating Characteristic Curve (AUC) will be reported to assess the model's predictive capability. Additionally, feature importances derived from the trained Random Forest model will be examined to identify the most influential factors associated with expressing interest in pursuing an SUD counseling career.
+
+While several models showed reasonable performance, the **Logistic Regression model utilizing L1-based feature selection** emerged as the preferred choice. L1 regularization (also known as Lasso) was employed because it performs automatic feature selection by adding a penalty proportional to the absolute value of the coefficients. This process shrinks the coefficients of less important features towards zero, potentially setting some exactly to zero, thus removing them from the model. This approach leads to a more parsimonious model (one with fewer predictors) which is often easier to interpret, a key goal for understanding the drivers of student interest. Applying L1 regularization during the tuning process identified a subset of 18 potentially relevant features (out of the initial 99). A final Logistic Regression model was then trained and tuned using only these 18 selected features. This model achieved the highest test set ROC AUC score (0.821), offered a good balance between precision and recall, and provided greater simplicity compared to more complex models like Random Forest or XGBoost.
+
+(Note: Detailed performance metrics, confusion matrices, and coefficient analyses for all explored models, including Random Forest, XGBoost, SVM, the final binary Logistic Regression, and an exploratory Ordinal Logistic Regression, are available in the project's `results/` directory and can be provided as supplementary material.)
+
+Performance of the final feature-selected Logistic Regression model on the test set is detailed below. @fig-confusion-matrix shows the confusion matrix, illustrating the counts of true positives, true negatives, false positives, and false negatives. @fig-roc-curve presents the ROC curve, visually representing the trade-off between the true positive rate and false positive rate, with an overall AUC of 0.821.
+
+![Confusion Matrix for Feature-Selected Logistic Regression on Test Set.](results/study1_logistic_fs/confusion_matrix.png){#fig-confusion-matrix}
+
+![ROC Curve for Feature-Selected Logistic Regression on Test Set (AUC = 0.821).](results/study1_logistic_fs/roc_curve.png){#fig-roc-curve}
+
+To understand which factors were most influential in the final model, @tbl-coefficients presents the top 15 features ranked by the absolute magnitude of their coefficients. The odds ratio indicates the multiplicative change in the odds of being interested in an SUD counseling career for a one-unit change in the predictor, holding other predictors constant. Odds ratios greater than 1 suggest a positive association, while those less than 1 suggest a negative association.
+
+```{{python}}
+#| label: tbl-coefficients
+#| tbl-cap: "Top 15 Features by Absolute Coefficient Magnitude in Final Logistic Regression Model."
+#| echo: false
+import pandas as pd
+
+# Use relative path from the QMD file in the root directory
+coeffs_path = 'results/study1_logistic_fs/logistic_fs_coefficients.csv'
+try:
+    coeffs_df = pd.read_csv(coeffs_path)
+    
+    # Select top 15 features based on absolute coefficient
+    top_coeffs = coeffs_df.iloc[coeffs_df['coefficient'].abs().argsort()[::-1]]
+    top_15_coeffs = top_coeffs.head(15)
+    
+    # Select and rename columns for the table
+    table_df = top_15_coeffs[['feature', 'coefficient', 'odds_ratio']].copy()
+    table_df.rename(columns={
+        'feature': 'Feature',
+        'coefficient': 'Coefficient',
+        'odds_ratio': 'Odds Ratio'
+    }, inplace=True)
+    
+    # Round numeric values for presentation
+    table_df['Coefficient'] = table_df['Coefficient'].round(3)
+    table_df['Odds Ratio'] = table_df['Odds Ratio'].round(3)
+    
+    # Print as markdown table
+    print(table_df.to_markdown(index=False))
+    
+except FileNotFoundError:
+    print(f"Error: Coefficient file not found at {coeffs_path}")
+except Exception as e:
+    print(f"Error processing coefficients: {e}")
+```
+
+```{{python}}
+#| label: fig-feature-importance
+#| fig-cap: "Coefficients of the 18 Features Selected by L1 Regularization in the Final Logistic Regression Model. Positive coefficients indicate increased odds of interest in SUD counseling, while negative coefficients indicate decreased odds."
+#| echo: false
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Use relative path from the QMD file in the root directory
+coeffs_path = 'results/study1_logistic_fs/logistic_fs_coefficients.csv'
+try:
+    coeffs_df = pd.read_csv(coeffs_path) # Contains all 18 selected features
+    
+    # Sort by coefficient value for plotting
+    coeffs_df_sorted = coeffs_df.sort_values('coefficient', ascending=False)
+    
+    # Create the plot
+    fig, ax = plt.subplots(figsize=(8, 6)) # Adjust figsize as needed
+    
+    colors = ['#0072B2' if c > 0 else '#D55E00' for c in coeffs_df_sorted['coefficient']] # Example colors for pos/neg
+    
+    ax.barh(coeffs_df_sorted['feature'], coeffs_df_sorted['coefficient'], color=colors)
+    
+    # Add vertical line at zero
+    ax.axvline(0, color='grey', linewidth=0.8, linestyle='--')
+    
+    # Improve labeling and aesthetics
+    ax.set_xlabel('Coefficient Value')
+    ax.set_ylabel('Feature')
+    ax.set_title('Feature Importance and Direction')
+    ax.invert_yaxis() # Display features with highest positive coeffs at top
+    plt.tight_layout() # Adjust layout to prevent labels overlapping
+    plt.show() # Display the plot
+
+except FileNotFoundError:
+    print(f"Error: Coefficient file not found at {coeffs_path}")
+    # Optionally, create a placeholder plot or message
+    fig, ax = plt.subplots()
+    ax.text(0.5, 0.5, 'Coefficient data not found,\ncannot generate plot.', 
+            ha='center', va='center', fontsize=12, color='red')
+    ax.set_xticks([])
+    ax.set_yticks([])
+    plt.show()
+except Exception as e:
+    print(f"Error generating feature importance plot: {e}")
+    # Optionally, create a placeholder plot or message
+    fig, ax = plt.subplots()
+    ax.text(0.5, 0.5, f'Error generating plot:\n{e}', 
+            ha='center', va='center', fontsize=10, color='red')
+    ax.set_xticks([])
+    ax.set_yticks([])
+    plt.show()
+
+```
+
+The factors most strongly influencing student interest are visualized in @fig-feature-importance, with specific coefficients and odds ratios for the top 15 detailed in @tbl-coefficients. Notably, higher familiarity with the SUD counselor profession (`sud_counselor_familiarity`, OR > 1) and identifying as Hispanic/Latino (`race_Hispanic / Latino`) were associated with significantly increased odds of expressing interest. Conversely, factors such as being in the senior year (`current_year_Senior`) or identifying with certain other racial categories (e.g., `race_White`, `race_Asian`) were associated with decreased odds compared to the reference groups used in the encoding. Wellbeing factors, such as stress related to housing stability (`stress_housing_stability`), also appeared among the influential predictors, though their interpretation requires care given the nature of Likert scales. Further investigation, potentially integrating qualitative findings, is needed to fully understand the complex interplay of these demographic, experiential, and wellbeing factors in shaping career interest.
+
+The specific hyperparameters used for this final model were `C=1000`, `class_weight='balanced'`, `penalty='l1'`, and `solver='liblinear'`. The full classification report and details for all models explored are available in the project's `results/` directory.
+
+### Study 2: Qualitative Interviews
+
+**Participants.** A subset of survey respondents who indicated willingness to participate in a follow-up interview were contacted. [Add details on final interview sample size, recruitment criteria, demographics].
+
+**Procedure.** Semi-structured interviews were conducted via Zoom, lasting approximately 30-45 minutes. Interviews explored students' understanding of SUD/MH counseling, perceived barriers and facilitators to entering these fields, and factors influencing their career interests.
+
+**Analysis.** Interview transcripts were analyzed using thematic analysis [@citation_needed_2] to identify recurring patterns and themes related to student perspectives on SUD and MH counseling careers.
+
+# Results
+
+To predict student interest in pursuing a career related to substance use disorder (SUD) counseling (`interest_dv`), several machine learning models were developed and evaluated using data collected from the survey. The primary goal was to identify a model with strong predictive performance, measured primarily by the Area Under the Receiver Operating Characteristic Curve (ROC AUC), while also considering other metrics like accuracy, precision, recall, and F1-score, particularly for the positive class (students expressing interest).
+
+Models explored included Random Forest (with and without SMOTE oversampling), Logistic Regression (with L1 and L2 regularization), Support Vector Machine (SVM), and XGBoost. Hyperparameter tuning was performed using cross-validation, and models were evaluated on a held-out test set.
+
+# Discussion
+
+Discuss the implications of your results, integrating findings from both studies. Consider how the qualitative findings might elaborate on or provide context for the quantitative predictors.
+
+# References
+
+::: {#refs}
+:::
+
+# Appendix
+
+## Variable Descriptions
+| Variable                  | Description                                                                                                                                                                                 | Type           |
+|:--------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------|
+| Progress                  | The variable 'Progress' measures the percentage of completion or advancement in a given task or project, represented as a numerical value from 0 to 100.                                      | Numeric        |
+| Duration (in seconds)     | This variable measures the duration of an event or activity in seconds, capturing how long it takes to complete a specific task.                                                              | Numeric        |
+| CarelessResponderDC       | This variable indicates whether a respondent completed the survey in less than the threshold duration of 120 seconds, with a value of 1 signifying a potentially careless response.            | Categorical    |
+| Finished                  | The variable 'Finished' indicates whether a task or activity has been completed, with a binary response of either completed (True) or not completed (False).                                   | Categorical    |
+| RecordedDate              | The RecordedDate variable captures the date and time when a particular event or response was logged, providing a timestamp for data collection.                                             | Other          |
+| ResponseId                | Response ID is a unique identifier assigned to each survey response, allowing for tracking and analysis of individual submissions.                                                           | Text           |
+| Q46                       | This variable measures the consent status of participants regarding their age and willingness to participate in the research study.                                                           | Categorical    |
+| demo_age                  | This variable measures the age of respondents in years, capturing a range of age groups and preferences regarding age disclosure.                                                             | Categorical    |
+| demo_gender               | This variable measures the gender identity of respondents, capturing their self-identification in terms of gender.                                                                            | Categorical    |
+| demo_sex                  | This variable measures the sex assigned to an individual at birth, reflecting their biological classification.                                                                                | Categorical    |
+| demo_country              | This variable captures the country of birth of the survey respondent, providing insights into demographic backgrounds.                                                                        | Categorical    |
+| demo_race                 | This variable captures the racial identity of respondents as part of demographic data collection.                                                                                             | Categorical    |
+| demo_race_7_TEXT          | This variable captures the self-reported race of respondents who selected 'Other' in a survey, allowing for open-ended text responses to specify their racial identity.                         | Text           |
+| demo_served               | This variable measures whether an individual has ever served on active duty in the U.S. Armed Forces, indicating their military service status.                                                | Categorical    |
+| demo_disability           | This variable measures whether an individual has a formally diagnosed disability as recognized by a medical professional.                                                                       | Categorical    |
+| demo_schoolyear           | This variable measures the current year in school of the respondents, indicating their level of progression in their educational journey.                                                     | Categorical    |
+| demo_parenteducation      | This variable measures the highest level of education completed by the respondent's parents or guardians, reflecting their educational background.                                              | Categorical    |
+| demo_employment           | This variable measures the current employment situation of respondents, capturing whether they are employed, unemployed, or in school with varying work hours.                                  | Categorical    |
+| demo_housing              | The variable measures the current living situation of respondents while attending Binghamton University, indicating whether they reside on-campus, off-campus, or with family.                  | Categorical    |
+| demo_livewith             | This variable measures the total number of friends or family members living with the respondent at their current residence while attending school.                                            | Numeric        |
+| demo_safety               | This variable measures the respondents' perception of their physical safety in their neighborhood while attending school.                                                                       | Categorical    |
+| demo_permanenthome        | This variable measures the type of permanent residence of the respondent when not attending school, indicating their living situation.                                                        | Categorical    |
+| demo_permanenthome_5_TEXT | This variable captures the description of the respondent's permanent residence when not attending school, allowing for open-ended responses.                                                    | Text           |
+| demo_geography            | This variable measures the type of geographic area in which the respondent grew up, categorizing their upbringing into distinct environments.                                                   | Categorical    |
+| demo_safeathome           | This variable measures the respondent's perception of physical safety in their childhood neighborhood, reflecting their feelings of security during that time.                                 | Categorical    |
+| demo_caregiver            | This variable measures whether the respondent serves as a caregiver for individuals aged 18 or older.                                                                                         | Categorical    |
+| demo_familyincome         | This variable measures the annual household income of respondents, capturing the combined income of all individuals living in their home or permanent residence.                                | Categorical    |
+| demo_personalincome       | This variable measures the respondent's personal annual income, capturing a range of income levels as well as options for non-disclosure.                                                       | Categorical    |
+| demo_religion             | This variable measures the respondent's religious affiliation or beliefs, capturing their identification with specific religious branches or lack thereof.                                      | Categorical    |
+| demo_addiction            | This variable measures whether an individual has ever been diagnosed or treated for a substance use or addiction concern, providing insight into their personal history with addiction.            | Categorical    |
+| demo_familyaddiction      | This variable measures whether a respondent has a close friend or family member who has been diagnosed or treated for a substance use or addiction concern, indicating the prevalence of addiction issues within personal networks.     | Categorical    |
+| demo_mentalhealth         | This variable measures whether an individual has ever been diagnosed or treated for a mental health concern, indicating their mental health history.                                            | Categorical    |
+| demo_people               | This variable measures the frequency with which individuals engage in social interactions with people they care about, reflecting their social connectivity and support network.                 | Ordinal/Likert |
+| demo_anythingelse         | This variable captures additional information about the respondent's background that may not be covered by other survey questions, allowing for open-ended responses.                             | Text           |
+| career_1                  | This variable measures the respondent's level of familiarity with the substance use disorder counselor profession, ranging from no familiarity to a high degree of familiarity.                | Ordinal/Likert |
+| career_2                  | This variable measures the respondent's level of interest in pursuing a career as a substance use disorder counselor.                                                                         | Ordinal/Likert |
+| career_4_1                | This variable measures the ranked importance of various reasons for interest in becoming a substance use disorder counselor, focusing on personal motivations and values.                       | Ordinal/Likert |
+| career_4_2                | This variable measures the ranked importance of various reasons for interest in becoming a substance use disorder counselor, specifically focusing on the second reason selected by respondents.                                        | Ordinal/Likert |
+| career_4_3                | This variable measures the ranked importance of various reasons for interest in becoming a substance use disorder counselor, focusing on personal motivations and values.                       | Ordinal/Likert |
+| career_6_1                | This variable measures the ranked importance of factors that influence the interest in pursuing a career as a substance use disorder counselor, with respondents identifying their top three priorities.                                | Ordinal/Likert |
+| career_6_2                | This variable measures the ranked importance of factors that could make a career as a substance use disorder counselor more appealing or feasible for respondents.                               | Text           |
+| career_6_3                | This variable captures the ranked preferences of respondents regarding factors that would enhance the appeal or feasibility of a career as a substance use disorder counselor.                   | Text           |
+| career_5_1                | This variable captures the top three reasons respondents are not interested in pursuing a career as a substance use disorder counselor, ranked by importance.                                   | Text           |
+| career_5_2                | This variable captures the top three reasons respondents are not interested in pursuing a career as a substance use disorder counselor, reflecting personal motivations and barriers.             | Text           |
+| career_5_3                | This variable captures the top three reasons respondents are not interested in pursuing a career as a substance use disorder counselor, reflecting personal attitudes and experiences related to the field.                             | Text           |
+| career_3                  | This variable measures the respondent's awareness of individuals who have worked or are currently working as substance use disorder counselors.                                                 | Categorical    |
+| career_3fu                | This variable measures the relationships of respondents to individuals who have worked or are currently working as substance use disorder counselors, capturing personal connections such as family members or friends.                 | Text           |
+| mh_1                      | This variable measures the respondent's interest in pursuing a career in mental health counseling or related fields.                                                                          | Categorical    |
+| mh_4                      | This variable measures the areas of specialization that respondents are interested in pursuing if they were to become a mental health counselor, allowing for multiple selections.               | Categorical    |
+| mh_4_12_TEXT              | This variable captures the areas of specialization that respondents are interested in pursuing if they were to become mental health counselors, specifically focusing on 'other' specialties that are not listed in predefined options. | Text           |
+| mh_1.5                    | This variable captures the various classes and training experiences that respondents believe are necessary for individuals to become mental health counselors or therapists.                     | Text           |
+| Q44                       | This variable captures the names and titles of degree programs that respondents associate with becoming a mental health counselor, reflecting their perceptions of relevant educational pathways.                                       | Text           |
+| Q45                       | This variable measures respondents' perceptions of the duration required to become a mental health counselor, reflecting their understanding of the training and education involved.              | Categorical    |
+| Q46.1                     | This variable measures the perceived cost of education or training required to become a mental health counselor, capturing a range of monetary values and uncertainty.                         | Categorical    |
+| Q47                       | This variable measures the preferred location for attending a training program in mental health counseling among respondents.                                                                   | Categorical    |
+| mh_3fu                    | This variable captures the reasons respondents prefer a specific location, reflecting their personal experiences and motivations related to that location.                                      | Text           |
+| wellbeing_1               | This variable measures the level of concern or stress individuals experience regarding education-related expenses, capturing their subjective feelings about this financial issue.              | Ordinal/Likert |
+| wellbeing_2               | This variable measures the level of concern or stress individuals experience regarding the cost of housing.                                                                                 | Ordinal/Likert |
+| wellbeing_3               | This variable measures the level of concern or stress related to the stability of housing, as reported by respondents.                                                                      | Ordinal/Likert |
+| wellbeing_4               | This variable measures the level of concern or stress individuals experience regarding the cost of groceries.                                                                               | Ordinal/Likert |
+| wellbeing_5               | The variable measures the level of concern or stress individuals experience regarding the cost of transportation.                                                                           | Ordinal/Likert |
+| wellbeing_6               | This variable measures the level of concern or stress individuals experience regarding the reliability of transportation.                                                                     | Ordinal/Likert |
+| wellbeing_7               | This variable measures the level of concern or stress individuals experience regarding access to high-speed internet.                                                                         | Ordinal/Likert |
+| wellbeing_8               | This variable measures the level of concern or stress individuals experience regarding the cost of childcare.                                                                               | Ordinal/Likert |
+| wellbeing_9               | This variable measures the level of concern or stress individuals experience regarding access to childcare.                                                                                 | Ordinal/Likert |
+| wellbeing_10              | The variable measures the level of concern or stress individuals feel regarding the stability and safety of their relationships with people they currently live with.                           | Ordinal/Likert |
+## Example Analysis Code
+
+Example code for loading data and generating outputs from Study 1.
+
+Loading processed data and displaying a table:
+
+```{{python}}
+# import pandas as pd
+# df = pd.read_csv("../data/processed/cleaned_data.csv")
+# print(df.head().to_markdown(index=False)) # Example using to_markdown for Quarto tables
+```
+
+Including a figure:
+
+```{{python}}
+# import matplotlib.pyplot as plt
+# import numpy as np
+# plt.figure()
+# plt.plot(np.random.rand(10))
+# plt.title("Example Figure")
+# plt.show() # Quarto captures the plot
+```
