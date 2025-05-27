@@ -1,0 +1,96 @@
+# =============================================================================
+# SUD Council Paper - .gitignore
+# =============================================================================
+# Excludes sensitive data while preserving analysis code, results, and documentation
+# Co-authors have data files locally - this prevents public data exposure
+
+# =============================================================================
+# DATA FILES (CRITICAL - DO NOT COMMIT)
+# =============================================================================
+# Raw and processed data directories
+data/
+output/
+
+# Any CSV files that might contain participant data
+*.csv
+!**/example_*.csv  # Allow example/template files if needed
+!**/config_*.csv   # Allow configuration files if needed
+
+# Excel files that might contain data
+*.xlsx
+*.xls
+
+# SPSS/Stata files
+*.sav
+*.dta
+
+# =============================================================================
+# RESULTS - ALLOW (these are aggregated/non-sensitive)
+# =============================================================================
+# Keep results/ directory - these are model outputs, not raw data
+
+# =============================================================================
+# PYTHON & VIRTUAL ENVIRONMENTS
+# =============================================================================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+*.ipynb_checkpoints
+
+# =============================================================================
+# R & QUARTO
+# =============================================================================
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Quarto render cache
+_freeze/
+_publish/
+/.quarto/
+*.nb.html
+
+# =============================================================================
+# SYSTEM & IDE FILES
+# =============================================================================
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Cursor IDE
+.cursor/
+
+# =============================================================================
+# DOCUMENT OUTPUTS & TEMPORARY FILES
+# =============================================================================
+# Keep temporary Word files out
+~$*.docx
+~$*.doc
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+_temp_*
+
+# Backup files
+*.bak
+*.backup 

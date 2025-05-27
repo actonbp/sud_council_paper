@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Erika Hernandez Acton">
+<meta name="author" content="Bryan Acton">
+<meta name="author" content="Rory Eckhardt">
+<meta name="author" content="Linda Reynolds">
+<meta name="author" content="Giovanni Scaringi">
+<meta name="author" content="Nadine Mastroleo">
+<meta name="keywords" content="substance use disorder, counseling, workforce development, student interest, career choice, machine learning, random forest, qualitative interviews, mixed-methods">
+<meta name="description" content="STUDENT INTEREST IN SUD COUNSELING">
+
+<title>Understanding Student Interest in Substance Use Disorder Counseling: A Mixed-Methods Approach Using Machine Learning and Qualitative Interviews</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="sud_council_paper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="sud_council_paper_files/libs/quarto-html/quarto.js"></script>
+<script src="sud_council_paper_files/libs/quarto-html/popper.min.js"></script>
+<script src="sud_council_paper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="sud_council_paper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="sud_council_paper_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="sud_council_paper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="sud_council_paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="sud_council_paper_files/libs/bootstrap/bootstrap-61c9f5fe3bf7f1d5f9219c551e9df0c2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="_extensions/wjschne/apaquarto/apa.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing">Data Processing</a></li>
+  <li><a href="#study-1-quantitative-survey-and-machine-learning-analysis" id="toc-study-1-quantitative-survey-and-machine-learning-analysis" class="nav-link" data-scroll-target="#study-1-quantitative-survey-and-machine-learning-analysis">Study 1: Quantitative Survey and Machine Learning Analysis</a></li>
+  <li><a href="#study-2-qualitative-interviews" id="toc-study-2-qualitative-interviews" class="nav-link" data-scroll-target="#study-2-qualitative-interviews">Study 2: Qualitative Interviews</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#study-2-findings-interview-themes" id="toc-study-2-findings-interview-themes" class="nav-link" data-scroll-target="#study-2-findings-interview-themes">Study 2 Findings (Interview Themes)</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a>
+  <ul class="collapse">
+  <li><a href="#variable-descriptions" id="toc-variable-descriptions" class="nav-link" data-scroll-target="#variable-descriptions">Variable Descriptions</a></li>
+  <li><a href="#example-analysis-code" id="toc-example-analysis-code" class="nav-link" data-scroll-target="#example-analysis-code">Example Analysis Code</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="sud_council_paper.docx"><i class="bi bi-file-word"></i>MS Word (apaquarto)</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content" id="quarto-document-content">
+
+
+
+
+<br>
+
+<br>
+
+<section id="title" class="level1 title unnumbered unlisted">
+<h1 class="title unnumbered unlisted">Understanding Student Interest in Substance Use Disorder Counseling: A Mixed-Methods Approach Using Machine Learning and Qualitative Interviews</h1>
+<div class="Author">
+<br>
+
+<p>Erika Hernandez Acton, Bryan Acton, Rory Eckhardt, Linda Reynolds, Giovanni Scaringi, and Nadine Mastroleo</p>
+<p>Binghamton University</p>
+</div>
+<br>
+
+<br>
+
+</section>
+<section id="author-note" class="level1 unnumbered unlisted AuthorNote">
+<h1 class="unnumbered unlisted AuthorNote">Author Note</h1>
+<p>Correspondence concerning this article should be addressed to Erika Hernandez Acton, Binghamton University, Email: <a href="mailto:erika@binghamton.edu">erika@binghamton.edu</a></p>
+<br>
+</section>
+<section id="abstract" class="level1 unnumbered unlisted AuthorNote">
+<h1 class="unnumbered unlisted AuthorNote">Abstract</h1>
+<p><em>Keywords</em>: substance use disorder, counseling, workforce development, student interest, career choice, machine learning, random forest, qualitative interviews, mixed-methods</p>
+<br>
+</section>
+<section id="firstheader" class="level1 title unnumbered unlisted">
+<h1 class="title unnumbered unlisted">Understanding Student Interest in Substance Use Disorder Counseling: A Mixed-Methods Approach Using Machine Learning and Qualitative Interviews</h1>
+</section>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>The field of Substance Use Disorder (SUD) counseling represents a critical component of the behavioral health workforce, addressing a significant public health challenge. National trends indicate a growing demand for qualified SUD counselors, driven by increased awareness, policy changes, and the ongoing opioid crisis <span class="citation" data-cites="citation_needed_1">(<a href="#ref-citation_needed_1" role="doc-biblioref"><strong>citation_needed_1?</strong></a>)</span>. However, expanding the workforce to meet this demand faces considerable hurdles <span class="citation" data-cites="citation_needed_2">(<a href="#ref-citation_needed_2" role="doc-biblioref"><strong>citation_needed_2?</strong></a>)</span>. Millions are invested annually in recruitment efforts, yet attracting sufficient numbers of students, particularly those with sustained interest, remains difficult. This difficulty may stem partly from a heterogeneity in student interest levels and a lack of clear understanding regarding the specific factors that draw individuals to, or deter them from, pursuing a career in SUD counseling. Addressing this knowledge gap is essential for developing effective strategies to build and sustain the SUD counseling pipeline. This study employs a mixed-methods approach to identify these critical factors, utilizing both quantitative machine learning techniques (Study 1) and qualitative interviews (Study 2) to provide a comprehensive understanding of student perspectives.</p>
+<p>You can cite references like this: <span class="citation" data-cites="example_key">(<a href="#ref-example_key" role="doc-biblioref">Author, 2024</a>)</span>. See the <code>paper/references.bib</code> file.</p>
+<p><code>{r setup, include=FALSE} knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE) # Add any R setup code here, like loading libraries # library(tidyverse) # library(readxl)</code></p>
+</section>
+<section id="methods" class="level1">
+<h1>Methods</h1>
+<p>This study employed a mixed-methods approach involving two main components: a quantitative survey analysis using machine learning and qualitative interviews. Ethical approval was obtained from the Institutional Review Board at Binghamton University.</p>
+<section id="data-processing" class="level3">
+<h3 data-anchor-id="data-processing">Data Processing</h3>
+<p>The raw survey data, collected via Qualtrics and stored in <code>data/survey/survey_raw.csv</code>, underwent several preprocessing steps to prepare it for analysis using Python libraries, primarily <code>pandas</code>.</p>
+<p>First, initial data cleaning was performed by filtering respondents based on survey completion metrics. Only responses with 100% <code>Progress</code>, a <code>Finished</code> status of True, and a <code>CarelessResponderDC</code> value of 0 (indicating the response time exceeded a predefined threshold, likely 120 seconds) were retained for analysis. This filtering resulted in a sample of N=397 participant responses available for subsequent steps.</p>
+<p>Next, variables relevant to the analysis were selected and renamed for clarity based on a predefined inclusion list (<code>data/survey/initial_analysis_vars_to_include.csv</code>). Variables excluded at this stage included survey metadata (e.g., <code>ResponseId</code>, <code>RecordedDate</code>), direct identifiers, free-text responses (e.g., <code>demo_anythingelse</code>, <code>_TEXT</code> variables), and specific ranking or qualitative follow-up questions not intended for the primary quantitative analysis. Renaming involved converting original survey variable names (e.g., <code>Duration (in seconds)</code>, <code>career_2</code>) to more programmatic names (e.g., <code>duration_seconds</code>, <code>sud_counselor_interest</code>).</p>
+<p>Selected variables were then recoded based on their intended type for analysis, as specified in the inclusion list. Ordinal and Likert scale variables (e.g., <code>sud_counselor_interest</code>, <code>sud_counselor_familiarity</code>, <code>stress_*</code> variables) were converted from their original text descriptions (e.g., “Slightly interested”, “Moderately Stressful”) to numerical values representing the scale levels (e.g., 1, 2, 3, 4, 5), allowing them to be treated as quantitative data where appropriate. For these specific ordinal/Likert variables, responses corresponding to “I prefer not to answer” were recoded as missing data (<code>NaN</code>) to preserve the numeric nature of these scales. In contrast, nominal categorical variables (e.g., <code>gender_identity</code>, <code>race</code>, <code>current_year</code>) were retained with their original text values, including “I prefer not to answer” where applicable, as these categories do not have an inherent numerical order. Numerical variables were kept as numbers.</p>
+<p>The resulting processed dataset, containing 38 variables for N=397 participants, was saved as <code>data/survey/analysis_ready_data.csv</code>. This dataset formed the basis for subsequent descriptive statistics and was the starting point for further processing specific to the machine learning analysis pipeline.</p>
+</section>
+<section id="study-1-quantitative-survey-and-machine-learning-analysis" class="level3">
+<h3 data-anchor-id="study-1-quantitative-survey-and-machine-learning-analysis">Study 1: Quantitative Survey and Machine Learning Analysis</h3>
+<p><strong>Participants.</strong> Participants were recruited from the undergraduate student population at Binghamton University through the SONA Systems research participation pool. After the initial data processing described above (N=397), participants with missing data on the primary outcome variable (<code>sud_counselor_interest</code> recoded as <code>NaN</code>) were excluded, resulting in a final analytical sample of N=391 for the machine learning analysis. [Add further demographic details if available here or in Results].</p>
+<p><strong>Measures.</strong> The survey included demographic questions, items assessing interest and familiarity with SUD counseling (original variables <code>career_1</code>, <code>career_2</code>), perceived barriers and facilitators (<code>career_5_*</code>, <code>career_6_*</code> - though excluded from ML predictors), knowledge of SUD/MH professionals (<code>career_3</code>), interest in MH careers (<code>mh_1</code>), and wellbeing indicators (<code>wellbeing_*</code>). See Appendix A for detailed variable descriptions based on the processed data.</p>
+<p><strong>Machine Learning Preprocessing.</strong> Further processing was performed using <code>scikit-learn</code> to prepare the data specifically for the classification model. The primary dependent variable, <code>sud_counselor_interest</code>, was dichotomized into a binary variable <code>interest_dv</code>. Responses indicating any level of interest (“Slightly interested,” “Moderately interested,” or “Definitely interested”) were coded as 1, while responses indicating “Not interested” were coded as 0. The resulting distribution was 62.5% (n=244) in the “Not interested” class (0) and 37.5% (n=147) in the “Any interest” class (1) within the N=391 analytical sample.</p>
+<p>Predictor variables included the 34 selected features from the initial processing step (excluding the target variable and filtering columns like <code>progress</code>, <code>careless_responder</code>, <code>completed</code>). Missing values within these predictors were imputed using the median for numeric/ordinal features and the mode for nominal categorical features. Following imputation, the nominal categorical features were converted into numerical format using one-hot encoding, resulting in a final feature set of 99 predictor variables. Validation checks confirmed the absence of missing values and the appropriate numeric data types in the final feature set.</p>
+<p>The fully processed dataset (N=391) was then split into a training set (80%, n=312) and a testing set (20%, n=79). Stratified sampling based on the binary <code>interest_dv</code> variable was used to ensure that the proportion of interested versus not-interested participants was approximately equal in both the training and testing sets.</p>
+<p><strong>Machine Learning Analysis.</strong> To identify key predictors of student interest in SUD counseling, a Random Forest classification model was employed using the <code>scikit-learn</code> library in Python <span class="citation" data-cites="citation_needed_1">(<a href="#ref-citation_needed_1" role="doc-biblioref"><strong>citation_needed_1?</strong></a>)</span>. Random Forest, an ensemble method based on multiple decision trees, was chosen for its ability to handle high-dimensional data with mixed predictor types (implicitly, before encoding), capture non-linear relationships between predictors and the outcome, and provide robust estimates of feature importance. The model was trained on the preprocessed training set (n=312) to learn patterns distinguishing between students with any interest versus no interest in SUD counseling.</p>
+<p>The performance of the trained model was then evaluated on the independent testing set (n=79). Key performance metrics including overall accuracy, precision, recall, F1-score for each class, and the Area Under the Receiver Operating Characteristic Curve (AUC) will be reported to assess the model’s predictive capability. Additionally, feature importances derived from the trained Random Forest model will be examined to identify the most influential factors associated with expressing interest in pursuing an SUD counseling career.</p>
+</section>
+<section id="study-2-qualitative-interviews" class="level3">
+<h3 data-anchor-id="study-2-qualitative-interviews">Study 2: Qualitative Interviews</h3>
+<p><strong>Participants.</strong> A subset of survey respondents who indicated willingness to participate in a follow-up interview were contacted. [Add details on final interview sample size, recruitment criteria, demographics].</p>
+<p><strong>Procedure.</strong> Semi-structured interviews were conducted via Zoom, lasting approximately 30-45 minutes. Interviews explored students’ understanding of SUD/MH counseling, perceived barriers and facilitators to entering these fields, and factors influencing their career interests.</p>
+<p><strong>Analysis.</strong> Interview transcripts were analyzed using thematic analysis <span class="citation" data-cites="citation_needed_2">(<a href="#ref-citation_needed_2" role="doc-biblioref"><strong>citation_needed_2?</strong></a>)</span> to identify recurring patterns and themes related to student perspectives on SUD and MH counseling careers.</p>
+</section>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<p>To predict student interest in pursuing a career related to substance use disorder (SUD) counseling (<code>interest_dv</code>), several machine learning models were developed and evaluated using data collected from the survey. The primary goal was to identify a model with strong predictive performance, measured primarily by the Area Under the Receiver Operating Characteristic Curve (ROC AUC), while also considering other metrics like accuracy, precision, recall, and F1-score, particularly for the positive class (students expressing interest).</p>
+<p>Models explored included Random Forest (with and without SMOTE oversampling), Logistic Regression (with L1 and L2 regularization), Support Vector Machine (SVM), and XGBoost. Hyperparameter tuning was performed using cross-validation, and models were evaluated on a held-out test set.</p>
+<p>While several models showed reasonable performance, the <strong>Logistic Regression model utilizing L1-based feature selection</strong> emerged as the preferred choice. This approach first identified a subset of 18 potentially relevant features (out of 99) using L1 regularization, then trained and tuned a final Logistic Regression model on this reduced set. This model achieved the highest test set ROC AUC score, offered a good balance between precision and recall, and provided greater simplicity compared to more complex models.</p>
+<p>Performance of the final feature-selected Logistic Regression model on the test set is detailed below. <a href="#fig-confusion-matrix" class="quarto-xref" aria-expanded="false">Figure&nbsp;1</a> shows the confusion matrix, illustrating the counts of true positives, true negatives, false positives, and false negatives. <a href="#fig-roc-curve" class="quarto-xref" aria-expanded="false">Figure&nbsp;2</a> presents the ROC curve, visually representing the trade-off between the true positive rate and false positive rate, with an overall AUC of 0.821.</p>
+<p>To understand which factors were most influential in the final model, <strong>?@tbl-coefficients</strong> presents the top 15 features ranked by the absolute magnitude of their coefficients. The odds ratio indicates the multiplicative change in the odds of being interested in an SUD counseling career for a one-unit change in the predictor, holding other predictors constant. Odds ratios greater than 1 suggest a positive association, while those less than 1 suggest a negative association.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: tbl-coefficients</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">#| tbl-cap: "Top 15 Features by Absolute Coefficient Magnitude in Final Logistic Regression Model."</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="in">import pandas as pd</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="in"># Use relative path from the QMD file in the root directory</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="in">coeffs_path = 'results/study1_logistic_fs/logistic_fs_coefficients.csv'</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="in">try:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="in">    coeffs_df = pd.read_csv(coeffs_path)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="in">    # Select top 15 features based on absolute coefficient</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">    top_coeffs = coeffs_df.iloc[coeffs_df['coefficient'].abs().argsort()[::-1]]</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="in">    top_15_coeffs = top_coeffs.head(15)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="in">    # Select and rename columns for the table</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="in">    table_df = top_15_coeffs[['feature', 'coefficient', 'odds_ratio']].copy()</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="in">    table_df.rename(columns={</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="in">        'feature': 'Feature',</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="in">        'coefficient': 'Coefficient',</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="in">        'odds_ratio': 'Odds Ratio'</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="in">    }, inplace=True)</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="in">    # Round numeric values for presentation</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="in">    table_df['Coefficient'] = table_df['Coefficient'].round(3)</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="in">    table_df['Odds Ratio'] = table_df['Odds Ratio'].round(3)</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="in">    # Print as markdown table</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="in">    print(table_df.to_markdown(index=False))</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="in">except FileNotFoundError:</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="in">    print(f"Error: Coefficient file not found at {coeffs_path}")</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="in">except Exception as e:</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="in">    print(f"Error processing coefficients: {e}")</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The specific hyperparameters used for this final model were <code>C=1000</code>, <code>class_weight='balanced'</code>, <code>penalty='l1'</code>, and <code>solver='liblinear'</code>. The full classification report and details for all models explored are available in the project’s <code>results/</code> directory.</p>
+<section id="study-2-findings-interview-themes" class="level2">
+<h2 data-anchor-id="study-2-findings-interview-themes">Study 2 Findings (Interview Themes)</h2>
+</section>
+</section>
+<section id="discussion" class="level1">
+<h1>Discussion</h1>
+<p>Discuss the implications of your results, integrating findings from both studies. Consider how the qualitative findings might elaborate on or provide context for the quantitative predictors.</p>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-example_key" class="csl-entry" role="listitem">
+Author, A. N. (2024). <em>Example citation for demonstration</em>. Publisher.
+</div>
+</div>
+<div id="fig-confusion-matrix" class="quarto-float quarto-figure quarto-figure-center FigureWithoutNote" prefix="" data-fignum="1" data-custom-style="FigureWithoutNote">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-confusion-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="FigureTitle" data-custom-style="FigureTitle">
+<p>Figure&nbsp;1</p>
+</div>
+<div class="Caption" data-custom-style="Caption">
+<p>Confusion Matrix for Feature-Selected Logistic Regression on Test Set.</p>
+</div>
+</figcaption>
+<div aria-describedby="fig-confusion-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/study1_logistic_fs/confusion_matrix.png" class="img-fluid figure-img">
+</div>
+</figure>
+</div>
+<div id="fig-roc-curve" class="quarto-float quarto-figure quarto-figure-center FigureWithoutNote" prefix="" data-fignum="2" data-custom-style="FigureWithoutNote">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-roc-curve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="FigureTitle" data-custom-style="FigureTitle">
+<p>Figure&nbsp;2</p>
+</div>
+<div class="Caption" data-custom-style="Caption">
+<p>ROC Curve for Feature-Selected Logistic Regression on Test Set (AUC = 0.821).</p>
+</div>
+</figcaption>
+<div aria-describedby="fig-roc-curve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/study1_logistic_fs/roc_curve.png" class="img-fluid figure-img">
+</div>
+</figure>
+</div>
+</section>
+<section id="appendix" class="level1">
+<h1>Appendix</h1>
+<section id="variable-descriptions" class="level2">
+<h2 data-anchor-id="variable-descriptions">Variable Descriptions</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 81%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Progress</td>
+<td style="text-align: left;">The variable ‘Progress’ measures the percentage of completion or advancement in a given task or project, represented as a numerical value from 0 to 100.</td>
+<td style="text-align: left;">Numeric</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Duration (in seconds)</td>
+<td style="text-align: left;">This variable measures the duration of an event or activity in seconds, capturing how long it takes to complete a specific task.</td>
+<td style="text-align: left;">Numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CarelessResponderDC</td>
+<td style="text-align: left;">This variable indicates whether a respondent completed the survey in less than the threshold duration of 120 seconds, with a value of 1 signifying a potentially careless response.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Finished</td>
+<td style="text-align: left;">The variable ‘Finished’ indicates whether a task or activity has been completed, with a binary response of either completed (True) or not completed (False).</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RecordedDate</td>
+<td style="text-align: left;">The RecordedDate variable captures the date and time when a particular event or response was logged, providing a timestamp for data collection.</td>
+<td style="text-align: left;">Other</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ResponseId</td>
+<td style="text-align: left;">Response ID is a unique identifier assigned to each survey response, allowing for tracking and analysis of individual submissions.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Q46</td>
+<td style="text-align: left;">This variable measures the consent status of participants regarding their age and willingness to participate in the research study.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_age</td>
+<td style="text-align: left;">This variable measures the age of respondents in years, capturing a range of age groups and preferences regarding age disclosure.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demo_gender</td>
+<td style="text-align: left;">This variable measures the gender identity of respondents, capturing their self-identification in terms of gender.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_sex</td>
+<td style="text-align: left;">This variable measures the sex assigned to an individual at birth, reflecting their biological classification.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demo_country</td>
+<td style="text-align: left;">This variable captures the country of birth of the survey respondent, providing insights into demographic backgrounds.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_race</td>
+<td style="text-align: left;">This variable captures the racial identity of respondents as part of demographic data collection.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demo_race_7_TEXT</td>
+<td style="text-align: left;">This variable captures the self-reported race of respondents who selected ‘Other’ in a survey, allowing for open-ended text responses to specify their racial identity.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_served</td>
+<td style="text-align: left;">This variable measures whether an individual has ever served on active duty in the U.S. Armed Forces, indicating their military service status.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demo_disability</td>
+<td style="text-align: left;">This variable measures whether an individual has a formally diagnosed disability as recognized by a medical professional.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_schoolyear</td>
+<td style="text-align: left;">This variable measures the current year in school of the respondents, indicating their level of progression in their educational journey.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demo_parenteducation</td>
+<td style="text-align: left;">This variable measures the highest level of education completed by the respondent’s parents or guardians, reflecting their educational background.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_employment</td>
+<td style="text-align: left;">This variable measures the current employment situation of respondents, capturing whether they are employed, unemployed, or in school with varying work hours.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demo_housing</td>
+<td style="text-align: left;">The variable measures the current living situation of respondents while attending Binghamton University, indicating whether they reside on-campus, off-campus, or with family.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_livewith</td>
+<td style="text-align: left;">This variable measures the total number of friends or family members living with the respondent at their current residence while attending school.</td>
+<td style="text-align: left;">Numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demo_safety</td>
+<td style="text-align: left;">This variable measures the respondents’ perception of their physical safety in their neighborhood while attending school.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_permanenthome</td>
+<td style="text-align: left;">This variable measures the type of permanent residence of the respondent when not attending school, indicating their living situation.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demo_permanenthome_5_TEXT</td>
+<td style="text-align: left;">This variable captures the description of the respondent’s permanent residence when not attending school, allowing for open-ended responses.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_geography</td>
+<td style="text-align: left;">This variable measures the type of geographic area in which the respondent grew up, categorizing their upbringing into distinct environments.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demo_safeathome</td>
+<td style="text-align: left;">This variable measures the respondent’s perception of physical safety in their childhood neighborhood, reflecting their feelings of security during that time.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_caregiver</td>
+<td style="text-align: left;">This variable measures whether the respondent serves as a caregiver for individuals aged 18 or older.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demo_familyincome</td>
+<td style="text-align: left;">This variable measures the annual household income of respondents, capturing the combined income of all individuals living in their home or permanent residence.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_personalincome</td>
+<td style="text-align: left;">This variable measures the respondent’s personal annual income, capturing a range of income levels as well as options for non-disclosure.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demo_religion</td>
+<td style="text-align: left;">This variable measures the respondent’s religious affiliation or beliefs, capturing their identification with specific religious branches or lack thereof.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_addiction</td>
+<td style="text-align: left;">This variable measures whether an individual has ever been diagnosed or treated for a substance use or addiction concern, providing insight into their personal history with addiction.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demo_familyaddiction</td>
+<td style="text-align: left;">This variable measures whether a respondent has a close friend or family member who has been diagnosed or treated for a substance use or addiction concern, indicating the prevalence of addiction issues within personal networks.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_mentalhealth</td>
+<td style="text-align: left;">This variable measures whether an individual has ever been diagnosed or treated for a mental health concern, indicating their mental health history.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">demo_people</td>
+<td style="text-align: left;">This variable measures the frequency with which individuals engage in social interactions with people they care about, reflecting their social connectivity and support network.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">demo_anythingelse</td>
+<td style="text-align: left;">This variable captures additional information about the respondent’s background that may not be covered by other survey questions, allowing for open-ended responses.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">career_1</td>
+<td style="text-align: left;">This variable measures the respondent’s level of familiarity with the substance use disorder counselor profession, ranging from no familiarity to a high degree of familiarity.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">career_2</td>
+<td style="text-align: left;">This variable measures the respondent’s level of interest in pursuing a career as a substance use disorder counselor.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">career_4_1</td>
+<td style="text-align: left;">This variable measures the ranked importance of various reasons for interest in becoming a substance use disorder counselor, focusing on personal motivations and values.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">career_4_2</td>
+<td style="text-align: left;">This variable measures the ranked importance of various reasons for interest in becoming a substance use disorder counselor, specifically focusing on the second reason selected by respondents.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">career_4_3</td>
+<td style="text-align: left;">This variable measures the ranked importance of various reasons for interest in becoming a substance use disorder counselor, focusing on personal motivations and values.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">career_6_1</td>
+<td style="text-align: left;">This variable measures the ranked importance of factors that influence the interest in pursuing a career as a substance use disorder counselor, with respondents identifying their top three priorities.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">career_6_2</td>
+<td style="text-align: left;">This variable measures the ranked importance of factors that could make a career as a substance use disorder counselor more appealing or feasible for respondents.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">career_6_3</td>
+<td style="text-align: left;">This variable captures the ranked preferences of respondents regarding factors that would enhance the appeal or feasibility of a career as a substance use disorder counselor.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">career_5_1</td>
+<td style="text-align: left;">This variable captures the top three reasons respondents are not interested in pursuing a career as a substance use disorder counselor, ranked by importance.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">career_5_2</td>
+<td style="text-align: left;">This variable captures the top three reasons respondents are not interested in pursuing a career as a substance use disorder counselor, reflecting personal motivations and barriers.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">career_5_3</td>
+<td style="text-align: left;">This variable captures the top three reasons respondents are not interested in pursuing a career as a substance use disorder counselor, reflecting personal attitudes and experiences related to the field.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">career_3</td>
+<td style="text-align: left;">This variable measures the respondent’s awareness of individuals who have worked or are currently working as substance use disorder counselors.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">career_3fu</td>
+<td style="text-align: left;">This variable measures the relationships of respondents to individuals who have worked or are currently working as substance use disorder counselors, capturing personal connections such as family members or friends.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mh_1</td>
+<td style="text-align: left;">This variable measures the respondent’s interest in pursuing a career in mental health counseling or related fields.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mh_4</td>
+<td style="text-align: left;">This variable measures the areas of specialization that respondents are interested in pursuing if they were to become a mental health counselor, allowing for multiple selections.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mh_4_12_TEXT</td>
+<td style="text-align: left;">This variable captures the areas of specialization that respondents are interested in pursuing if they were to become mental health counselors, specifically focusing on ‘other’ specialties that are not listed in predefined options.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mh_1.5</td>
+<td style="text-align: left;">This variable captures the various classes and training experiences that respondents believe are necessary for individuals to become mental health counselors or therapists.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Q44</td>
+<td style="text-align: left;">This variable captures the names and titles of degree programs that respondents associate with becoming a mental health counselor, reflecting their perceptions of relevant educational pathways.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Q45</td>
+<td style="text-align: left;">This variable measures respondents’ perceptions of the duration required to become a mental health counselor, reflecting their understanding of the training and education involved.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Q46.1</td>
+<td style="text-align: left;">This variable measures the perceived cost of education or training required to become a mental health counselor, capturing a range of monetary values and uncertainty.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Q47</td>
+<td style="text-align: left;">This variable measures the preferred location for attending a training program in mental health counseling among respondents.</td>
+<td style="text-align: left;">Categorical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mh_3fu</td>
+<td style="text-align: left;">This variable captures the reasons respondents prefer a specific location, reflecting their personal experiences and motivations related to that location.</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">wellbeing_1</td>
+<td style="text-align: left;">This variable measures the level of concern or stress individuals experience regarding education-related expenses, capturing their subjective feelings about this financial issue.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">wellbeing_2</td>
+<td style="text-align: left;">This variable measures the level of concern or stress individuals experience regarding the cost of housing.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">wellbeing_3</td>
+<td style="text-align: left;">This variable measures the level of concern or stress related to the stability of housing, as reported by respondents.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">wellbeing_4</td>
+<td style="text-align: left;">This variable measures the level of concern or stress individuals experience regarding the cost of groceries.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">wellbeing_5</td>
+<td style="text-align: left;">The variable measures the level of concern or stress individuals experience regarding the cost of transportation.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">wellbeing_6</td>
+<td style="text-align: left;">This variable measures the level of concern or stress individuals experience regarding the reliability of transportation.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">wellbeing_7</td>
+<td style="text-align: left;">This variable measures the level of concern or stress individuals experience regarding access to high-speed internet.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">wellbeing_8</td>
+<td style="text-align: left;">This variable measures the level of concern or stress individuals experience regarding the cost of childcare.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">wellbeing_9</td>
+<td style="text-align: left;">This variable measures the level of concern or stress individuals experience regarding access to childcare.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">wellbeing_10</td>
+<td style="text-align: left;">The variable measures the level of concern or stress individuals feel regarding the stability and safety of their relationships with people they currently live with.</td>
+<td style="text-align: left;">Ordinal/Likert</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-analysis-code" class="level2">
+<h2 data-anchor-id="example-analysis-code">Example Analysis Code</h2>
+<p>Example code for loading data and generating outputs from Study 1.</p>
+<p>Loading processed data and displaying a table:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in"># import pandas as pd</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in"># df = pd.read_csv("../data/processed/cleaned_data.csv")</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="in"># print(df.head().to_markdown(index=False)) # Example using to_markdown for Quarto tables</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Including a figure:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="in"># import matplotlib.pyplot as plt</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="in"># import numpy as np</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in"># plt.figure()</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="in"># plt.plot(np.random.rand(10))</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="in"># plt.title("Example Figure")</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="in"># plt.show() # Quarto captures the plot</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

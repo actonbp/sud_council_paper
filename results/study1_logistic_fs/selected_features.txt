@@ -1,0 +1,18 @@
+mh_career_interest_Yes
+mh_career_interest_No
+feel_safe_current
+is_caregiver
+family_sud_history_Yes, in the past year
+parent_education_Associates Degree
+sud_counselor_familiarity
+race_Latino or Hispanic
+religious_affiliation_I am spiritual, but not religious
+thoughts_which_program_I prefer not to answer
+race_Middle Eastern
+permanent_residence_type_Other (please write):
+family_sud_history_No
+knows_sud_counselor_I prefer not to answer
+geographic_area_Rural (low density housing outside of a city)
+gender_identity_Nonbinary
+stress_groceries
+knows_sud_counselor_Yes, they currently work in this field

@@ -1,0 +1,81 @@
+dv_col: career_2
+drop_cols:
+  - StartDate
+  - EndDate
+  - Status
+  - GC
+  # Added identifiers, metadata, free-text
+  - ResponseId
+  - RecordedDate
+  - Progress
+  - Finished
+  - CarelessResponderDC 
+  - demo_race_7_TEXT
+  - demo_permanenthome_5_TEXT
+  - demo_anythingelse
+  - career_4_1 # These are rank/text, not suitable for direct ML features in this setup
+  - career_4_2
+  - career_4_3
+  - career_6_1
+  - career_6_2 
+  - career_6_3
+  - career_5_1
+  - career_5_2
+  - career_5_3
+  - career_3fu
+  - mh_4_12_TEXT
+  - mh_1.5
+  - Q44
+  - mh_3fu
+
+numeric_cols:
+  - "Duration (in seconds)"
+  - demo_livewith
+
+categorical_cols:
+  # Keep only actual categorical predictors
+  - demo_age
+  - demo_gender # Will be renamed to gender_identity in script 01
+  - demo_sex
+  - demo_country
+  - demo_race
+  - demo_served
+  - demo_disability
+  - demo_schoolyear
+  - demo_parenteducation
+  - demo_employment
+  - demo_housing
+  - demo_safety
+  - demo_permanenthome
+  - demo_geography
+  - demo_safeathome
+  - demo_caregiver
+  - demo_familyincome
+  - demo_personalincome
+  - demo_religion
+  - demo_addiction
+  - demo_familyaddiction
+  - demo_mentalhealth
+  - career_3
+  - mh_1
+  - mh_4
+  - Q45
+  - Q46.1
+  - Q47
+
+likert_cols:
+  - demo_people
+  - career_1
+  # - career_2 # This is the DV, handled separately
+  - wellbeing_1
+  - wellbeing_2
+  - wellbeing_3
+  - wellbeing_4
+  - wellbeing_5
+  - wellbeing_6
+  - wellbeing_7
+  - wellbeing_8
+  - wellbeing_9
+  - wellbeing_10
+
+# REMOVED text_cols_for_embedding section 
