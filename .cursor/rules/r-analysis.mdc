@@ -1,0 +1,119 @@
+---
+description: R Analysis Guidelines for SUD Research Project
+globs: ["**/*.R"]
+alwaysApply: false
+---
+
+# R Analysis Standards for SUD Research
+
+## Tidymodels Framework (Study 1)
+
+### Required Approach
+- Use **modern tidymodels** syntax (2025 best practices)
+- `initial_split()` with stratification for data splitting
+- `recipe()` for preprocessing with `step_*()` functions  
+- `workflow()` to combine preprocessing and modeling
+- `tune_grid()` for hyperparameter optimization
+- Pure tidyverse data manipulation throughout
+
+### Example Pattern
+```r
+# Modern tidymodels approach
+split <- initial_split(data, strata = outcome, prop = 0.8)
+train_data <- training(split)
+test_data <- testing(split)
+
+rec <- recipe(outcome ~ ., data = train_data) %>%
+  step_normalize(all_numeric_predictors()) %>%
+  step_dummy(all_nominal_predictors())
+
+model_spec <- logistic_reg(penalty = tune(), mixture = 1) %>%
+  set_engine("glmnet") %>%
+  set_mode("classification")
+
+workflow <- workflow() %>%
+  add_recipe(rec) %>%
+  add_model(model_spec)
+```
+
+### Performance Standards
+- Target cross-validation ROC AUC ≥ 0.75
+- Bootstrap validation for effect size stability
+- Report confidence intervals for all metrics
+- Include sample sizes and statistical significance tests
+
+## Text Analysis Framework (Study 2)
+
+### Conservative Detection Approach
+- Use **substance-specific terminology** for SUD detection
+- Porter stemming via `SnowballC::wordStem()`
+- Multi-source stopword removal (tidytext + custom focus group terms)
+- Precision over recall methodology
+
+### Required Workflow
+```r
+# Text preprocessing pipeline
+tokens <- data %>%
+  unnest_tokens(word, text) %>%
+  anti_join(stop_words) %>%
+  anti_join(custom_stopwords) %>%
+  mutate(stem = SnowballC::wordStem(word))
+
+# Conservative SUD detection
+sud_terms <- c("substanc", "abus", "addict", "alcohol", "drug", ...)
+sud_utterances <- tokens %>%
+  filter(stem %in% sud_terms) %>%
+  distinct(response_id)
+```
+
+### Validation Requirements
+- Document detection rate (target: 15-25% for conservative approach)
+- Validate themes through co-occurrence analysis
+- Cross-session consistency checks
+- Manual validation of sample utterances
+
+## Code Quality Standards
+
+### Documentation
+- Clear function documentation with purpose and parameters
+- Inline comments for complex statistical procedures
+- Section headers for major analysis steps
+- Output summaries with interpretation
+
+### Reproducibility
+- Set seeds for all random processes
+- Save intermediate results to `results/` directory
+- Include session info in analysis reports
+- Version control all analysis scripts
+
+### Error Handling
+- Check data dimensions before analysis
+- Validate model convergence
+- Handle missing data explicitly
+- Include diagnostic plots and checks
+
+## Package Management
+
+### Required Packages
+```r
+# Study 1: Tidymodels ecosystem
+library(tidymodels)
+library(tidyverse)
+library(glmnet)
+
+# Study 2: Text analysis
+library(tidytext)
+library(SnowballC)
+library(textdata)
+
+# Visualization
+library(ggplot2)
+library(corrplot)
+library(gt)
+```
+
+### Installation Script
+Always maintain `scripts/r/r_package_requirements.R` with all dependencies
+
+@scripts/r/study1_main_analysis.R
+@scripts/r/study2_text_preprocessing.R

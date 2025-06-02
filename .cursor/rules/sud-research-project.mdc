@@ -1,0 +1,109 @@
+---
+description: SUD Counseling Career Research Project - Mixed Methods Academic Study
+globs: ["**/*.qmd", "**/*.R", "**/*.md", "**/*.bib"]
+alwaysApply: true
+---
+
+# SUD Counseling Career Research Project
+
+## Project Overview
+This is a **completed mixed-methods academic research study** examining factors influencing undergraduate interest in SUD (Substance Use Disorder) counseling careers. The project consists of:
+
+- **Study 1**: Quantitative analysis using R tidymodels (L1-regularized logistic regression)
+- **Study 2**: Qualitative text analysis of focus group discussions using tidytext
+- **Publication**: APA-formatted Quarto manuscript ready for journal submission
+
+## Key Project Context
+
+### Primary Author & Collaborator Information
+- **Erika** is the **first author** and primary researcher
+- This repository is set up for collaborative academic work
+- The project is **publication-ready** and **complete**
+
+### Critical Analysis Results
+- **Study 1 Performance**: Cross-validation ROC AUC = 0.787 [95% CI: 0.766, 0.809]
+- **Key Finding**: Students "uncertain" about mental health careers show 74% higher odds of SUD counseling interest
+- **Study 2 Themes**: 4 data-driven themes from conservative text analysis (19.7% detection rate)
+
+## File Structure & Workflow
+
+### Essential Files for Erika
+- `sud_council_paper.qmd` - **Main manuscript** (primary editing target)
+- `scripts/r/study1_main_analysis.R` - Complete tidymodels analysis
+- `scripts/r/study2_*.R` - Text analysis pipeline (4 scripts)
+- `results/` - All analysis outputs and visualizations
+- `references.bib` - Bibliography in BibTeX format
+
+### Compilation Instructions
+**CRITICAL**: Always use APA extension for proper formatting:
+```bash
+# ✅ CORRECT (APA formatting)
+quarto render sud_council_paper.qmd --to apaquarto-docx
+
+# ❌ WRONG (breaks APA styling)
+quarto render sud_council_paper.qmd --to docx
+```
+
+## Analysis Guidelines
+
+### Study 1 (Quantitative)
+- Uses **modern tidymodels framework** with 2025 best practices
+- Implements L1-regularized logistic regression with feature selection
+- Includes comprehensive validation (bootstrap, cross-validation)
+- Results are **statistically robust** and **publication-ready**
+
+### Study 2 (Qualitative)
+- Conservative SUD detection approach (substance-specific terminology required)
+- Porter stemming via SnowballC for linguistic robustness
+- Co-occurrence analysis for data-driven theme emergence
+- **Precision over recall** methodology to ensure SUD-specific focus
+
+## Academic Standards
+
+### Statistical Reporting
+- Report confidence intervals for all effect sizes
+- Include sample sizes for each analysis group
+- Only report findings with p < 0.05 AND adequate N (≥20)
+- Conservative approach adopted throughout
+
+### APA Formatting Requirements
+- Tables moved to end with "INSERT TABLE X ABOUT HERE" placeholders
+- APA 7th edition citations and references
+- Times New Roman, double spacing, proper margins
+- Running head and page numbers
+
+## Repository Maintenance
+
+### Data Privacy
+- **NEVER commit data files** - .gitignore excludes sensitive information
+- Analysis outputs (results/) are safe to include
+- Focus group transcripts contain participant information
+
+### Archive System
+- `archive/` folder preserves all previous work
+- Clear documentation of what was moved and why
+- Maintains project history without cluttering main workspace
+
+## Collaboration Workflow
+
+### When Making Changes
+1. **Read project status first**: Check CLAUDE.md for current state
+2. **Follow existing patterns**: Maintain tidymodels/tidytext methodology
+3. **Update documentation**: Ensure changes are reflected in README.md
+4. **Test compilation**: Verify Quarto renders properly with APA formatting
+
+### Before Committing
+- Ensure manuscript compiles successfully
+- Run relevant analysis scripts to verify reproducibility
+- Update version info in CLAUDE.md if major changes made
+
+## Research Impact
+This study provides **actionable insights for SUD counselor recruitment**:
+- Target students exploring (not committed to) mental health careers
+- Increase profession visibility and familiarity
+- Focus recruitment efforts on junior-year students
+- Address specific demographic patterns identified in analysis
+
+@sud_council_paper.qmd
+@scripts/r/study1_main_analysis.R
+@CLAUDE.md

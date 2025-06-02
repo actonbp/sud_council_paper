@@ -1,0 +1,133 @@
+---
+description: Quarto APA Formatting Guidelines for Academic Manuscript
+globs: ["**/*.qmd", "**/*.bib"]
+alwaysApply: false
+---
+
+# Quarto APA Formatting Standards
+
+## Critical Compilation Command
+
+### ALWAYS Use APA Extension
+```bash
+# ✅ CORRECT - Maintains APA formatting
+quarto render sud_council_paper.qmd --to apaquarto-docx
+
+# ❌ NEVER USE - Breaks APA styling
+quarto render sud_council_paper.qmd --to docx
+```
+
+## YAML Header Requirements
+
+### Essential APA Configuration
+```yaml
+format:
+  apaquarto-docx:
+    default: true
+bibliography: references.bib
+csl: _extensions/wjschne/apaquarto/apa.csl
+```
+
+### Document Metadata
+- Include author information with affiliations
+- Proper title formatting (sentence case)
+- Running head (max 50 characters)
+- Author note with correspondence details
+
+## APA Style Guidelines
+
+### Table Formatting
+- Tables automatically moved to end of document
+- Use "INSERT TABLE X ABOUT HERE" placeholders in text
+- Number tables consecutively (Table 1, Table 2, etc.)
+- Include descriptive table titles above tables
+
+### Citation Patterns
+```
+In-text: [@author2024] or @author2024
+Multiple: [@author2024; @another2024]
+Page numbers: [@author2024, p. 15]
+```
+
+### Reference Management
+- Add new references to `references.bib` in BibTeX format
+- Use consistent entry types (@article, @book, @incollection)
+- Include DOI when available
+- Follow APA 7th edition guidelines
+
+## Content Structure Standards
+
+### Abstract Requirements
+- 150-250 words maximum
+- No citations in abstract
+- Include keywords (3-5 terms)
+- Structured format: Purpose, Method, Results, Conclusions
+
+### Section Organization
+1. **Introduction** - Literature review and hypotheses
+2. **Method** - Participants, materials, procedure
+3. **Results** - Statistical findings with tables/figures
+4. **Discussion** - Interpretation, limitations, implications
+5. **References** - APA formatted bibliography
+
+### Statistical Reporting
+- Include confidence intervals: "95% CI [0.766, 0.809]"
+- Effect sizes with interpretation: "Cohen's d = 0.764 (large effect)"
+- Sample sizes: "N = 391" or "n = 150 per group"
+- Exact p-values when p > .001
+
+## Mixed-Methods Integration
+
+### Study Presentation
+- **Study 1**: Quantitative analysis first
+- **Study 2**: Qualitative analysis second  
+- **Integration**: Combined discussion of findings
+- Clear transitions between studies
+
+### Results Organization
+```
+## Results
+
+### Study 1: Quantitative Analysis
+[Statistical results with tables]
+
+### Study 2: Qualitative Analysis  
+[Thematic analysis with figures]
+
+### Integrated Findings
+[Mixed-methods synthesis]
+```
+
+## Figure and Table Guidelines
+
+### R Code Chunks
+```{r}
+#| label: fig-feature-importance
+#| fig-cap: "Feature importance from logistic regression model"
+#| echo: false
+#| warning: false
+
+# Include R code for figures
+```
+
+### Table Formatting
+- Use `gt` package for professional tables
+- Include table notes for methodology details
+- Consistent decimal places (typically 2-3)
+- Bold headers and proper alignment
+
+## Extension Dependencies
+
+### Required Files
+- `_extensions/wjschne/apaquarto/` - Core APA extension
+- `apa.csl` - Citation style language file
+- `apaquarto.docx` - Reference document template
+
+### Verification Steps
+1. Check extension exists: `ls _extensions/wjschne/apaquarto/`
+2. Verify YAML header includes proper format specification
+3. Test compilation with sample content
+4. Review output for proper APA formatting
+
+@sud_council_paper.qmd
+@references.bib

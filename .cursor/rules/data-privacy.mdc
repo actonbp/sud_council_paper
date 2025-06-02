@@ -1,0 +1,108 @@
+---
+description: Data Privacy and Security Guidelines for Academic Research
+globs: ["**/.gitignore", "**/data/**", "**/results/**"]
+alwaysApply: true
+---
+
+# Data Privacy and Security Standards
+
+## CRITICAL: Participant Data Protection
+
+### Never Commit These Files
+- `data/` directory contents (contains participant information)
+- `*.csv` files with raw survey or focus group data
+- Any files containing personal identifiers
+- Backup files with participant data (`*.bak`, `~$*.docx`)
+
+### Safe to Include
+- `results/` directory (aggregated, non-identifiable outputs)
+- Analysis scripts without embedded data
+- Figures and visualizations (no personal information)
+- Model coefficients and statistical summaries
+
+## .gitignore Compliance
+
+### Data File Exclusions
+```
+# CRITICAL - Raw data protection
+data/
+*.csv
+!**/example_*.csv
+!**/config_*.csv
+
+# Excel files that might contain data
+*.xlsx
+*.xls
+
+# Statistical software files
+*.sav
+*.dta
+*.rda
+*.rds
+*.RData
+```
+
+### Verification Steps
+1. Check `.gitignore` includes all data patterns
+2. Use `git status` to verify no data files are staged
+3. Review `data/` directory is properly excluded
+4. Confirm focus group transcripts not tracked
+
+## Repository Handoff Protocol
+
+### Before Sharing Repository
+- [ ] Verify no data files in git history
+- [ ] Check .gitignore excludes sensitive directories
+- [ ] Ensure analysis outputs contain no personal identifiers
+- [ ] Confirm participant consent covers data sharing approach
+
+### Collaborative Workflow
+- Share data files through secure, separate channels
+- Use consistent file naming for local data directories
+- Document data structure without including actual data
+- Maintain participant anonymity in all communications
+
+## IRB and Ethics Compliance
+
+### Data Handling Requirements
+- Focus group participants provided informed consent
+- Data used only for approved research purposes  
+- No re-identification attempts of anonymized data
+- Secure storage of original transcripts (not in repository)
+
+### Documentation Standards
+- Maintain data dictionary without personal identifiers
+- Document anonymization procedures in methodology
+- Include participant demographic summaries (not individual data)
+- Follow institutional data retention policies
+
+## Emergency Procedures
+
+### If Data Accidentally Committed
+1. **STOP** - Do not push to remote repository
+2. Remove files from staging: `git reset HEAD <file>`
+3. Add to .gitignore immediately
+4. Use `git filter-branch` if already committed locally
+5. Notify research team and IRB if data was exposed
+
+### Repository Monitoring
+- Regular .gitignore compliance checks
+- Automated CI checks for data file patterns (if configured)
+- Periodic review of git history for accidental inclusions
+- Team training on secure repository practices
+
+## Analysis Output Guidelines
+
+### Safe Result Types
+- Statistical summaries (means, correlations, confidence intervals)
+- Model coefficients and performance metrics
+- Aggregated demographic breakdowns (n ≥ 20 per group)
+- Visualizations without individual data points
+
+### Restricted Content
+- Individual survey responses or focus group quotes with identifiers
+- Cell sizes < 5 in demographic breakdowns
+- Raw transcripts or unprocessed text data
+- Any output that could enable re-identification
+
+@.gitignore

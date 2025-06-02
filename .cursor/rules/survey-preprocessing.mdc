@@ -1,0 +1,35 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Survey Data Preprocessing Guide
+
+**STATUS: PREPROCESSING COMPLETE** - Python preprocessing has generated all necessary data files.
+**CURRENT FOCUS: R tidymodels analysis embedded in sud_council_paper.qmd**
+
+## Key Files (Python Preprocessing Complete)
+*   **Configuration:** [config/study1_config.yaml](mdc:config/study1_config.yaml) - Defines preprocessing parameters
+*   **ML-Ready Data:** [data/processed/X_train.csv](mdc:data/processed/X_train.csv), [data/processed/y_train.csv](mdc:data/processed/y_train.csv) - Training data
+*   **Test Data:** [data/processed/X_test.csv](mdc:data/processed/X_test.csv), [data/processed/y_test.csv](mdc:data/processed/y_test.csv) - Test data  
+*   **Selected Features:** [results/study1_logistic_fs/selected_features.txt](mdc:results/study1_logistic_fs/selected_features.txt) - 18 features from Python L1 selection
+*   **Python Results:** [results/study1_logistic_fs/](mdc:results/study1_logistic_fs/) - Reference results (ROC AUC: 0.821)
+
+## Current Workflow
+**R tidymodels analysis in [sud_council_paper.qmd](mdc:sud_council_paper.qmd) loads these preprocessed files directly.**
+No need to re-run Python preprocessing unless data changes.
+
+## Process Overview
+The [scripts/01_preprocess_survey.py](mdc:scripts/01_preprocess_survey.py) script performs the following steps:
+1.  Loads configuration from [config/study1_config.yaml](mdc:config/study1_config.yaml).
+2.  Loads raw data from [data/survey/survey_raw.csv](mdc:data/survey/survey_raw.csv).
+3.  Drops columns specified in `drop_cols` from the config.
+4.  Renames `demo_gender` to `gender_identity`.
+5.  Includes `mh_not_sud` (interest in non-SUD MH careers) as a categorical predictor.
+6.  Renames the DV column (`career_2` specified in config) to `interest_dv`.
+7.  Maps text-based Likert scale responses (including `interest_dv`, `wellbeing_*`, `career_1`, `demo_people`) to numeric values based on hardcoded dictionaries.
+8.  Creates a **new binary column** `interest_dv_binary` (0 = no interest, 1 = any interest) derived from the numeric `interest_dv`. The original numeric `interest_dv` (1-4 scale) is **kept**.
+9.  Performs type conversions for numeric, categorical, and Likert columns.
+10. Handles missing values via median imputation (numeric/Likert) and mode imputation (categorical).
+11. Selects the final set of columns based on the config lists (`numeric_cols`, `categorical_cols`, `likert_cols`) plus both `interest_dv` and `interest_dv_binary`.
+12. Saves the processed data to [data/processed/survey_processed.csv](mdc:data/processed/survey_processed.csv).

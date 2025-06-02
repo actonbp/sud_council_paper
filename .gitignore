@@ -93,4 +93,12 @@ _temp_*
 
 # Backup files
 *.bak
-*.backup 
+*.backup
+
+# =============================================================================
+# CURSOR IDE SUPPORT
+# =============================================================================
+# Cursor rules and configuration
+!.cursor/
+!.cursor/rules/
+!.cursor/rules/*.mdc

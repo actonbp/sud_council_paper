@@ -1,0 +1,186 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# R and tidymodels Workflow for SUD Council Paper - FINAL ANALYSIS COMPLETE
+
+This project uses R with the `tidymodels` framework for the primary machine learning analysis presented in `sud_council_paper.qmd`. **STATUS: PUBLICATION-READY WITH STATISTICAL VALIDATION COMPLETE**
+
+## ✅ FINAL STATUS: ANALYSIS COMPLETE
+- **Performance:** ROC AUC 0.787 [0.766, 0.809] - exceeds target
+- **Validation:** Comprehensive statistical testing with conservative interpretation
+- **Paper:** Complete APA integration with R code chunks and results
+
+## Key Principles:
+- **Pure tidymodels Workflow:** Use ONLY tidymodels/tidyverse functions throughout entire pipeline
+- **Modern R Patterns:** No base R shortcuts - use `initial_split()`, `training()`, `testing()`, `recipe()`, `workflow()`
+- **Reproducibility:** All analysis steps follow tidymodels best practices within `sud_council_paper.qmd`
+- **APA Integration:** Outputs generated using tidymodels results functions (`collect_metrics()`, `augment()`)
+- **Python Legacy:** Reference only - replicate using pure tidymodels approach
+
+## 🚫 CRITICAL ANTI-PATTERNS TO AVOID:
+- **NO** manual data splitting with base R (`X_train <- read.csv()`)
+- **NO** `data.frame()` creation for train/test sets
+- **NO** base R subsetting with `[,]` or `$`
+- **NO** manual train/test variable assignment (`train_data <- data.frame(...)`)
+- **NO** old-school R approaches
+
+## ✅ REQUIRED tidymodels PATTERNS:
+- **Data Splitting:** `initial_split()` → `training()` / `testing()`
+- **Preprocessing:** `recipe()` with `step_*()` functions
+- **Modeling:** `workflow()` combining recipe + model spec
+- **Evaluation:** `collect_metrics()`, `augment()`, `conf_mat()`
+- **Data Wrangling:** dplyr verbs (`select()`, `mutate()`, `filter()`)
+
+## Required tidymodels Ecosystem:
+- **Core:** `tidymodels` (includes `rsample`, `recipes`, `parsnip`, `workflows`, `tune`, `yardstick`)
+- **Data:** `tidyverse` (`dplyr`, `readr`, `tidyr`) - NO base R data manipulation
+- **Files:** `here` for paths
+- **Presentation:** `gt` for APA tables, `ggplot2` for plots
+- **Performance:** `doParallel` for tuning
+
+## 🎉 WORKING tidymodels Template (PROVEN IN PRODUCTION):
+```r
+# PROVEN working patterns from scripts/r/03_logistic_regression_fs.R
+
+# 1. Modern data loading using tidyverse
+combined_raw_data <- read_csv(file.path(input_dir, "X_train.csv"), show_col_types = FALSE) %>%
+  bind_cols(read_csv(file.path(input_dir, "y_train.csv"), show_col_types = FALSE)) %>%
+  bind_rows(
+    read_csv(file.path(input_dir, "X_test.csv"), show_col_types = FALSE) %>%
+      bind_cols(read_csv(file.path(input_dir, "y_test.csv"), show_col_types = FALSE))
+  )
+
+# 2. Feature selection and cleaning using tidyverse
+analysis_data <- combined_raw_data %>%
+  select(all_of(safe_features), interest_dv) %>%
+  mutate(
+    interest_dv = factor(interest_dv, 
+                        levels = c(0, 1), 
+                        labels = c("NotInterested", "AnyInterest"))
+  ) %>%
+  drop_na()
+
+# 3. Modern tidymodels data splitting
+data_split <- initial_split(analysis_data, prop = 0.8, strata = interest_dv)
+
+# 4. Modern preprocessing recipe with logical conversion
+ml_recipe <- recipe(interest_dv ~ ., data = training(data_split)) %>%
+  step_mutate_at(all_logical_predictors(), fn = as.numeric) %>%  # Convert logical to numeric
+  step_dummy(all_nominal_predictors()) %>%  # Encode categorical variables
+  step_normalize(all_numeric_predictors()) %>%
+  step_zv(all_predictors())  # Remove zero-variance predictors
+
+# 5. Modern model specification with tuning
+logistic_spec <- logistic_reg(
+  penalty = tune(),
+  mixture = 1  # L1 regularization (Lasso)
+) %>%
+  set_engine("glmnet") %>%
+  set_mode("classification")
+
+# 6. Modern workflow
+ml_workflow <- workflow() %>%
+  add_recipe(ml_recipe) %>%
+  add_model(logistic_spec)
+
+# 7. Modern cross-validation and tuning
+cv_folds <- vfold_cv(training(data_split), v = 10, strata = interest_dv)
+tune_results <- tune_grid(
+  ml_workflow,
+  resamples = cv_folds,
+  grid = penalty_grid,
+  metrics = metric_set(roc_auc, accuracy, sensitivity, specificity),
+  control = control_grid(save_pred = TRUE, verbose = TRUE)
+)
+
+# 8. Modern final fit and evaluation
+best_params <- select_best(tune_results, metric = "roc_auc")
+final_workflow <- finalize_workflow(ml_workflow, best_params)
+final_fit <- last_fit(final_workflow, data_split)
+
+# 9. Modern results extraction
+final_metrics <- collect_metrics(final_fit)
+test_predictions <- collect_predictions(final_fit)
+```
+
+## Modern tidymodels Workflow (REQUIRED APPROACH):
+
+### 1. **Data Preparation (`data-prep-r` chunk):**
+```r
+# Load and combine data using tidyverse
+combined_data <- read_csv("X_train.csv") %>%
+  bind_cols(read_csv("y_train.csv")) %>%
+  bind_rows(
+    read_csv("X_test.csv") %>% bind_cols(read_csv("y_test.csv"))
+  ) %>%
+  select(all_of(selected_features), interest_dv) %>%
+  mutate(interest_dv = factor(interest_dv, levels = c(0,1), labels = c("NotInterested", "AnyInterest")))
+
+# tidymodels data splitting
+data_split <- initial_split(combined_data, prop = 0.8, strata = interest_dv)
+```
+
+### 2. **Recipe & Workflow (`tidymodels-pipeline` chunk):**
+```r
+# Modern preprocessing recipe
+ml_recipe <- recipe(interest_dv ~ ., data = training(data_split)) %>%
+  step_normalize(all_numeric_predictors())
+
+# Model specification
+logistic_spec <- logistic_reg(penalty = tune(), mixture = 1) %>%
+  set_engine("glmnet") %>%
+  set_mode("classification")
+
+# Workflow
+ml_workflow <- workflow() %>%
+  add_recipe(ml_recipe) %>%
+  add_model(logistic_spec)
+```
+
+### 3. **Evaluation & Results (`model-results-r` chunk):**
+```r
+# Cross-validation and final fit
+cv_folds <- vfold_cv(training(data_split), v = 10, strata = interest_dv)
+tune_results <- tune_grid(ml_workflow, cv_folds, grid = 10)
+final_results <- last_fit(finalize_workflow(ml_workflow, select_best(tune_results, "roc_auc")), data_split)
+
+# Extract results using tidymodels functions
+metrics <- collect_metrics(final_results)
+predictions <- augment(final_results)
+conf_matrix <- predictions %>% conf_mat(interest_dv, .pred_class)
+```
+
+## 🚫 WRONG APPROACH (What NOT to do):
+```r
+# DON'T DO THIS - Base R patterns
+X_train <- read.csv("X_train.csv")
+y_train <- read.csv("y_train.csv")
+train_data <- data.frame(X_train[, features], interest_dv = y_train$interest_dv)
+model <- glm(interest_dv ~ ., data = train_data, family = binomial())
+```
+
+## ✅ CORRECT APPROACH (tidymodels patterns):
+```r
+# DO THIS - Modern tidymodels
+data_split <- initial_split(combined_data, strata = interest_dv)
+ml_recipe <- recipe(interest_dv ~ ., training(data_split))
+ml_workflow <- workflow() %>% add_recipe(ml_recipe) %>% add_model(model_spec)
+final_fit <- last_fit(ml_workflow, data_split)
+results <- collect_metrics(final_fit)
+```
+
+## ✅ CURRENT STATUS - COMPLETE IMPLEMENTATION:
+- ✅ **Script fully modernized** - `scripts/r/03_logistic_regression_fs.R` uses PURE tidymodels
+- ✅ **Working end-to-end** - Complete pipeline from data → model → evaluation
+- ✅ **Modern patterns throughout** - No base R shortcuts, follows tidymodels ecosystem
+- ✅ **Performance achieved** - ROC AUC 0.6393 with 11 features
+- 🎯 **Next phase** - Optimization to reach target ROC AUC 0.821
+
+## Coding Standards:
+- **REQUIRED:** All data operations use tidyverse (`dplyr`, `tidyr`)
+- **REQUIRED:** All ML operations use tidymodels (`rsample`, `recipes`, `workflows`)
+- **FORBIDDEN:** Base R data manipulation, manual train/test splits
+- **APA Integration:** Use `collect_metrics()` → `gt()` for tables
+- **Chunk Labels:** APA Quarto format (`fig-roc-curve-r`, `tbl-metrics-r`)
