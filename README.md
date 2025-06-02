@@ -24,24 +24,148 @@ This repository contains a **complete, publication-ready academic study** with:
 
 ## 🚀 **HOW TO COMPILE THE MANUSCRIPT**
 
-### **CRITICAL: Use the Correct Command**
-```bash
-# ✅ CORRECT (APA formatting):
-quarto render sud_council_paper.qmd --to apaquarto-docx
+### **🎯 ERIKA: START HERE - Complete Setup Guide**
 
-# ❌ WRONG (breaks APA styling):
-quarto render sud_council_paper.qmd --to docx
+#### **Step 1: Install Required Software**
+```bash
+# 1. Install Quarto (REQUIRED)
+# Download from: https://quarto.org/docs/get-started/
+# Choose installer for your operating system
+
+# 2. Install R and RStudio (REQUIRED)  
+# Download from: https://posit.co/downloads/
+# Install R first, then RStudio
+
+# 3. Verify installations
+quarto --version    # Should show version 1.3+ 
+R --version        # Should show R 4.0+
 ```
 
-### **Prerequisites:**
-1. **Install Quarto:** https://quarto.org/docs/get-started/
-2. **Install R and RStudio:** https://posit.co/downloads/
-3. **Install R packages:** `Rscript scripts/r/r_package_requirements.R`
+#### **Step 2: Setup Repository**
+```bash
+# 1. Clone repository
+git clone https://github.com/actonbp/sud_council_paper.git
+cd sud_council_paper
 
-### **To Edit and Recompile:**
-1. Edit `sud_council_paper.qmd` in RStudio or VS Code
-2. Run: `quarto render sud_council_paper.qmd --to apaquarto-docx`
-3. Open `sud_council_paper.docx` to see APA-formatted result
+# 2. Install R packages (THIS IS CRITICAL)
+Rscript scripts/r/r_package_requirements.R
+
+# 3. Verify APA extension exists (should already be included)
+ls _extensions/wjschne/apaquarto/  # Should show many files
+```
+
+#### **Step 3: Add Your Data Files**
+```bash
+# See DATA_REQUIREMENTS.md for exact files needed
+# Add data files to:
+# - data/survey/
+# - data/focus_group/  
+# - data/processed/
+
+# Verify data setup
+Rscript -e "source('scripts/r/r_package_requirements.R'); cat('Data check complete!')"
+```
+
+#### **Step 4: Compile Manuscript**
+```bash
+# 🎯 THE CRITICAL COMMAND (use this EXACT command):
+quarto render sud_council_paper.qmd --to apaquarto-docx
+
+# ❌ NEVER use this (breaks APA formatting):
+# quarto render sud_council_paper.qmd --to docx
+```
+
+#### **Step 5: Verify Success**
+```bash
+# Check outputs were created
+ls sud_council_paper.docx          # Main manuscript
+ls sud_council_paper_files/        # Supporting files
+
+# Open in Word to verify APA formatting:
+# - Title page with running head
+# - Tables moved to end
+# - Proper APA citations
+# - Double spacing, Times New Roman
+```
+
+### **🔧 Quick Compilation (After Setup)**
+```bash
+# For daily work after initial setup:
+quarto render sud_council_paper.qmd --to apaquarto-docx && open sud_council_paper.docx
+```
+
+---
+
+## 📈 **HOW TO RUN THE ANALYSES**
+
+### **🎯 ERIKA: Analysis Reproduction Guide**
+
+#### **Study 1: Quantitative Analysis (START HERE)**
+```bash
+# 1. Verify data files exist (see DATA_REQUIREMENTS.md)
+ls data/survey/survey_raw.csv        # Must exist
+ls data/survey/ml_ready_survey_data.csv  # Must exist
+
+# 2. Run complete Study 1 analysis (takes ~5-10 minutes)
+Rscript scripts/r/study1_main_analysis.R
+
+# 3. Check outputs were created
+ls results/r/study1_logistic_fs_modern/  # Should contain:
+# - final_fit.rds            (trained model)
+# - final_metrics.csv        (performance metrics)  
+# - model_coefficients.csv   (effect sizes)
+# - features_used.txt        (selected variables)
+```
+
+#### **Study 2: Text Analysis (Run in Order)**
+```bash
+# 1. Verify focus group data exists
+ls data/focus_group/*.csv | wc -l    # Should show 7 files
+
+# 2. Run Study 2 pipeline (each script ~2-5 minutes)
+Rscript scripts/r/study2_text_preprocessing.R        # Step 1: Text processing
+Rscript scripts/r/study2_cooccurrence_analysis.R     # Step 2: Theme analysis  
+Rscript scripts/r/study2_methodology_validation.R    # Step 3: Validation tables
+Rscript scripts/r/study2_create_visualizations.R     # Step 4: Publication figures
+
+# 3. Check Study 2 outputs
+ls results/study2_*.png              # Visualization files
+ls results/study2_*.csv              # Analysis tables
+ls results/study2_*.html             # Interactive methodology demo
+```
+
+#### **🔍 Quick Analysis Verification**
+```r
+# Run this in R console to verify everything worked:
+source("scripts/r/r_package_requirements.R")
+
+# Check Study 1 results
+if (file.exists("results/r/study1_logistic_fs_modern/final_metrics.csv")) {
+  cat("✅ Study 1 completed successfully!\n")
+} else {
+  cat("❌ Study 1 needs to be run\n")
+}
+
+# Check Study 2 results  
+study2_files <- length(list.files("results/", pattern = "study2_.*\\.png"))
+if (study2_files >= 3) {
+  cat("✅ Study 2 completed successfully!\n")
+} else {
+  cat("❌ Study 2 needs to be run\n")
+}
+```
+
+#### **⚡ Full Reproduction (Both Studies)**
+```bash
+# Complete analysis pipeline from scratch (15-20 minutes total)
+echo "Running complete analysis pipeline..."
+Rscript scripts/r/study1_main_analysis.R
+Rscript scripts/r/study2_text_preprocessing.R  
+Rscript scripts/r/study2_cooccurrence_analysis.R
+Rscript scripts/r/study2_methodology_validation.R
+Rscript scripts/r/study2_create_visualizations.R
+echo "✅ All analyses complete! Ready to compile manuscript."
+```
 
 ---
 
@@ -191,24 +315,97 @@ The `apaquarto` extension provides:
 
 ## 🛠️ **TROUBLESHOOTING**
 
-### **Common Issues:**
+### **🚨 Most Common Issues for Erika**
 
-**Quarto won't render:**
-- Check Quarto is installed: `quarto --version`
-- Install missing R packages: `Rscript scripts/r/r_package_requirements.R`
+#### **1. Quarto Compilation Fails**
+```bash
+# Problem: "quarto: command not found" or "unknown format"
 
-**Wrong Word formatting:**
-- Make sure you use `--to apaquarto-docx` NOT `--to docx`
-- Check `_extensions/wjschne/apaquarto/` folder exists
+# Solution A: Check Quarto installation
+quarto --version               # Should show 1.3+
+# If missing: Download from https://quarto.org/docs/get-started/
 
-**Script errors:**
-- Check data files exist in `data/` folder
-- Install packages: `Rscript scripts/r/r_package_requirements.R`
-- Scripts expect specific data structure
+# Solution B: Verify APA extension
+ls _extensions/wjschne/apaquarto/    # Should show many .lua files  
+# If missing: Extension should be included in repository
 
-**Missing figures:**
-- Run Study 2 visualization script: `Rscript scripts/r/study2_create_visualizations.R`
-- Check `results/` folder for output files
+# Solution C: Check R packages
+Rscript scripts/r/r_package_requirements.R
+# Should install all required packages without errors
+```
+
+#### **2. Wrong APA Formatting in Word**
+```bash
+# Problem: Generic Word format instead of APA
+
+# ✅ CORRECT command:
+quarto render sud_council_paper.qmd --to apaquarto-docx
+
+# ❌ WRONG commands (don't use these):
+# quarto render sud_council_paper.qmd --to docx
+# quarto render sud_council_paper.qmd
+
+# Verify output: Tables should be at END, not in text
+```
+
+#### **3. R Analysis Scripts Fail**
+```bash
+# Problem: "Error: object not found" or "cannot open connection"
+
+# Solution: Check data files exist (see DATA_REQUIREMENTS.md)
+ls data/survey/survey_raw.csv              # Study 1 data
+ls data/focus_group/*.csv | wc -l          # Should show 7 files
+
+# Solution: Install packages properly
+Rscript scripts/r/r_package_requirements.R
+
+# Solution: Check R version  
+R --version    # Should be R 4.0+
+```
+
+#### **4. Missing Analysis Results**
+```bash
+# Problem: No figures or results files
+
+# Solution: Run analyses in correct order
+# Study 1:
+Rscript scripts/r/study1_main_analysis.R
+
+# Study 2 (run all 4 in order):
+Rscript scripts/r/study2_text_preprocessing.R
+Rscript scripts/r/study2_cooccurrence_analysis.R  
+Rscript scripts/r/study2_methodology_validation.R
+Rscript scripts/r/study2_create_visualizations.R
+
+# Verify outputs:
+ls results/r/study1_logistic_fs_modern/    # Study 1 results
+ls results/study2_*.png                   # Study 2 figures
+```
+
+#### **5. Quarto Renders But R Code Fails**
+```bash
+# Problem: "Execution halted" or R chunk errors in Quarto
+
+# Solution: Run R scripts individually first
+cd /path/to/sud_council_paper
+Rscript scripts/r/study1_main_analysis.R   # Must complete successfully
+
+# Then try Quarto again:
+quarto render sud_council_paper.qmd --to apaquarto-docx
+```
+
+### **📞 Getting Help**
+
+#### **Check These First:**
+1. **Data files**: Review `DATA_REQUIREMENTS.md` for exact files needed
+2. **Dependencies**: Run `Rscript scripts/r/r_package_requirements.R`  
+3. **Versions**: Ensure Quarto 1.3+, R 4.0+, RStudio 2023+
+4. **Extensions**: Verify `_extensions/wjschne/apaquarto/` exists
+
+#### **Still Having Issues?**
+- **Technical details**: Check `CLAUDE.md` for comprehensive documentation
+- **Error messages**: Copy exact error text when seeking help
+- **Environment**: Include OS version, R version, Quarto version
 
 ---
 
