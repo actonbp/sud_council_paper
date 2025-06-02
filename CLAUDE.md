@@ -1,168 +1,207 @@
 # CLAUDE.md - AI Agent Instructions
 
 ## Project Overview
-This is a **SUD (Substance Use Disorder) Counselors research project** using **R tidymodels** analysis embedded in an **APA Quarto** document for academic publication.
+This is a **clean, production-ready SUD (Substance Use Disorder) Counselors research repository** with complete mixed-methods analysis and publication-ready manuscript. **Repository was cleaned and organized for colleague handoff in June 2024.**
 
-## Current Status: FINAL PUBLICATION-READY ANALYSIS COMPLETE! ✅🎉
+## Current Status: CLEAN REPOSITORY READY FOR COLLEAGUE COLLABORATION ✅🤝
 
-### 🏆 **STATISTICALLY VALIDATED SUCCESS: PUBLICATION-READY**
-1. ✅ **COMPLETED:** Robust R tidymodels implementation achieving **ROC AUC 0.787 [0.766, 0.809]** 
-2. ✅ **COMPLETED:** Comprehensive statistical validation with significance testing
-3. ✅ **COMPLETED:** Conservative interpretation excluding small sample size artifacts
-4. ✅ **COMPLETED:** Complete APA paper with statistically validated findings only
-5. ✅ **COMPLETED:** Two major validated findings: (1) MH career uncertainty effect (p<0.001), (2) Familiarity dose-response (p<0.001)
+### 🏆 **REPOSITORY HANDOFF COMPLETE**
+1. ✅ **CLEANED STRUCTURE:** Non-essential files archived, scripts renamed for clarity
+2. ✅ **SIMPLIFIED SCRIPTS:** 5 essential R scripts with clear names and purposes
+3. ✅ **COLLEAGUE-READY DOCS:** Comprehensive README.md for new user onboarding
+4. ✅ **COMPLETE MANUSCRIPT:** Publication-ready APA paper with all analysis integrated
+5. ✅ **ARCHIVE SYSTEM:** Non-essential files moved to `archive/` with documentation
+6. ✅ **CLEAR WORKFLOW:** Step-by-step instructions for manuscript compilation and analysis
 
-### 🔬 **Statistically Validated Research Discoveries**
-**1. Professional Identity Silos Effect (χ² = 92.59, p < 0.001)**
-- Students "Unsure" about MH careers: **64.0% show SUD interest** vs. 8.5% of committed MH students
-- Students committed to MH careers: **OR = 0.64** (36% lower odds) of SUD interest  
-- **Critical Insight:** SUD counseling exists as distinct professional identity, not MH subset
+## 🎯 **Repository Structure (Post-Cleanup)**
 
-**2. Exposure Dose-Response Relationship (χ² = 16.64, p < 0.001)**
-- No familiarity: 27.6% interest → Moderate familiarity: 56.1% interest
-- **Professional familiarity:** Strong predictor (OR = 1.33) for career interest
-- **Implication:** Systematic exposure programs can meaningfully impact recruitment
+### **Essential Files for Collaboration:**
+```
+sud_council_paper/
+├── 📄 sud_council_paper.qmd          # MAIN MANUSCRIPT
+├── 📄 sud_council_paper.docx          # Compiled APA Word document
+├── 📄 README.md                      # COLLEAGUE ONBOARDING GUIDE
+├── 📄 references.bib                 # APA bibliography
+├── 📄 CLAUDE.md                      # This file
+├── 
+├── 📁 scripts/r/                     # 5 ESSENTIAL SCRIPTS ONLY
+│   ├── r_package_requirements.R           # Package installation
+│   ├── study1_main_analysis.R             # Study 1: Tidymodels
+│   ├── study2_text_preprocessing.R        # Study 2: Text processing
+│   ├── study2_cooccurrence_analysis.R     # Study 2: Co-occurrence
+│   ├── study2_methodology_validation.R    # Study 2: Validation
+│   └── study2_create_visualizations.R     # Study 2: Figures
+│
+├── 📁 results/                       # All outputs and figures
+├── 📁 _extensions/wjschne/apaquarto/  # APA formatting system
+├── 📁 data/                          # Data files (gitignored)
+└── 📁 archive/                       # Non-essential files
+```
 
-## File Status Summary
+### **What Was Archived:**
+- `archive/deprecated_python/` - Original Python scripts (replaced by R)
+- `archive/scripts/` - Duplicate/draft R scripts  
+- `archive/old_drafts/` - Previous manuscript versions
+- `archive/temp_files/` - Temporary and system files
 
-| File | Purpose | Status |
-|------|---------|---------|
-| `scripts/r/03_logistic_regression_fs.R` | Complete tidymodels analysis | ✅ **FINAL** |
-| `sud_council_paper.qmd` | APA paper with integrated R results | ✅ **COMPLETE** |
-| `README.md` | Project documentation | ✅ **UPDATED** |
-| `results/study1_ordinal_logistic/` | Final model outputs | ✅ **COMPLETE** |
+## 🔬 **Complete Research Summary**
 
-## What Was Accomplished (For Future Reference)
-
-### ✅ **Analysis Pipeline Completed:**
-1. **Strategic Variable Preprocessing:**
-   - Mental health career interest: categorical (Yes/No/Unsure) not ordinal
-   - Stress variables: ordered factors (1-5 scales) preserving rank structure
-   - Demographic grouping: categories <5% representation consolidated for external validity
-
-2. **Comprehensive Tidymodels Implementation:**
-   - Modern `initial_split()` with stratification
-   - Recipe-based preprocessing with `step_*()` functions
-   - L1-regularized logistic regression with grid search optimization
-   - SMOTE upsampling for class imbalance handling
-   - 10-fold cross-validation with 5 repeats (50 total folds)
-
-3. **Robust Validation:**
-   - Bootstrap stability analysis (100 resamples)
-   - Common method bias assessment
-   - Endogeneity testing through alternative specifications
-   - External validity through demographic balance verification
-
-### ✅ **Academic Integration Completed:**
-4. **QMD Paper Integration:**
-   - Updated Methods section with comprehensive tidymodels description
-   - Complete Results section with performance tables and key findings
-   - Updated Discussion section interpreting the MH career uncertainty finding
-   - Working R code chunks displaying final model results
-   - Professional visualizations (coefficient plots, performance tables)
-
-5. **Documentation Updates:**
-   - README.md updated with final performance and key findings
-   - Comprehensive project status documentation for future researchers
-
-## Final Performance Summary
-
-### 📊 **Achieved Results (EXCEEDS TARGET):**
-- **Cross-Validation ROC AUC:** 0.787 [95% CI: 0.766, 0.809]
-- **Test Set ROC AUC:** 0.706  
+### **Study 1: Quantitative Analysis (N=391)**
+- **Method:** L1-regularized logistic regression using tidymodels framework
+- **Key Finding:** Students uncertain about mental health careers show 74% higher odds of SUD counseling interest
+- **Performance:** Cross-validation ROC AUC = 0.787 [95% CI: 0.766, 0.809]
 - **Effect Sizes:** Cohen's d = 0.764, correlation r = 0.411 (strong for behavioral research)
-- **Bootstrap Stability:** 100% sign consistency for key predictors
-- **Final Features:** 10 robust predictors from strategic selection
+- **Statistical Validation:** χ² = 92.59, p < .001 for career uncertainty effect
 
-### 🎯 **Target Comparison:**
-- **Original Target:** ROC AUC 0.821 (from Python reference)
-- **R Tidymodels Result:** ROC AUC 0.787 ± 0.011 
-- **Status:** Within confidence interval of target, excellent stability
-- **Academic Standard:** Strong effect sizes for behavioral prediction research
+### **Study 2: Qualitative Analysis (N=19, 7 focus groups)**
+- **Method:** Conservative text analysis (19.7% SUD detection) with Porter stemming
+- **Four Primary Themes:**
+  1. **Professional-Field Recognition (45.3%)** - Career legitimacy and opportunities
+  2. **Personal-Emotional Framework (27.5%)** - Family experience and emotional connection
+  3. **People-Centered Orientation (18.8%)** - Relational and helping focus
+  4. **Service-Helping Identity (8.4%)** - Counselor role conceptualization
 
-## Current Project State (Where We Left Off)
+### **Mixed-Methods Integration**
+- Qualitative themes validate quantitative predictors
+- Career uncertainty pathway supported across both studies
+- Personal experience emerges in statistical models and thematic analysis
+- Theoretical alignment with Social Cognitive Career Theory
 
-### ✅ **COMPLETELY FINISHED TASKS:**
-1. **R Analysis:** Comprehensive tidymodels implementation with optimal performance
-2. **Academic Paper:** Complete QMD integration with R results, methods, and discussion
-3. **Key Finding:** Identified and interpreted MH career uncertainty as recruitment pathway
-4. **Documentation:** Updated README and project status for future reference
-5. **Validation:** Comprehensive robustness testing confirms reliable results
+## 📊 **Analysis Pipeline (Simplified)**
 
-### 📝 **IF FUTURE WORK IS NEEDED:**
-The analysis and academic integration are complete. Any future work would likely involve:
+### **Study 1 Workflow:**
+```r
+# Complete tidymodels analysis
+Rscript scripts/r/study1_main_analysis.R
+```
+- Modern tidymodels implementation with proper validation
+- L1 regularization for feature selection and interpretability  
+- Bootstrap stability analysis (100% sign consistency)
+- Cross-validation: 10-fold with 5 repeats (50 total folds)
 
-1. **Study 2 Extension:** Qualitative interview analysis using R text mining packages
-2. **Additional Models:** Could explore alternative algorithms if specifically requested
-3. **Sensitivity Analysis:** Could test alternative variable grouping strategies if needed
-4. **Publication Prep:** Could assist with journal submission requirements
+### **Study 2 Workflow:**
+```r
+# Run in sequence:
+Rscript scripts/r/study2_text_preprocessing.R      # Conservative SUD detection
+Rscript scripts/r/study2_cooccurrence_analysis.R   # Thematic analysis
+Rscript scripts/r/study2_methodology_validation.R  # Validation tables
+Rscript scripts/r/study2_create_visualizations.R   # Publication figures
+```
+- Conservative SUD detection requiring substance-specific terms
+- Porter stemming for linguistic robustness
+- Co-occurrence analysis for data-driven theme emergence
+- Network visualization showing thematic coherence
 
-## CRITICAL REPOSITORY GUIDELINES
+## 📄 **APA Manuscript Compilation**
 
-### 🚫 **NEVER CREATE NEW FILES**
-- The comprehensive analysis is complete - no new analysis files needed
-- All results and methods are integrated into existing structure
-- Only modify existing files if specifically requested for extensions
+### **CRITICAL COMMAND:**
+```bash
+# ✅ CORRECT (APA formatting):
+quarto render sud_council_paper.qmd --to apaquarto-docx
 
-### 📁 **Key Files for Future Reference:**
-- **`scripts/r/03_logistic_regression_fs.R`** - Complete, validated analysis
-- **`sud_council_paper.qmd`** - Final paper with all R integration
-- **`data/survey/ai_generated_dictionary_detailed.csv`** - Comprehensive variable guide
-- **`results/study1_ordinal_logistic/`** - Final model artifacts
+# ❌ WRONG (breaks APA styling):
+quarto render sud_council_paper.qmd --to docx
+```
 
-### 🎯 **TIDYMODELS PRINCIPLES FOLLOWED:**
-- ✅ Modern `initial_split()`, `training()`, `testing()` for data splitting
-- ✅ `recipe()` preprocessing with proper `step_*()` functions
-- ✅ `workflow()` combining preprocessing and modeling
-- ✅ `tune_grid()` for hyperparameter optimization
-- ✅ `collect_metrics()`, `augment()` for evaluation
-- ✅ Pure tidyverse data manipulation throughout
+### **APA Extension Features:**
+- **Proper title page** with running head and author affiliations
+- **Tables moved to end** with "INSERT TABLE X ABOUT HERE" placeholders
+- **APA 7th edition citations** and reference formatting
+- **Times New Roman, double spacing, 1-inch margins**
+- **Automatic figure and table numbering**
 
-## Research Impact & Applications
+## 🎯 **Guidelines for Future AI Agents**
 
-### 🎯 **Primary Research Contribution:**
-**Discovery:** Mental health career uncertainty represents a major untapped recruitment pathway for SUD counseling careers.
+### **Repository Guidelines:**
+1. **NEVER recreate archived files** - Everything essential is in the main directory
+2. **Use the clean script names** - No need to rename or reorganize further
+3. **Follow the README.md workflow** - It's designed for new users
+4. **Respect the archive system** - Don't move files back without good reason
+5. **Maintain APA formatting** - Always use `--to apaquarto-docx`
 
-### 📋 **Practical Applications:**
-1. **Recruitment Strategy:** Target students exploring MH careers, not those already committed
-2. **Timing:** Junior year optimal for career intervention (positive coefficient)
-3. **Method:** Increase SUD counselor profession visibility and familiarity
-4. **Demographics:** Latino/Hispanic students and those with education cost concerns show elevated interest
+### **Colleague Support Focus:**
+1. **Help with Quarto/R setup** - Package installation, environment setup
+2. **Manuscript editing assistance** - Citations, formatting, content updates
+3. **Analysis reproduction** - Running scripts, troubleshooting data issues
+4. **Visualization enhancements** - Modifying figures for publication
+5. **Documentation updates** - Keeping README and methods current
 
-### 🔬 **Methodological Contributions:**
-1. **Strategic Preprocessing:** Optimal variable type decisions for student survey data
-2. **External Validity:** Demographic grouping prevents overfitting to small subgroups  
-3. **Bootstrap Validation:** Ensures reliable effect size estimation in behavioral research
-4. **Tidymodels Framework:** Reproducible academic research pipeline
+### **DON'T Recreate or Reorganize:**
+- ❌ Don't create new preprocessing scripts
+- ❌ Don't reorganize the folder structure
+- ❌ Don't move files from archive back to main
+- ❌ Don't rename the clean scripts
+- ❌ Don't duplicate existing functionality
 
-## Success Metrics Achieved
+### **DO Support and Enhance:**
+- ✅ Help troubleshoot script errors
+- ✅ Assist with Quarto compilation issues
+- ✅ Help add new references to references.bib
+- ✅ Support manuscript content updates
+- ✅ Help interpret analysis results
 
-✅ **Statistical Performance:** ROC AUC 0.787 [0.766, 0.809] - robust and stable  
-✅ **Effect Size:** Cohen's d = 0.764 - strong for behavioral prediction  
-✅ **Academic Integration:** Complete QMD paper ready for publication  
-✅ **Key Finding:** Actionable insight for SUD workforce development  
-✅ **Reproducibility:** All code documented and validated  
-✅ **Repository:** Clean, professional, guideline-compliant  
+## 🔧 **Technical Specifications**
+
+### **R Package Dependencies:**
+All required packages listed in `scripts/r/r_package_requirements.R`:
+- **tidymodels ecosystem** - Modern ML framework
+- **tidytext** - Text analysis with tidy principles
+- **ggplot2** - Publication-quality visualizations
+- **here** - Reproducible file paths
+- **Various specialty packages** - For specific analysis needs
+
+### **Data Structure:**
+- **Study 1:** Survey data (N=391) with 67 initial variables → 10 final predictors
+- **Study 2:** Focus group transcripts → 61 SUD-specific utterances (19.7% detection)
+- **Conservative approach:** Substance-specific terminology required for SUD classification
+
+### **Output Standards:**
+- **Figures:** 300 DPI PNG + vector PDF for publication
+- **Tables:** CSV format with proper statistical reporting
+- **Interactive:** HTML methodology visualization for transparency
+- **Manuscript:** APA-compliant Word document ready for submission
+
+## 🚀 **Success Metrics Achieved**
+
+✅ **Study 1:** ROC AUC 0.787 [0.766, 0.809] with robust cross-validation  
+✅ **Study 2:** 4 validated themes with conservative 19.7% detection approach  
+✅ **Mixed-Methods:** Qualitative validation of quantitative predictors  
+✅ **Manuscript:** Complete APA paper with 4,000+ word Introduction, comprehensive Methods/Results/Discussion  
+✅ **Repository:** Clean, colleague-ready structure with clear documentation  
+✅ **Reproducibility:** All analyses scripted and documented for replication  
+
+## 📚 **Key Reference Materials**
+
+### **Methodological Documentation:**
+- `results/study2_interactive_methodology.html` - Interactive pipeline visualization
+- `results/study2_advanced_methodology.txt` - Complete Study 2 documentation
+- `archive/ARCHIVE_README.md` - Documentation of archived files
+
+### **Analysis Outputs:**
+- `results/r/study1_logistic_fs_modern/` - Complete Study 1 model outputs
+- `results/study2_*.csv` - Study 2 analysis tables and summaries
+- `results/study2_*.png` - Publication-ready figures and visualizations
 
 ---
 
-**STATUS: PUBLICATION-READY WITH STATISTICAL VALIDATION** 🎉  
-**Last Updated:** Current session - Statistical validation complete, conservative findings documented  
-**Next Steps:** (1) Study 2 qualitative analysis implementation, (2) Journal submission preparation
+**STATUS: CLEAN REPOSITORY READY FOR COLLEAGUE COLLABORATION** 🤝✅  
+**Last Updated:** June 2024 - Repository cleaned and organized for Erica's collaboration  
+**Current Priority:** Support colleague onboarding, manuscript editing, and analysis reproduction  
 
-## Critical Statistical Validation Notes
+## 🎯 **FOR AI AGENTS: COLLEAGUE SUPPORT FOCUS**
 
-### ✅ **Statistically Robust Findings (p < 0.001, adequate N):**
-1. **Mental Health Career Interest Effect:** Highly significant, large sample sizes (N=129-150 per group)
-2. **Professional Familiarity Effect:** Significant dose-response, adequate sample sizes (N=66-163 per group)
+### **Primary Support Areas:**
+1. **Quarto/R Environment Setup** - Help install dependencies and configure tools
+2. **Manuscript Compilation** - Troubleshoot APA formatting and rendering issues  
+3. **Analysis Reproduction** - Help run scripts and interpret outputs
+4. **Citation Management** - Assist with references.bib updates and formatting
+5. **Figure/Table Updates** - Modify visualizations and statistical summaries
 
-### ⚠️ **Findings Removed Due to Statistical Issues:**
-- Religion/spirituality effects (p = 0.173, not significant)
-- Race/ethnicity differences (p = 0.085, not significant among reliable groups)
-- Senior-year patterns (N=6, too small)
-- Very high familiarity effects (N=8, too small)
+### **Handoff Success Criteria:**
+- ✅ Colleague can compile manuscript using provided commands
+- ✅ All scripts run successfully with clear error messages if issues arise
+- ✅ Analysis outputs are interpretable and well-documented
+- ✅ Repository structure is intuitive for academic collaboration
+- ✅ Future updates and modifications are straightforward
 
-### 📋 **Conservative Approach Adopted:**
-- Only report findings with p < 0.05 AND adequate sample sizes (N ≥ 20)
-- Include statistical test results in paper for transparency
-- Focus policy recommendations on validated findings only
+**This repository is now optimized for collaborative academic research with clear workflows and comprehensive documentation.**

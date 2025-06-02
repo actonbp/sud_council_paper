@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study 2: Interactive Text Analysis Pipeline</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .step {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover {
+            background: #f8f9ff;
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+        
+        .step-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .step-content {
+            margin-left: 55px;
+        }
+        
+        .data-table {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .data-row {
+            padding: 8px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .data-row:last-child {
+            border-bottom: none;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+            animation: pulse 2s infinite;
+        }
+        
+        .removed {
+            text-decoration: line-through;
+            color: #dc3545;
+            opacity: 0.6;
+        }
+        
+        .stemmed {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .sud-term {
+            background: #d4edda;
+            color: #155724;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        @keyframes pulse {
+            0% { background-color: #fff3cd; }
+            50% { background-color: #ffeaa7; }
+            100% { background-color: #fff3cd; }
+        }
+        
+        .network-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .theme-box {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            min-width: 150px;
+        }
+        
+        .theme-personal { background: #E31A1C; }
+        .theme-people { background: #1F78B4; }
+        .theme-service { background: #33A02C; }
+        .theme-professional { background: #FF7F00; }
+        
+        .stats {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .toggle-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .toggle-button:hover {
+            background: #5a6fd8;
+        }
+        
+        .expandable {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .expandable.expanded {
+            max-height: 1000px;
+        }
+        
+        .methodology-note {
+            background: #f1f3f4;
+            border-left: 4px solid #34a853;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Study 2: Text Analysis Pipeline</h1>
+            <p>Interactive Methodology Visualization for SUD Counseling Career Discourse Analysis</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-header" onclick="toggleStep('step1')">
+                <div class="step-number">1</div>
+                <div class="step-title">Raw Focus Group Data Structure</div>
+            </div>
+            <div class="step-content">
+                <p>Focus group conversations were transcribed and structured with rich metadata for each utterance.</p>
+                
+                <div class="data-table">
+                    <div class="data-row"><strong>Sample Data Structure:</strong></div>
+                    <div class="data-row">session_id: 11_11_2024_4pm</div>
+                    <div class="data-row">response_id: 13</div>
+                    <div class="data-row">Speaker: Speaker 2</div>
+                    <div class="data-row">start_time: 0:01:01, end_time: 0:01:34, duration: 33.64s</div>
+                    <div class="data-row">word_count: 92, speaking_rate: 164.09 words/min</div>
+                    <div class="data-row"><strong>cleaned_text:</strong> "I actually have a lot of experience with substance abuse counselors just because of family and genetics and whatnot. So I would say the really interesting part was when I was meeting with the substance abuse counselor..."</div>
+                </div>
+                
+                <div class="stats">
+                    <strong>Dataset Overview:</strong><br>
+                    • Total utterances: 310 substantive responses<br>
+                    • Sessions: 7 focus groups<br>
+                    • Participants: 19 undergraduate students<br>
+                    • Duration: 60-90 minutes per session<br>
+                    • Data format: Structured CSV with temporal and speaker metadata
+                </div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-header" onclick="toggleStep('step2')">
+                <div class="step-number">2</div>
+                <div class="step-title">Text Tokenization (tidytext)</div>
+            </div>
+            <div class="step-content">
+                <p>Using <code>tidytext::unnest_tokens()</code> to convert utterances into individual word tokens.</p>
+                
+                <div class="data-table">
+                    <div class="data-row"><strong>Original utterance:</strong></div>
+                    <div class="data-row">"I actually have a lot of experience with substance abuse counselors"</div>
+                    <div class="data-row"><br><strong>After tokenization:</strong></div>
+                    <div class="data-row">→ <span class="highlight">i</span></div>
+                    <div class="data-row">→ <span class="highlight">actually</span></div>
+                    <div class="data-row">→ <span class="highlight">have</span></div>
+                    <div class="data-row">→ <span class="highlight">a</span></div>
+                    <div class="data-row">→ <span class="highlight">lot</span></div>
+                    <div class="data-row">→ <span class="highlight">of</span></div>
+                    <div class="data-row">→ <span class="highlight">experience</span></div>
+                    <div class="data-row">→ <span class="highlight">with</span></div>
+                    <div class="data-row">→ <span class="highlight">substance</span></div>
+                    <div class="data-row">→ <span class="highlight">abuse</span></div>
+                    <div class="data-row">→ <span class="highlight">counselors</span></div>
+                </div>
+                
+                <div class="stats">
+                    <strong>Tokenization Results:</strong><br>
+                    • Raw tokens generated: 20,890<br>
+                    • Method: Word-level tokenization<br>
+                    • Punctuation: Removed automatically<br>
+                    • Case: Converted to lowercase
+                </div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-header" onclick="toggleStep('step3')">
+                <div class="step-number">3</div>
+                <div class="step-title">Stopword Removal (Multi-source)</div>
+            </div>
+            <div class="step-content">
+                <p>Removing common words and focus group filler terms to retain meaningful content.</p>
+                
+                <div class="data-table">
+                    <div class="data-row"><strong>Tokens after tokenization:</strong></div>
+                    <div class="data-row"><span class="removed">i</span> (stopword)</div>
+                    <div class="data-row"><span class="removed">actually</span> (focus group filler)</div>
+                    <div class="data-row"><span class="removed">have</span> (stopword)</div>
+                    <div class="data-row"><span class="removed">a</span> (stopword)</div>
+                    <div class="data-row">lot ✓</div>
+                    <div class="data-row"><span class="removed">of</span> (stopword)</div>
+                    <div class="data-row">experience ✓</div>
+                    <div class="data-row"><span class="removed">with</span> (stopword)</div>
+                    <div class="data-row">substance ✓</div>
+                    <div class="data-row">abuse ✓</div>
+                    <div class="data-row">counselors ✓</div>
+                </div>
+                
+                <div class="stats">
+                    <strong>Stopword Sources:</strong><br>
+                    • tidytext default English stopwords<br>
+                    • Snowball stemmer stopwords<br>
+                    • Custom focus group terms: "um", "uh", "like", "know", "yeah", "actually", etc.<br>
+                    • Reduction: 20,890 → 4,324 tokens (79% reduction)
+                </div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-header" onclick="toggleStep('step4')">
+                <div class="step-number">4</div>
+                <div class="step-title">Porter Stemming (SnowballC)</div>
+            </div>
+            <div class="step-content">
+                <p>Reducing words to their root forms to handle linguistic variation while preserving meaning.</p>
+                
+                <div class="data-table">
+                    <div class="data-row"><strong>Meaningful tokens → Stems:</strong></div>
+                    <div class="data-row">lot → <span class="stemmed">lot</span></div>
+                    <div class="data-row">experience → <span class="stemmed">experi</span></div>
+                    <div class="data-row">substance → <span class="stemmed">substanc</span></div>
+                    <div class="data-row">abuse → <span class="stemmed">abus</span></div>
+                    <div class="data-row">counselors → <span class="stemmed">counsel</span></div>
+                    <div class="data-row">counseling → <span class="stemmed">counsel</span> (consolidation)</div>
+                    <div class="data-row">counselor → <span class="stemmed">counsel</span> (consolidation)</div>
+                </div>
+                
+                <div class="stats">
+                    <strong>Stemming Results:</strong><br>
+                    • Unique words before: 2,156<br>
+                    • Unique stems after: 1,000<br>
+                    • Reduction: 53.6% (handles plurals, tenses, variations)<br>
+                    • Algorithm: Porter stemming via SnowballC package
+                </div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-header" onclick="toggleStep('step5')">
+                <div class="step-number">5</div>
+                <div class="step-title">SUD Term Detection (Conservative)</div>
+            </div>
+            <div class="step-content">
+                <p>Identifying utterances containing substance-specific terminology using a comprehensive 53-term taxonomy.</p>
+                
+                <div class="data-table">
+                    <div class="data-row"><strong>SUD Term Categories (53 terms total):</strong></div>
+                    <div class="data-row">Core Addiction: <span class="sud-term">substanc</span>, <span class="sud-term">addict</span>, <span class="sud-term">depend</span></div>
+                    <div class="data-row">Substances: <span class="sud-term">alcohol</span>, <span class="sud-term">drug</span>, <span class="sud-term">opioid</span>, marijuana, cocaine</div>
+                    <div class="data-row">Treatment: <span class="sud-term">recoveri</span>, rehab, detox, therapi</div>
+                    <div class="data-row">Problem Framing: <span class="sud-term">abus</span>, struggl, battl</div>
+                    <div class="data-row">Professional: <span class="sud-term">counsel</span>, therapist, clinic</div>
+                    <div class="data-row"><br><strong>Example Detection:</strong></div>
+                    <div class="data-row">Stems: "lot experi <span class="sud-term">substanc</span> <span class="sud-term">abus</span> <span class="sud-term">counsel</span>"</div>
+                    <div class="data-row">✓ <strong>SUD DETECTED</strong> (contains substance-specific terms)</div>
+                </div>
+                
+                <div class="stats">
+                    <strong>Conservative Detection Results:</strong><br>
+                    • SUD utterances detected: 61 out of 310 (19.7%)<br>
+                    • Method: Requires substance-specific terminology<br>
+                    • False positive reduction: Eliminated general mental health discussions<br>
+                    • Precision over recall: Conservative approach ensures SUD-specific focus
+                </div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-header" onclick="toggleStep('step6')">
+                <div class="step-number">6</div>
+                <div class="step-title">Co-occurrence Analysis</div>
+            </div>
+            <div class="step-content">
+                <p>Analyzing which terms appear together within the same utterances to identify thematic relationships.</p>
+                
+                <div class="data-table">
+                    <div class="data-row"><strong>Sample Co-occurrence Calculation:</strong></div>
+                    <div class="data-row">Utterance 1: "feel substanc abus famili experi"</div>
+                    <div class="data-row">Utterance 2: "peopl help substanc counsel support"</div>
+                    <div class="data-row">Utterance 3: "feel peopl famili mental health"</div>
+                    <div class="data-row"><br><strong>Co-occurrence Pairs:</strong></div>
+                    <div class="data-row">feel ↔ substanc: 2 utterances</div>
+                    <div class="data-row">feel ↔ famili: 2 utterances</div>
+                    <div class="data-row">feel ↔ peopl: 1 utterance</div>
+                    <div class="data-row">substanc ↔ abus: 2 utterances</div>
+                    <div class="data-row">peopl ↔ help: 1 utterance</div>
+                </div>
+                
+                <div class="stats">
+                    <strong>Co-occurrence Network:</strong><br>
+                    • Total relationships found: 1,233 pairs<br>
+                    • Minimum threshold: ≥2 co-occurrences for stability<br>
+                    • Network nodes: 14 most frequent terms<br>
+                    • Network edges: 83 strongest relationships<br>
+                    • Strongest connection: "feel" ↔ "people" (52 co-occurrences)
+                </div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-header" onclick="toggleStep('step7')">
+                <div class="step-number">7</div>
+                <div class="step-title">Theme Emergence</div>
+            </div>
+            <div class="step-content">
+                <p>Data-driven identification of thematic clusters based on word co-occurrence patterns.</p>
+                
+                <div class="network-container">
+                    <h4>Four Natural Themes Emerged:</h4>
+                    <div class="theme-box theme-professional">
+                        Professional-Field<br>
+                        (45.3%)
+                    </div>
+                    <div class="theme-box theme-personal">
+                        Personal-Emotional<br>
+                        (27.5%)
+                    </div>
+                    <div class="theme-box theme-people">
+                        People-Centered<br>
+                        (18.8%)
+                    </div>
+                    <div class="theme-box theme-service">
+                        Service-Helping<br>
+                        (8.4%)
+                    </div>
+                </div>
+                
+                <div class="data-table">
+                    <div class="data-row"><strong>Theme Assignment Examples:</strong></div>
+                    <div class="data-row">🔹 Professional-Field: "substanc", "abus", "mental", "health", "field", "job"</div>
+                    <div class="data-row">🔹 Personal-Emotional: "feel", "famili", "person", "experi", "life"</div>
+                    <div class="data-row">🔹 People-Centered: "peopl", "help", "interact", "someon"</div>
+                    <div class="data-row">🔹 Service-Helping: "counsel", "support", "care", "assist"</div>
+                </div>
+                
+                <div class="stats">
+                    <strong>Validation Evidence:</strong><br>
+                    • Themes emerge from co-occurrence patterns (not imposed)<br>
+                    • Cross-session consistency verified<br>
+                    • Network analysis validates thematic coherence<br>
+                    • Conservative detection ensures SUD-specific focus<br>
+                    • Supports Study 1 quantitative findings
+                </div>
+            </div>
+        </div>
+        
+        <div class="methodology-note">
+            <strong>Methodological Transparency:</strong> This interactive visualization demonstrates the rigorous, reproducible text analysis pipeline used in Study 2. The conservative SUD detection approach (19.7% vs 35.2% broad detection) ensures precision over recall, eliminating false positives while maintaining thematic coherence. All processing steps follow tidytext/smltar best practices with Porter stemming for linguistic robustness.
+        </div>
+    </div>
+    
+    <script>
+        function toggleStep(stepId) {
+            // Simple toggle functionality for future expansion
+            console.log('Step clicked:', stepId);
+        }
+        
+        // Add some interactivity for hover effects
+        document.querySelectorAll('.step').forEach(step => {
+            step.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(5px)';
+            });
+            
+            step.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+        
+        // Add click functionality to step headers
+        document.querySelectorAll('.step-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const isExpanded = content.style.maxHeight && content.style.maxHeight !== '0px';
+                
+                if (isExpanded) {
+                    content.style.maxHeight = '0px';
+                    content.style.opacity = '0';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    content.style.opacity = '1';
+                }
+            });
+        });
+        
+        // Initialize with all steps expanded
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.step-content').forEach(content => {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.opacity = '1';
+                content.style.transition = 'max-height 0.3s ease, opacity 0.3s ease';
+            });
+        });
+    </script>
+</body>
+</html>
