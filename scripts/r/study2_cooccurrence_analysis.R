@@ -117,8 +117,79 @@ if(nrow(cooccur_matrix) >= 4) {
   # Hierarchical clustering
   theme_clusters <- hclust(cooccur_dist, method = "ward.D2")
   
-  # Cut into 4 themes (matching HTML documentation)
-  cluster_membership <- cutree(theme_clusters, k = 4)
+  # DATA-DRIVEN CLUSTER NUMBER DETERMINATION
+  cat("\n🔬 DETERMINING OPTIMAL NUMBER OF CLUSTERS:\n")
+  
+  # Method 1: Elbow Method (Within-cluster sum of squares)
+  wss <- numeric(min(10, nrow(cooccur_matrix)-1))
+  for(k in 1:length(wss)) {
+    clusters <- cutree(theme_clusters, k = k)
+    # Calculate within-cluster sum of squares
+    wss[k] <- sum(sapply(1:k, function(cluster_num) {
+      cluster_points <- cooccur_matrix[clusters == cluster_num, , drop = FALSE]
+      if(nrow(cluster_points) > 1) {
+        cluster_center <- colMeans(cluster_points)
+        sum(apply(cluster_points, 1, function(x) sum((x - cluster_center)^2)))
+      } else {
+        0
+      }
+    }))
+  }
+  
+  # Method 2: Silhouette Analysis (if cluster package available)
+  silhouette_scores <- numeric(min(8, nrow(cooccur_matrix)-2))
+  if(require(cluster, quietly = TRUE)) {
+    for(k in 2:length(silhouette_scores)+1) {
+      clusters <- cutree(theme_clusters, k = k)
+      if(k <= nrow(cooccur_matrix) && length(unique(clusters)) == k) {
+        sil <- silhouette(clusters, cooccur_dist)
+        silhouette_scores[k-1] <- mean(sil[, 3])
+      }
+    }
+    
+    optimal_k_silhouette <- which.max(silhouette_scores) + 1
+    cat("Optimal clusters by silhouette analysis:", optimal_k_silhouette, 
+        "(score:", round(max(silhouette_scores, na.rm = TRUE), 3), ")\n")
+  } else {
+    cat("Note: cluster package not available for silhouette analysis\n")
+    optimal_k_silhouette <- NA
+  }
+  
+  # Method 3: Elbow detection
+  # Calculate rate of change in WSS
+  wss_changes <- diff(wss)
+  wss_second_diff <- diff(wss_changes)
+  
+  # Find elbow (point where second derivative is largest)
+  optimal_k_elbow <- which.max(abs(wss_second_diff)) + 1
+  
+  cat("Optimal clusters by elbow method:", optimal_k_elbow, "\n")
+  cat("WSS by cluster number:", paste(round(wss, 1), collapse = ", "), "\n")
+  
+  # Choose final k based on convergence of methods
+  if(!is.na(optimal_k_silhouette)) {
+    if(optimal_k_silhouette == optimal_k_elbow) {
+      optimal_k <- optimal_k_silhouette
+      cat("✓ Methods agree! Using k =", optimal_k, "\n")
+    } else {
+      # Use silhouette if available, otherwise elbow
+      optimal_k <- optimal_k_silhouette
+      cat("Methods disagree. Using silhouette method: k =", optimal_k, "\n")
+      cat("(Elbow suggested:", optimal_k_elbow, ")\n")
+    }
+  } else {
+    optimal_k <- optimal_k_elbow
+    cat("Using elbow method: k =", optimal_k, "\n")
+  }
+  
+  # Ensure reasonable bounds
+  if(optimal_k < 2) optimal_k <- 2
+  if(optimal_k > 6) optimal_k <- 6  # Practical limit for interpretability
+  
+  cat("FINAL DATA-DRIVEN CLUSTER COUNT:", optimal_k, "\n")
+  
+  # Cut dendrogram at optimal k
+  cluster_membership <- cutree(theme_clusters, k = optimal_k)
   
   cat("\n📊 DATA-DRIVEN THEMES (From Clustering):\n")
   
@@ -132,7 +203,7 @@ if(nrow(cooccur_matrix) >= 4) {
     arrange(theme_number, desc(n))
   
   # Display themes
-  for(i in 1:4) {
+  for(i in 1:optimal_k) {
     theme_words <- theme_assignments %>% 
       filter(theme_number == i)
     
@@ -159,10 +230,21 @@ if(nrow(cooccur_matrix) >= 4) {
   cat("\n📋 THEME PREVALENCE:\n")
   print(theme_summary)
   
+  # Save cluster validation metrics
+  cluster_validation <- list(
+    wss_by_k = wss,
+    silhouette_scores = if(exists("silhouette_scores")) silhouette_scores else NA,
+    optimal_k_elbow = optimal_k_elbow,
+    optimal_k_silhouette = if(exists("optimal_k_silhouette")) optimal_k_silhouette else NA,
+    final_optimal_k = optimal_k,
+    method_used = if(!is.na(optimal_k_silhouette)) "silhouette_primary" else "elbow_only"
+  )
+  
 } else {
   cat("Insufficient words for clustering analysis\n")
   theme_assignments <- tibble()
   theme_summary <- tibble()
+  cluster_validation <- list()
 }
 
 # ANALYSIS 4: Session-level patterns
@@ -218,7 +300,8 @@ proper_cooccurrence_analysis <- list(
   emergent_themes = if(exists("theme_summary")) theme_summary else tibble(),
   
   session_patterns = session_patterns,
-  methodology_type = "data_driven_cooccurrence_clustering"
+  methodology_type = "data_driven_cooccurrence_clustering",
+  cluster_validation = if(exists("cluster_validation")) cluster_validation else list()
 )
 
 saveRDS(proper_cooccurrence_analysis, here("results", "proper_cooccurrence_analysis.rds"))
