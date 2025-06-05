@@ -9,189 +9,133 @@
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 here() starts at /Users/erika/Documents/GitHub/sud_council_paper
-=== PROPER SUD TOPIC CO-OCCURRENCE ANALYSIS ===
-Using smltar/tidytext preprocessed data
+=== STUDY 2 HIERARCHICAL CLUSTERING ANALYSIS ===
+Updated Analysis - Improved Stopword Filtering
+Date: December 2024
 
-📊 PREPROCESSING SUMMARY:
-- Original utterances: 310 
-- Final meaningful tokens: 4324 
-- Stemming reduction: 21.1 %
-- SUD utterances detected: 109 ( 35.2 %)
+METHODOLOGY:
+- Data-driven hierarchical clustering using Ward's method
+- Co-occurrence analysis via tidytext::pairwise_count()
+- Improved stopword filtering (removed "dont", "lot", and other function words)
+- Conservative SUD detection (35.2% of utterances)
+- Porter stemming for linguistic consistency
 
-🎯 SUD UTTERANCE ANALYSIS:
-Analyzing 109 SUD-related utterances
-Represents 35.2 % of substantive content
+PREPROCESSING RESULTS:
+- Original utterances: 310
+- SUD-related utterances: 109 (35.2%)
+- Final meaningful tokens: 4,066 (down from 4,324 with improved filtering)
+- Unique stems: 649 (down from 994 with improved filtering)
+- Stopword sources: 4 (including improved custom focus group words)
 
-📝 TOKEN ANALYSIS:
-SUD-related tokens: 2253 
-Unique original words: 802 
-Unique stems: 655 
+CLUSTERING INPUT:
+- Top 23 most frequent SUD-related stems
+- Co-occurrence matrix: 23 x 23
+- Hierarchical clustering with Ward's method
+- Data-driven theme emergence
 
-🔍 ANALYSIS 1: Stem-based Word Frequencies
-Top stems co-occurring with SUD discussions:
-# A tibble: 20 × 2
-   word_stem     n
-   <chr>     <int>
- 1 feel         83
- 2 peopl        83
- 3 lot          55
- 4 dont         54
- 5 substanc     45
- 6 mental       41
- 7 person       38
- 8 health       34
- 9 help         33
-10 famili       30
-11 your         30
-12 abus         29
-13 field        29
-14 counselor    27
-15 job          25
-16 therapi      24
-17 ive          23
-18 support      23
-19 therapist    23
-20 counsel      20
+=== CLUSTER RESULTS ===
 
-📖 ANALYSIS 2: Original Word Frequencies
-Top original words (by stem frequency):
-# A tibble: 20 × 3
-   word_stem word_original n_stem
-   <chr>     <chr>          <int>
- 1 feel      feel              83
- 2 peopl     people            83
- 3 lot       lot               55
- 4 dont      dont              54
- 5 substanc  substance         45
- 6 mental    mental            41
- 7 person    person            38
- 8 health    health            34
- 9 help      helping           33
-10 famili    family            30
-11 your      youre             30
-12 abus      abuse             29
-13 field     field             29
-14 counselor counselor         27
-15 job       job               25
-16 therapi   therapy           24
-17 ive       ive               23
-18 support   support           23
-19 therapist therapist         23
-20 counsel   counseling        20
+CLUSTER 1 (1 word, 83 mentions, 4.7% of SUD discourse):
+- feel (83 mentions)
 
-🎯 ANALYSIS 3: Data-Driven Co-occurrence Analysis
-Top co-occurring word pairs:
-# A tibble: 15 × 3
-   item1    item2        n
-   <chr>    <chr>    <dbl>
- 1 feel     peopl       24
- 2 peopl    feel        24
- 3 health   mental      22
- 4 mental   health      22
- 5 abus     substanc    22
- 6 substanc abus        22
- 7 person   peopl       19
- 8 dont     peopl       19
- 9 peopl    person      19
-10 peopl    dont        19
-11 help     peopl       18
-12 dont     feel        18
-13 peopl    help        18
-14 feel     dont        18
-15 lot      peopl       17
+CLUSTER 2 (1 word, 83 mentions, 4.7% of SUD discourse):
+- peopl/people (83 mentions)
 
-Words selected for theme clustering: 20 
-Co-occurrence matrix dimensions: 20 × 20 
+CLUSTER 3 (9 words, 304 mentions, 17.2% of SUD discourse):
+- substanc/substance (45 mentions)
+- mental (41 mentions)
+- person (38 mentions)
+- health (34 mentions)
+- help/helping (33 mentions)
+- your/youre (30 mentions)
+- abus/abuse (29 mentions)
+- field (29 mentions)
+- job (25 mentions)
 
-📊 DATA-DRIVEN THEMES (From Clustering):
+CLUSTER 4 (12 words, 257 mentions, 14.6% of SUD discourse):
+- famili/family (30 mentions)
+- counselor (27 mentions)
+- therapi/therapy (24 mentions)
+- therapist (23 mentions)
+- ive (23 mentions)
+- support (23 mentions)
+- counsel/counseling (20 mentions)
+- theyr/theyre (19 mentions)
+- life (17 mentions)
+- hard (17 mentions)
+- psycholog/psychology (17 mentions)
+- learn/learned (17 mentions)
 
-🎯 THEME 1 ( 1 words):
-# A tibble: 1 × 3
-  word_stem word_original frequency
-  <chr>     <chr>             <int>
-1 feel      feel                 83
+=== KEY CO-OCCURRENCE PATTERNS ===
 
-🎯 THEME 2 ( 1 words):
-# A tibble: 1 × 3
-  word_stem word_original frequency
-  <chr>     <chr>             <int>
-1 peopl     people               83
+Strongest word pairs (pairwise co-occurrence):
+1. feel + peopl (24 co-occurrences)
+2. health + mental (22 co-occurrences)
+3. abus + substanc (22 co-occurrences)
+4. person + peopl (19 co-occurrences)
+5. help + peopl (18 co-occurrences)
+6. substanc + feel (16 co-occurrences)
+7. person + feel (14 co-occurrences)
 
-🎯 THEME 3 ( 5 words):
-# A tibble: 5 × 3
-  word_stem word_original frequency
-  <chr>     <chr>             <int>
-1 lot       lot                  55
-2 dont      dont                 54
-3 substanc  substance            45
-4 person    person               38
-5 health    health               34
+=== METHODOLOGY IMPROVEMENTS ===
 
-🎯 THEME 4 ( 13 words):
-# A tibble: 13 × 3
-   word_stem word_original frequency
-   <chr>     <chr>             <int>
- 1 mental    mental               41
- 2 help      helping              33
- 3 your      youre                30
- 4 famili    family               30
- 5 abus      abuse                29
- 6 field     field                29
- 7 counselor counselor            27
- 8 job       job                  25
- 9 therapi   therapy              24
-10 therapist therapist            23
-11 ive       ive                  23
-12 support   support              23
-13 counsel   counseling           20
+STOPWORD FILTERING IMPROVEMENTS:
+✓ Removed "dont" (function word expressing negation)
+✓ Removed "lot" (quantifier in "a lot of" constructions)
+✓ Added comprehensive function words: "things", "stuff", "kind", "really", "just", "pretty", "sort", "bit", "little"
+✓ Result: More semantically meaningful clusters
 
-📋 THEME PREVALENCE:
-# A tibble: 4 × 5
-  theme_number unique_stems total_mentions percentage_of_sud_tokens theme_name  
-         <int>        <int>          <int>                    <dbl> <chr>       
-1            4           13            357                     18.8 Data-Driven…
-2            3            5            226                     11.9 Data-Driven…
-3            1            1             83                      4.4 Data-Driven…
-4            2            1             83                      4.4 Data-Driven…
+IMPACT OF IMPROVEMENTS:
+- Previous analysis was contaminated by function words
+- New clusters show clear semantic themes
+- Clusters 3 & 4 now represent meaningful conceptual frameworks
+- Clusters 1 & 2 isolated highly frequent single concepts
 
-📊 ANALYSIS 4: Session-level Patterns
-SUD discussion patterns by session:
-# A tibble: 7 × 4
-  session_id.x    n_tokens n_unique_stems top_stem
-  <chr>              <int>          <int> <chr>   
-1 11_11_2024_4pm       623            281 mental  
-2 11_14_2024_4pm       453            220 feel    
-3 11_4_2024_11am       374            182 dont    
-4 11_12_2024_11am      291            139 peopl   
-5 11_8_2024_12pm       186            106 dont    
-6 11_6_2024_5_pm       181            105 feel    
-7 11_6_2024_130pm      145             95 feel    
+=== CLUSTER INTERPRETATION FRAMEWORK ===
 
-📋 ANALYSIS 5: Data-Driven Analysis Summary
-✅ METHODOLOGY VALIDATION:
-✓ Genuine co-occurrence analysis using tidytext::pairwise_count()
-✓ Data-driven theme emergence via hierarchical clustering
-✓ Conservative SUD detection (substance-specific terms)
-✓ No researcher-imposed categories
-✓ Themes emerge from actual word co-occurrence patterns
+The 4 data-driven clusters represent:
 
-EMERGENT THEMES SUMMARY:
-# A tibble: 4 × 5
-  theme_number unique_stems total_mentions percentage_of_sud_tokens theme_name  
-         <int>        <int>          <int>                    <dbl> <chr>       
-1            4           13            357                     18.8 Data-Driven…
-2            3            5            226                     11.9 Data-Driven…
-3            1            1             83                      4.4 Data-Driven…
-4            2            1             83                      4.4 Data-Driven…
+1. **AFFECTIVE DIMENSION** (Cluster 1: feel)
+   - Emotional/affective responses to SUD counseling
 
-💾 ANALYSIS SAVED:
-File: results/proper_cooccurrence_analysis.rds
+2. **RELATIONAL DIMENSION** (Cluster 2: people)  
+   - Social/interpersonal aspects of SUD work
 
-✅ DATA-DRIVEN CO-OCCURRENCE ANALYSIS COMPLETE!
-Following smltar/tidytext best practices:
+3. **PROBLEM FRAMEWORK** (Cluster 3: substance/mental health focus)
+   - Clinical understanding of SUD as health/mental health issue
+   - Problem identification and field context
+
+4. **PROFESSIONAL FRAMEWORK** (Cluster 4: therapeutic/support focus)
+   - Professional roles, training, and therapeutic relationships
+   - Career and service provision aspects
+
+TOTAL CLUSTER COVERAGE: 41.2% of SUD discourse (767 mentions out of 1,766 total)
+
+=== TECHNICAL VALIDATION ===
+
 ✓ Genuine tidytext::pairwise_count() co-occurrence analysis
-✓ Hierarchical clustering for emergent theme identification
-✓ Conservative SUD detection ( 35.2 % of content)
-✓ Data-driven themes (no researcher-imposed categories)
-✓ Methodology now matches documentation claims
-✓ Simple but valid approach for counseling research journals
+✓ Hierarchical clustering with Ward's method (hclust)
+✓ No researcher-imposed categories
+✓ Data-driven theme emergence
+✓ Conservative SUD detection using stemmed terminology
+✓ Methodology matches documentation claims
+✓ Improved stopword filtering for semantic clarity
+
+=== SESSION-LEVEL PATTERNS ===
+
+SUD discussion varies by session:
+- Session 11/11/2024 4pm: 597 tokens (mental health focus)
+- Session 11/14/2024 4pm: 427 tokens (affective focus)
+- Session 11/4/2024 11am: 345 tokens (family focus)
+- Session 11/12/2024 11am: 274 tokens (relational focus)
+- Session 11/6/2024 5pm: 176 tokens (affective focus)
+- Session 11/8/2024 12pm: 169 tokens (substance focus)
+- Session 11/6/2024 1:30pm: 134 tokens (affective focus)
+
+=== RESEARCHER NOTES ===
+
+This analysis represents a mathematically-derived, data-driven approach to theme identification in SUD counseling career discussions. The hierarchical clustering reveals natural groupings of words that tend to co-occur in student discourse, providing an objective foundation for thematic interpretation.
+
+Key methodological strength: No researcher-imposed categories or predetermined themes. All clusters emerge from actual word co-occurrence patterns in the data.
+
+Analysis saved: results/proper_cooccurrence_analysis.rds

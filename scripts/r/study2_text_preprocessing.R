@@ -47,7 +47,10 @@ if(stopwords_available) {
     # Custom focus group stopwords
     tibble(word = c("um", "uh", "like", "know", "yeah", "okay", "right", 
                    "maybe", "actually", "probably", "guess", "kinda", "sorta",
-                   "gonna", "wanna", "basically", "literally", "obviously"),
+                   "gonna", "wanna", "basically", "literally", "obviously",
+                   # Additional function words that slipped through tokenization
+                   "dont", "lot", "lots", "thing", "things", "stuff", "kind",
+                   "really", "just", "pretty", "sort", "bit", "little"),
            lexicon = "focus_group")
   ) %>%
     distinct(word, .keep_all = TRUE)
@@ -59,7 +62,10 @@ if(stopwords_available) {
     # Custom focus group stopwords
     tibble(word = c("um", "uh", "like", "know", "yeah", "okay", "right", 
                    "maybe", "actually", "probably", "guess", "kinda", "sorta",
-                   "gonna", "wanna", "basically", "literally", "obviously"),
+                   "gonna", "wanna", "basically", "literally", "obviously",
+                   # Additional function words that slipped through tokenization
+                   "dont", "lot", "lots", "thing", "things", "stuff", "kind",
+                   "really", "just", "pretty", "sort", "bit", "little"),
            lexicon = "focus_group")
   ) %>%
     distinct(word, .keep_all = TRUE)
