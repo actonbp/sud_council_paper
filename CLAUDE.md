@@ -1,7 +1,7 @@
 # CLAUDE.md - AI Agent Instructions
 
 ## Project Overview
-This is a **clean, production-ready SUD (Substance Use Disorder) Counselors research repository** with complete mixed-methods analysis and publication-ready manuscript. **Repository was cleaned and organized for colleague handoff in June 2024.**
+This is a **clean, production-ready SUD (Substance Use Disorder) Counselors research repository** with complete mixed-methods analysis and publication-ready manuscript. **Repository was cleaned and organized for colleague handoff in May 2025.**
 
 ## Current Status: CLEAN REPOSITORY READY FOR COLLEAGUE COLLABORATION ✅🤝
 
@@ -185,8 +185,8 @@ All required packages listed in `scripts/r/r_package_requirements.R`:
 ---
 
 **STATUS: CLEAN REPOSITORY READY FOR COLLEAGUE COLLABORATION** 🤝✅  
-**Last Updated:** June 2024 - Repository cleaned and organized for Erica's collaboration  
-**Current Priority:** Support colleague onboarding, manuscript editing, and analysis reproduction  
+**Last Updated:** June 4, 2025 - APA formatting improvements completed, manuscript compilation tested  
+**Current Priority:** Support manuscript refinement, meeting preparation, and ongoing collaboration  
 
 ## 🎯 **FOR AI AGENTS: COLLEAGUE SUPPORT FOCUS**
 

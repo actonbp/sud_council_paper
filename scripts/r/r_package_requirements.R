@@ -46,7 +46,10 @@ required_packages <- c(
   "gt",            # Grammar of tables
   "here",          # Project-relative paths
   
-  # For qualitative analysis with embeddings (Study 2)
+  # For qualitative analysis with tidytext (Study 2)
+  "tidytext",      # Tidy text analysis
+  "SnowballC",     # Porter stemming
+  "widyr",         # Pairwise operations for co-occurrence analysis
   "quanteda",      # Text analysis
   "text2vec",      # Word embeddings
   "textfeatures",  # Text feature extraction

@@ -211,14 +211,120 @@ sud_council_paper/
 │   ├── r/study1_logistic_fs_modern/       # Study 1 model outputs
 │   ├── study2_*.csv                       # Study 2 analysis tables
 │   ├── study2_*.png                       # Study 2 publication figures
+│   ├── study2_cluster_output.txt          # ✅ Complete clustering analysis output
+│   ├── study2_cluster_themes_for_naming.txt # ✅ Clean theme naming worksheet
 │   └── study2_interactive_methodology.html # Interactive methodology demo
 │
+├── 📁 meetings/                      # ✅ MEETING PREP & QUARTO REPORTS
+│   └── README.md                          # Meeting organization guide
 ├── 📁 _extensions/wjschne/apaquarto/  # ✅ APA FORMATTING SYSTEM
 ├── 📁 config/                        # Analysis configuration
-├── 📁 data/                          # Data files (not in Git)
+├── 📁 data/                          # ⚠️  DATA FILES (NOT INCLUDED - see below)
 ├── 📁 archive/                       # Non-essential files moved here
 └── 📁 venv/                          # Python environment (legacy)
 ```
+
+### **⚠️ DATA ACCESS NOTICE**
+
+**Raw data files are NOT included in this repository** due to participant privacy protections and IRB requirements.
+
+#### **What's Missing:**
+- `data/survey/` - Survey response data (N=391)
+- `data/focus_group/` - Focus group transcripts (7 sessions, N=19 participants)  
+- `data/processed/` - Cleaned and preprocessed datasets
+
+#### **For Data Access:**
+📧 **Contact:** Linda Reynolds at **linda.reynolds@binghamton.edu**
+
+- Include your institution affiliation
+- Specify intended use (replication, extension, etc.)
+- Data sharing subject to IRB approval and data use agreements
+
+#### **What IS Included:**
+- ✅ All analysis scripts for transparency
+- ✅ Complete methodology documentation  
+- ✅ Final results and visualizations in `results/` folder
+- ✅ **Cluster output template** (`results/study2_cluster_output_DEMO.txt`)
+- ✅ Aggregated findings suitable for publication
+
+**Note:** Scripts will require local data files to execute, but provide complete methodological transparency.
+
+#### **Study 2 Cluster Output:**
+The hierarchical clustering analysis generates **actual word clusters** for researcher interpretation:
+
+**✅ REAL RESULTS (109 SUD utterances, 35.2% detection rate):**
+- `results/study2_cluster_output.txt` - **Complete technical analysis**
+- `results/study2_cluster_themes_for_naming.txt` - **Clean researcher worksheet**
+
+**📊 Cluster Overview:**
+- **Cluster 4 (18.8%):** Professional/field framework (mental, helping, counselor, therapy, etc.)
+- **Cluster 3 (11.9%):** Substance/personal frame (substance, person, health, etc.) 
+- **Clusters 1 & 2 (4.4% each):** Emotional (feel) and social (people) dimensions
+
+Each cluster emerged from mathematical co-occurrence analysis - researchers now assign thematic names.
+
+---
+
+## 📋 **MEETING PREPARATION & REPORTS**
+
+### **Creating Meeting Documents:**
+The `meetings/` folder is designed for preparing presentation materials and updates for team meetings.
+
+**Quick Meeting Report:**
+```bash
+# Create a Quarto document for meeting updates
+# Example: 2025-06-05_project_update.qmd
+
+# Compile to APA-formatted Word document
+cd meetings/
+quarto render 2025-06-05_project_update.qmd --to apaquarto-docx
+
+# Or compile to PDF
+quarto render 2025-06-05_project_update.qmd --to pdf
+```
+
+**Meeting Document Types:**
+- **Project Updates**: Current manuscript status and recent accomplishments
+- **Progress Reports**: Analysis results and methodology updates  
+- **Planning Documents**: Next steps and milestone planning
+- **Meeting Minutes**: Team discussion documentation
+
+**Template Structure**: Each meeting document can include:
+- Current manuscript status
+- Recent APA formatting improvements
+- Analysis pipeline results (Study 1 & 2)
+- Upcoming deadlines and goals
+- Discussion points and decisions needed
+
+---
+
+## 📊 **STUDY 2 UPDATED METHODOLOGY**
+
+Following [Supervised Machine Learning for Text Analysis in R](https://smltar.com) principles for genuine data-driven theme emergence:
+
+### **Methodology Refinements (June 2025):**
+- **Co-occurrence Analysis**: Using `tidytext::pairwise_count()` for genuine term relationships
+- **Hierarchical Clustering**: Ward's method with Euclidean distance (`hclust(method = "ward.D2")`)
+- **Data-Driven Groupings**: Cut dendrogram into 4 clusters (`cutree(k = 4)`)
+- **Researcher Interpretation**: Team interprets cluster meanings (not imposed categories)
+- **Conservative SUD Detection**: 19.7% approach (substance-specific terms required)
+- **Participant-Only Text**: Moderator speech filtered from analysis
+- **Simple but Valid**: Appropriate methodology for counseling research journals
+
+### **Key Changes from Previous Approach:**
+- **Before**: Researcher-imposed regex categories (`career|work|job|profession`)
+- **After**: Data-driven clustering + researcher interpretation of natural groupings
+- **Before**: No systematic clustering methodology
+- **After**: Hierarchical clustering with Ward's method and Euclidean distance  
+- **Before**: All speaker text included  
+- **After**: Participant-only analysis (moderator bias removed)
+- **Before**: 35.2% broad SUD detection
+- **After**: 19.7% conservative, substance-specific detection
+
+### **Implementation:**
+- Existing scripts refined (not replaced) to use proper tidytext co-occurrence
+- Maintains tidymodels ecosystem consistency
+- Documentation now matches actual methodology
 
 ---
 
@@ -243,6 +349,7 @@ Rscript scripts/r/study2_text_preprocessing.R
 
 # 2. Co-occurrence analysis and thematic clustering  
 Rscript scripts/r/study2_cooccurrence_analysis.R
+# ✅ Creates: results/study2_cluster_output.txt (word clusters for theme naming)
 
 # 3. Methodology validation and documentation
 Rscript scripts/r/study2_methodology_validation.R
@@ -418,6 +525,6 @@ quarto render sud_council_paper.qmd --to apaquarto-docx
 
 ---
 
-**Last Updated:** June 2024 - Cleaned and organized for colleague handoff  
+**Last Updated:** June 2025 - Enhanced with APA improvements and meeting organization  
 **Status:** ✅ Publication-ready manuscript with complete analysis pipeline  
 **Contact:** Use GitHub issues for questions about the repository

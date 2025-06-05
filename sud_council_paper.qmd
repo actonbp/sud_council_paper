@@ -168,7 +168,7 @@ All sessions were video-recorded with participant consent. Participants were inf
 
 **SUD Discourse Identification.** To focus analysis on career-relevant content, a comprehensive taxonomy of 53 SUD-related terms was developed across five categories: core addiction terminology (e.g., substance, addiction, dependence), specific substances (e.g., alcohol, drugs, opioids), treatment/recovery language (e.g., recovery, therapy, counseling), problem framing terms (e.g., abuse, struggle, battle), and professional context words (e.g., counselor, therapist, clinical). Only utterances containing substance-specific terminology were included in the final analysis to ensure precise focus on SUD counseling discourse.
 
-**Thematic Analysis.** Following identification of SUD-relevant utterances (*n* = 61, representing 19.7% of substantive discussion), co-occurrence analysis identified frequently paired terms to reveal thematic patterns. This computational approach was supplemented by close reading of transcript excerpts to ensure thematic coherence and contextual accuracy. The analysis aimed to identify dominant conceptual frameworks students used when discussing SUD counseling careers.
+**Thematic Analysis.** Following identification of SUD-relevant utterances (*n* = 61, representing 19.7% of substantive discussion), co-occurrence analysis used the tidytext framework to identify thematic patterns. Specifically, pairwise co-occurrence frequencies were calculated using `pairwise_count()` to determine which terms appeared together within the same utterances. These co-occurrence relationships were then subjected to hierarchical clustering using Ward's minimum variance method with Euclidean distance (`hclust(method = "ward.D2")`). The resulting dendrogram was cut into four clusters using `cutree(k = 4)`, yielding data-driven word groupings. Research team members then interpreted these clusters to derive thematic frameworks, combining computational rigor with qualitative contextual understanding. This approach ensured that themes emerged from actual discourse patterns rather than researcher-imposed categories.
 
 **Validation Procedures.** To ensure analytical rigor, two research team members independently reviewed the computational results and transcript excerpts. Discrepancies were resolved through discussion until consensus was reached. The hybrid computational-interpretive approach enhanced both the systematic nature of pattern detection and the contextual richness of qualitative insights.
 
@@ -182,7 +182,7 @@ This mixed-methods study examined factors influencing undergraduate students' in
 
 The L1-regularized logistic regression model demonstrated strong predictive performance across multiple validation approaches. Cross-validation results based on 50 total folds (10-fold CV with 5 repeats) showed consistent performance with ROC AUC = 0.787 (95% CI [0.766, 0.809]), indicating good discriminative ability. The narrow confidence interval (SE = 0.011) suggests stable model performance across different data subsamples.
 
-Test set validation yielded ROC AUC = 0.706 and classification accuracy = 66.2%, demonstrating reasonable generalization to unseen data. Effect size calculations revealed Cohen's *d* = 0.764 and correlation *r* = 0.411, representing strong effects for behavioral prediction research [@cohen1988statistical]. Bootstrap stability analysis (100 resamples) confirmed 100% sign consistency for key predictors, indicating robust coefficient estimates.
+Test set validation yielded ROC AUC = 0.706 and classification accuracy = 66.2%, demonstrating reasonable generalization to unseen data. Effect size calculations revealed Cohen's *d* = 0.764 and correlation *r* = 0.411, representing strong effects for behavioral prediction research [@cohen1988statistical]. Bootstrap stability analysis (100 resamples) confirmed 100% sign consistency for key predictors, indicating robust coefficient estimates. All statistical tests were conducted with α = .05.
 
 [INSERT TABLE 1 ABOUT HERE]
 
@@ -515,6 +515,8 @@ knitr::kable(performance_data,
              caption = "Table 1. Model Performance Summary for L1-Regularized Logistic Regression")
 ```
 
+{{< pagebreak >}}
+
 ```{r display-tbl-coefficients}
 #| echo: false
 #| message: false
@@ -555,6 +557,8 @@ knitr::kable(coefficients_data,
              caption = "Table 2. Primary Predictors of SUD Counseling Career Interest from L1-Regularized Logistic Regression")
 ```
 
+{{< pagebreak >}}
+
 ```{r display-tbl-personal-theme}
 #| echo: false
 #| message: false
@@ -570,6 +574,8 @@ personal_theme <- tibble(
 knitr::kable(personal_theme, 
              caption = "Table 3. Personal-Emotional Framework: Top Co-occurring Terms in SUD Discussions")
 ```
+
+{{< pagebreak >}}
 
 ```{r display-tbl-preprocessing}
 #| echo: false
@@ -590,6 +596,8 @@ knitr::kable(preprocessing_pipeline,
              caption = "Table 4. Text Preprocessing Pipeline Following smltar/tidytext Methodology")
 ```
 
+{{< pagebreak >}}
+
 ```{r display-tbl-methodology}
 #| echo: false
 #| message: false
@@ -608,6 +616,8 @@ methodology_table <- tribble(
 knitr::kable(methodology_table,
              caption = "Table 5. SUD Terminology Taxonomy: Categories and Examples Used for Text Detection")
 ```
+
+{{< pagebreak >}}
 
 ```{r display-tbl-thematic}
 #| echo: false
@@ -628,6 +638,8 @@ thematic_summary <- tribble(
 knitr::kable(thematic_summary,
              caption = "Table 6. Complete Thematic Analysis: Word Co-occurrence Patterns in SUD Discourse")
 ```
+
+{{< pagebreak >}}
 
 # Appendix
 

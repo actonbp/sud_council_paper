@@ -1,0 +1,73 @@
+=== STUDY 2: DATA-DRIVEN WORD CLUSTERS FOR THEME NAMING ===
+
+**METHODOLOGY:** Hierarchical clustering (Ward's method) of co-occurring terms within SUD utterances
+**DETECTION RATE:** 109/310 utterances (35.2%) contain SUD-specific terminology  
+**TOTAL SUD TOKENS:** 2,253 tokens across 655 unique stems
+
+---
+
+📊 **CLUSTER 1 - EMOTIONAL/AFFECTIVE DIMENSION** (83 mentions, 4.4% of SUD discourse)
+**Core Word:** feel (83 mentions)
+
+RESEARCHER ASSIGNMENT: What thematic concept does this represent?
+PROPOSED THEME NAME: _________________________________
+
+---
+
+📊 **CLUSTER 2 - RELATIONAL/SOCIAL DIMENSION** (83 mentions, 4.4% of SUD discourse)  
+**Core Word:** people (83 mentions)
+
+RESEARCHER ASSIGNMENT: What thematic concept does this represent?
+PROPOSED THEME NAME: _________________________________
+
+---
+
+📊 **CLUSTER 3 - SUBSTANCE/PERSONAL FRAME** (226 mentions, 11.9% of SUD discourse)
+**Core Words:**
+- lot (55 mentions) - frequency/quantity expressions
+- dont (54 mentions) - negation/uncertainty  
+- substance (45 mentions) - direct SUD terminology
+- person (38 mentions) - individual focus
+- health (34 mentions) - wellness framing
+
+RESEARCHER ASSIGNMENT: What thematic concept do these words collectively represent?
+PROPOSED THEME NAME: _________________________________
+
+---
+
+📊 **CLUSTER 4 - PROFESSIONAL/FIELD FRAMEWORK** (357 mentions, 18.8% of SUD discourse)
+**Core Words:**
+- mental (41 mentions) - mental health context
+- helping (33 mentions) - service orientation  
+- family (30 mentions) - systemic perspective
+- youre (30 mentions) - second-person address
+- abuse (29 mentions) - problem terminology
+- field (29 mentions) - professional domain
+- counselor (27 mentions) - professional role
+- job (25 mentions) - career framing
+- therapy (24 mentions) - treatment modality
+- therapist (23 mentions) - professional identity
+- ive (23 mentions) - personal experience
+- support (23 mentions) - helping framework
+- counseling (20 mentions) - professional activity
+
+RESEARCHER ASSIGNMENT: What thematic concept do these words collectively represent?
+PROPOSED THEME NAME: _________________________________
+
+---
+
+📋 **CLUSTER PREVALENCE RANKING:**
+1. **Cluster 4** - 18.8% of SUD discourse (most prominent theme)
+2. **Cluster 3** - 11.9% of SUD discourse  
+3. **Clusters 1 & 2** - 4.4% each (tied, smaller but distinct themes)
+
+---
+
+📝 **RESEARCH TEAM INSTRUCTIONS:**
+1. **Review each cluster's word groupings** - These emerged from mathematical co-occurrence analysis
+2. **Assign meaningful theme names** - Based on conceptual coherence of word groups
+3. **Consider prevalence** - Cluster 4 represents the most prominent thematic framework
+4. **Document rationale** - Explain how word groupings support chosen theme names
+5. **Cross-validate themes** - Do the emergent clusters align with theoretical frameworks?
+
+**FILE LOCATION:** This analysis can be found in `results/study2_cluster_output.txt` for complete technical details. 

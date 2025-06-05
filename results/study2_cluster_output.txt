@@ -1,0 +1,197 @@
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+here() starts at /Users/erika/Documents/GitHub/sud_council_paper
+=== PROPER SUD TOPIC CO-OCCURRENCE ANALYSIS ===
+Using smltar/tidytext preprocessed data
+
+📊 PREPROCESSING SUMMARY:
+- Original utterances: 310 
+- Final meaningful tokens: 4324 
+- Stemming reduction: 21.1 %
+- SUD utterances detected: 109 ( 35.2 %)
+
+🎯 SUD UTTERANCE ANALYSIS:
+Analyzing 109 SUD-related utterances
+Represents 35.2 % of substantive content
+
+📝 TOKEN ANALYSIS:
+SUD-related tokens: 2253 
+Unique original words: 802 
+Unique stems: 655 
+
+🔍 ANALYSIS 1: Stem-based Word Frequencies
+Top stems co-occurring with SUD discussions:
+# A tibble: 20 × 2
+   word_stem     n
+   <chr>     <int>
+ 1 feel         83
+ 2 peopl        83
+ 3 lot          55
+ 4 dont         54
+ 5 substanc     45
+ 6 mental       41
+ 7 person       38
+ 8 health       34
+ 9 help         33
+10 famili       30
+11 your         30
+12 abus         29
+13 field        29
+14 counselor    27
+15 job          25
+16 therapi      24
+17 ive          23
+18 support      23
+19 therapist    23
+20 counsel      20
+
+📖 ANALYSIS 2: Original Word Frequencies
+Top original words (by stem frequency):
+# A tibble: 20 × 3
+   word_stem word_original n_stem
+   <chr>     <chr>          <int>
+ 1 feel      feel              83
+ 2 peopl     people            83
+ 3 lot       lot               55
+ 4 dont      dont              54
+ 5 substanc  substance         45
+ 6 mental    mental            41
+ 7 person    person            38
+ 8 health    health            34
+ 9 help      helping           33
+10 famili    family            30
+11 your      youre             30
+12 abus      abuse             29
+13 field     field             29
+14 counselor counselor         27
+15 job       job               25
+16 therapi   therapy           24
+17 ive       ive               23
+18 support   support           23
+19 therapist therapist         23
+20 counsel   counseling        20
+
+🎯 ANALYSIS 3: Data-Driven Co-occurrence Analysis
+Top co-occurring word pairs:
+# A tibble: 15 × 3
+   item1    item2        n
+   <chr>    <chr>    <dbl>
+ 1 feel     peopl       24
+ 2 peopl    feel        24
+ 3 health   mental      22
+ 4 mental   health      22
+ 5 abus     substanc    22
+ 6 substanc abus        22
+ 7 person   peopl       19
+ 8 dont     peopl       19
+ 9 peopl    person      19
+10 peopl    dont        19
+11 help     peopl       18
+12 dont     feel        18
+13 peopl    help        18
+14 feel     dont        18
+15 lot      peopl       17
+
+Words selected for theme clustering: 20 
+Co-occurrence matrix dimensions: 20 × 20 
+
+📊 DATA-DRIVEN THEMES (From Clustering):
+
+🎯 THEME 1 ( 1 words):
+# A tibble: 1 × 3
+  word_stem word_original frequency
+  <chr>     <chr>             <int>
+1 feel      feel                 83
+
+🎯 THEME 2 ( 1 words):
+# A tibble: 1 × 3
+  word_stem word_original frequency
+  <chr>     <chr>             <int>
+1 peopl     people               83
+
+🎯 THEME 3 ( 5 words):
+# A tibble: 5 × 3
+  word_stem word_original frequency
+  <chr>     <chr>             <int>
+1 lot       lot                  55
+2 dont      dont                 54
+3 substanc  substance            45
+4 person    person               38
+5 health    health               34
+
+🎯 THEME 4 ( 13 words):
+# A tibble: 13 × 3
+   word_stem word_original frequency
+   <chr>     <chr>             <int>
+ 1 mental    mental               41
+ 2 help      helping              33
+ 3 your      youre                30
+ 4 famili    family               30
+ 5 abus      abuse                29
+ 6 field     field                29
+ 7 counselor counselor            27
+ 8 job       job                  25
+ 9 therapi   therapy              24
+10 therapist therapist            23
+11 ive       ive                  23
+12 support   support              23
+13 counsel   counseling           20
+
+📋 THEME PREVALENCE:
+# A tibble: 4 × 5
+  theme_number unique_stems total_mentions percentage_of_sud_tokens theme_name  
+         <int>        <int>          <int>                    <dbl> <chr>       
+1            4           13            357                     18.8 Data-Driven…
+2            3            5            226                     11.9 Data-Driven…
+3            1            1             83                      4.4 Data-Driven…
+4            2            1             83                      4.4 Data-Driven…
+
+📊 ANALYSIS 4: Session-level Patterns
+SUD discussion patterns by session:
+# A tibble: 7 × 4
+  session_id.x    n_tokens n_unique_stems top_stem
+  <chr>              <int>          <int> <chr>   
+1 11_11_2024_4pm       623            281 mental  
+2 11_14_2024_4pm       453            220 feel    
+3 11_4_2024_11am       374            182 dont    
+4 11_12_2024_11am      291            139 peopl   
+5 11_8_2024_12pm       186            106 dont    
+6 11_6_2024_5_pm       181            105 feel    
+7 11_6_2024_130pm      145             95 feel    
+
+📋 ANALYSIS 5: Data-Driven Analysis Summary
+✅ METHODOLOGY VALIDATION:
+✓ Genuine co-occurrence analysis using tidytext::pairwise_count()
+✓ Data-driven theme emergence via hierarchical clustering
+✓ Conservative SUD detection (substance-specific terms)
+✓ No researcher-imposed categories
+✓ Themes emerge from actual word co-occurrence patterns
+
+EMERGENT THEMES SUMMARY:
+# A tibble: 4 × 5
+  theme_number unique_stems total_mentions percentage_of_sud_tokens theme_name  
+         <int>        <int>          <int>                    <dbl> <chr>       
+1            4           13            357                     18.8 Data-Driven…
+2            3            5            226                     11.9 Data-Driven…
+3            1            1             83                      4.4 Data-Driven…
+4            2            1             83                      4.4 Data-Driven…
+
+💾 ANALYSIS SAVED:
+File: results/proper_cooccurrence_analysis.rds
+
+✅ DATA-DRIVEN CO-OCCURRENCE ANALYSIS COMPLETE!
+Following smltar/tidytext best practices:
+✓ Genuine tidytext::pairwise_count() co-occurrence analysis
+✓ Hierarchical clustering for emergent theme identification
+✓ Conservative SUD detection ( 35.2 % of content)
+✓ Data-driven themes (no researcher-imposed categories)
+✓ Methodology now matches documentation claims
+✓ Simple but valid approach for counseling research journals
