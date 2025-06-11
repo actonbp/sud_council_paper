@@ -1,0 +1,99 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# AI Agent Guidance for SUD Counseling Research Project
+
+## Core Principles for Repository Work
+
+### 🚫 **DO NOT Create New Scripts Unless Absolutely Necessary**
+- **Work with existing scripts** in `scripts/r/` directory
+- The project has 5 essential, clean scripts that are **publication-ready**
+- Only create new scripts if explicitly requested or if critical functionality is missing
+- Before creating anything new, **ask the user** if it's truly needed
+
+### 🤔 **Think Before Acting - Lay Out Options**
+- **Present multiple approaches** when there are different ways to solve a problem
+- **Explain pros and cons** of each option
+- **Ask which approach** the user prefers rather than assuming
+- **Plan the sequence** of actions before starting
+
+### ❓ **Ask Questions When Uncertain**
+- **Never hallucinate or make up** information about the project
+- **Never assume** what the user wants
+- If you don't understand something, **ask for clarification**
+- If you're unsure about data file locations, analysis results, or project status, **ask first**
+- **Don't fill in gaps** with assumptions - get confirmation
+
+### 🧹 **Keep Repository Tidy**
+- **Do NOT delete files** - move them to `archive/` folder instead
+- **Follow existing organization patterns** established in the repository
+- **Document what you move** and why in archive README files
+- **Preserve project history** by maintaining clean archive system
+
+### 📁 **Archive System Usage**
+- Move outdated/completed files to appropriate `archive/` subfolders
+- Update `archive/ARCHIVE_README.md` with what was moved and when
+- **Never delete anything** - the archive preserves project evolution
+- Keep main directory focused on essential, current files
+
+### 📊 **Analysis Guidelines**
+- **Use existing tidymodels/tidyverse patterns** established in the project
+- **Follow the 5-script pipeline** for Study 1 and Study 2
+- **Respect data privacy rules** - never commit participant data
+- **Maintain APA formatting standards** for all manuscript work
+
+### 🤝 **Collaboration Focus**
+- This is **Erika's project** - she is the first author and primary researcher
+- **Support her workflow** rather than imposing new structures
+- **Ask before making major changes** to organization or approach
+- **Preserve her existing work patterns** and preferences
+
+## Current Project Status
+
+### ✅ **What's Complete:**
+- **Study 1**: Tidymodels analysis achieving ROC AUC = 0.787
+- **Study 2**: Text analysis with 4 validated themes
+- **Manuscript**: APA-formatted Quarto paper ready for submission
+- **Repository**: Clean, colleague-ready structure with archive system
+
+### 🎯 **What to Focus On:**
+- **Manuscript refinement** and content improvements
+- **Analysis reproduction** and results verification
+- **Documentation updates** and clarity improvements
+- **Meeting preparation** and project communication
+- **Meeting document creation** using Quarto for Word/PDF reports
+
+### 🚫 **What NOT to Do:**
+- Don't reorganize the established folder structure
+- Don't create duplicate analysis scripts
+- Don't modify the archive system organization
+- Don't assume data file locations or content
+
+## When Working on This Project
+
+1. **Read project status first** - Check CLAUDE.md and README.md
+2. **Ask questions early** if anything is unclear
+3. **Present options** rather than making unilateral decisions
+4. **Work within existing patterns** rather than creating new ones
+5. **Document any changes** you make clearly
+6. **Test manuscript compilation** after any QMD changes
+7. **Keep the user informed** about what you're doing and why
+
+## Working with Meeting Documents
+
+### **Meeting Folder Usage (`meetings/`)**
+- **Purpose**: Create Quarto documents that compile to professional Word/PDF reports for meetings
+- **Content Types**: Project updates, progress reports, meeting preparation materials
+- **Compilation**: Use `quarto render filename.qmd --to apaquarto-docx` for APA Word format
+- **Organization**: Follow filename convention `YYYY-MM-DD_meeting_topic.qmd`
+
+### **Meeting Document Content**
+- Current manuscript status and recent improvements
+- Analysis pipeline results and key findings
+- APA formatting updates and compilation success
+- Next steps and discussion points
+- Actionable items and decisions needed
+
+Remember: This is a **complete, publication-ready academic project**. The goal is to **support and enhance** existing work, not to rebuild or reorganize it.

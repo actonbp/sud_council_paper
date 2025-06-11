@@ -1,0 +1,60 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Meeting Preparation Workflow
+
+## Professional Meeting Document Creation
+
+### Meeting Documents Location
+All meeting materials are created in the [meetings/](mdc:meetings) folder with professional Quarto compilation to Word documents.
+
+### Document Naming Convention
+- **Format**: `YYYY-MM-DD_meeting_topic.qmd`
+- **Example**: [2025-06-05_study2_methodology_review.qmd](mdc:meetings/2025-06-05_study2_methodology_review.qmd)
+
+### Document Structure Template
+```yaml
+---
+title: "Meeting Topic Title"
+shorttitle: "Short Title" 
+date: "Month Day, Year"
+author:
+  - name: "Erika Hernandez Acton"
+    corresponding: true
+    email: "erika@binghamton.edu"
+    affiliations:
+      - name: "Binghamton University"
+---
+```
+
+### Content Sections
+1. **Executive Summary**: Key points and decisions needed
+2. **Current Status**: Manuscript, analysis, or methodology status
+3. **Specific Results**: Include actual data, clusters, or findings (no hallucinations)
+4. **Action Items**: Clear next steps for research team
+5. **Timeline**: Deadlines and milestones
+
+### Compilation Workflow
+```bash
+cd meetings/
+# For APA formatting (if available):
+quarto render filename.qmd --to apaquarto-docx
+# For standard Word format:
+quarto render filename.qmd --to docx
+```
+
+### Key Best Practices
+- **Include real results**: Always use actual data from analysis outputs
+- **Document methodology accurately**: Only describe what code actually executed
+- **Provide clear action items**: Specific tasks for research team
+- **Update README**: Keep [meetings/README.md](mdc:meetings/README.md) current with document status
+
+### Integration with Analysis Results
+Meeting documents should reference actual output files:
+- [results/study2_cluster_output.txt](mdc:results/study2_cluster_output.txt) for technical details
+- [results/study2_cluster_themes_for_naming.txt](mdc:results/study2_cluster_themes_for_naming.txt) for researcher worksheets
+
+### Archive and Status Tracking
+Update meeting document status in [meetings/README.md](mdc:meetings/README.md) with completion status, key results, and action items for team follow-up.

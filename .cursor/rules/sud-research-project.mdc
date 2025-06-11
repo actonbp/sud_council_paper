@@ -33,6 +33,7 @@ This is a **completed mixed-methods academic research study** examining factors 
 - `scripts/r/study2_*.R` - Text analysis pipeline (4 scripts)
 - `results/` - All analysis outputs and visualizations
 - `references.bib` - Bibliography in BibTeX format
+- `meetings/` - Meeting preparation and Quarto report creation
 
 ### Compilation Instructions
 **CRITICAL**: Always use APA extension for proper formatting:

@@ -1,0 +1,62 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Study 2 Hierarchical Clustering Methodology
+
+## Validated Data-Driven Approach ✅ JUNE 5, 2025 CONFIRMED
+
+### Core Methodology
+The Study 2 analysis uses **hierarchical clustering with Ward's method** to identify data-driven themes from SUD-related utterances. This approach was implemented to resolve methodology integrity issues where documentation claimed "data-driven themes" but implementation used researcher-imposed categories.
+
+**✅ JUNE 5 UPDATE:** Methodology validated through comprehensive mathematical optimization using silhouette analysis for genuine data-driven cluster determination.
+
+### Mathematical Validation (June 5, 2025)
+- **Silhouette Analysis**: k=3 optimal (score=0.185) indicating reasonable cluster separation
+- **Elbow Method**: k=2 secondary validation  
+- **Decision Algorithm**: Prioritized cluster quality over parsimony → k=3 selected
+- **Enhanced Stopwords**: Added function words ("dont", "lot", "things", "stuff") to prevent semantic contamination
+
+### Required Script Sequence
+1. **Preprocessing**: [study2_text_preprocessing.R](mdc:scripts/r/study2_text_preprocessing.R)
+2. **Clustering**: [study2_cooccurrence_analysis.R](mdc:scripts/r/study2_cooccurrence_analysis.R) 
+3. **Validation**: [study2_methodology_validation.R](mdc:scripts/r/study2_methodology_validation.R)
+4. **Visualization**: [study2_create_visualizations.R](mdc:scripts/r/study2_create_visualizations.R)
+
+### Technical Implementation
+- **Co-occurrence Analysis**: `tidytext::pairwise_count()` for genuine term relationships
+- **Clustering Method**: `hclust(method = "ward.D2")` with Euclidean distance
+- **Cluster Assignment**: `cutree(k = 3)` **UPDATED** - mathematically optimized via silhouette analysis
+- **SUD Detection**: 35.2% detection rate using 53 substance-specific terms (validated June 5)
+- **Distance Calculation**: Complement transformation of co-occurrence matrix
+
+### Expected Outputs
+- [study2_cluster_output.txt](mdc:results/study2_cluster_output.txt) - Complete technical analysis
+- [study2_cluster_themes_for_naming.txt](mdc:results/study2_cluster_themes_for_naming.txt) - Researcher worksheet
+- [study2_cluster_validation.csv](mdc:results/study2_cluster_validation.csv) - Silhouette analysis results
+
+### Validated Cluster Results Structure (k=3 OPTIMIZED)
+- **Cluster 1 - Clinical-Affective Framework (21.9%)**: feel, substance, mental, health, abuse
+- **Cluster 2 - Relational Dimension (4.7%)**: people (mathematically isolated as distinct theme)  
+- **Cluster 3 - Professional-Therapeutic Framework (14.6%)**: family, counselor, therapy, therapist, support
+
+### Key Principle
+**Data-driven clustering + researcher interpretation**: Mathematical analysis determines word groupings AND cluster count through validation metrics, researchers assign thematic meanings. This maintains methodological integrity while allowing qualitative interpretation.
+
+### Methodology Advantages (Documented June 5)
+- **Eliminates researcher bias** through mathematical validation
+- **Quantifiable cluster quality** via silhouette analysis  
+- **Reproducible results** using standardized algorithms
+- **Conservative approach** suitable for focus group data
+- **Transparent mathematical relationships** between words
+
+### Package Dependencies
+Ensure [r_package_requirements.R](mdc:scripts/r/r_package_requirements.R) includes: `tidytext`, `widyr`, `SnowballC`, `cluster` for proper co-occurrence analysis, stemming, and silhouette validation.
+
+### Manuscript Documentation
+Complete methodology explanation available in **Appendix B** of manuscript including:
+- Step-by-step mathematical process
+- Validation methodology comparison  
+- Advantages over alternative approaches
+- Limitations and assumptions

@@ -1,0 +1,145 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Methodology Integrity Principles
+
+## Documentation Must Match Implementation
+
+### Core Principle
+**NEVER claim methodology approaches that aren't actually implemented in the code.** Documentation must accurately reflect what analysis scripts actually execute.
+
+### Key Integrity Requirements
+
+#### Study 1 (Quantitative)
+- Must use genuine tidymodels framework: [scripts/r/study1_main_analysis.R](mdc:scripts/r/study1_main_analysis.R)
+- Document actual cross-validation approach (10-fold with 5 repeats)
+- Report real performance metrics (ROC AUC 0.787 [0.766, 0.809])
+- Use actual effect sizes calculated from bootstrap validation
+
+#### Study 2 (Qualitative) 
+- **Data-driven claims require actual mathematical clustering**: [scripts/r/study2_cooccurrence_analysis.R](mdc:scripts/r/study2_cooccurrence_analysis.R)
+- **Co-occurrence analysis must use `tidytext::pairwise_count()`** not regex pattern matching
+- **Hierarchical clustering must use `hclust(method = "ward.D2")`** for theme derivation
+- **Theme assignment**: Mathematics determines clusters, researchers interpret meanings
+
+### Critical Red Flags
+- ❌ **Claiming "data-driven themes" while using researcher-imposed categories**
+- ❌ **Documenting "network analysis" without actual network computation**
+- ❌ **Stating "emergent themes" when using predefined regex patterns**
+- ❌ **Reporting methodology not implemented in analysis scripts**
+
+### Validation Steps
+1. **Read the actual analysis scripts** before documenting methodology
+2. **Trace data flow** from preprocessing through final outputs
+3. **Verify output files** match documented results
+4. **Check mathematical approaches** match claimed methods
+
+### Output File Verification
+- [results/study2_cluster_output.txt](mdc:results/study2_cluster_output.txt) must contain real clustering results
+- [results/study2_cluster_themes_for_naming.txt](mdc:results/study2_cluster_themes_for_naming.txt) provides researcher worksheet
+- Manuscript methods section must describe actual implemented approach
+
+### Documentation Standards
+- **Be conservative**: Under-promise and over-deliver on methodology sophistication
+- **Be accurate**: Describe exactly what code executes, no embellishments
+- **Be transparent**: Acknowledge limitations of simple but valid approaches
+- **Be reproducible**: Provide clear script sequence and parameter settings
+
+### Repository Maintenance
+Keep [CLAUDE.md](mdc:CLAUDE.md) and [README.md](mdc:README.md) aligned with actual implemented methodology. Update documentation immediately when analysis approaches change.
+
+# Statistical Methodology Integrity Principles
+
+## CRITICAL STATISTICAL ISSUES IDENTIFIED (June 5, 2025)
+
+### 🔴 URGENT FIXES REQUIRED
+
+#### Bootstrap Confidence Intervals - MATHEMATICALLY INVALID
+- **Problem**: Current code uses CV standard errors as sampling distribution errors
+- **Formula**: `cv_95_lower <- cv_mean - 1.96 * cv_std_err` ← WRONG
+- **Reality**: Cross-validation errors ≠ parameter uncertainty
+- **Action**: REMOVE all bootstrap CI claims from manuscript and results
+
+#### Statistical Significance - INAPPROPRIATE FOR REGULARIZATION  
+- **Problem**: Reporting p-values for L1-regularized (Lasso) model coefficients
+- **Reality**: Regularization shrinks coefficients, invalidates standard inference
+- **Current Claims**: "p < 0.001" throughout manuscript
+- **Action**: REMOVE all statistical significance claims, focus on effect sizes only
+
+#### Effect Size Conversions - UNVALIDATED ASSUMPTIONS
+- **Problem**: `cohens_d <- sqrt(2) * qnorm(roc_auc_value)` assumes normality
+- **Problem**: `correlation_r <- 2 * (roc_auc_value - 0.5)` assumes linearity  
+- **Reality**: These may not apply to our logistic regression model
+- **Action**: Validate formulas against literature OR remove entirely
+
+### 🟠 MODERATE CONCERNS
+
+#### Multiple Comparisons - NO CORRECTION
+- **Problem**: Testing ~15-20 predictors simultaneously without correction
+- **Impact**: Inflated Type I error rate
+- **Action**: Apply Bonferroni/FDR correction OR limit to pre-specified hypotheses
+
+#### Nested Cross-Validation - NOT IMPLEMENTED
+- **Problem**: Tuning hyperparameters on same folds used for performance estimation
+- **Impact**: Optimistic performance estimates (leakage)
+- **Action**: Implement proper nested CV OR acknowledge optimistic bias
+
+### 🟡 MINOR IMPROVEMENTS
+
+#### Power Analysis - MISSING
+- **Problem**: No formal power analysis for N=391 sample  
+- **Action**: Conduct post-hoc power analysis for primary effects
+
+#### Bootstrap Stability - MISLEADING METRIC
+- **Problem**: "Sign consistency" doesn't capture magnitude changes
+- **Action**: Replace with coefficient standard deviation or CV
+
+## VALIDATED METHODOLOGIES (June 5, 2025)
+
+### Study 2 Hierarchical Clustering ✅ CONFIRMED ROBUST
+- **Approach**: Silhouette analysis determines optimal k=3 clusters
+- **Validation**: Mathematical optimization, not researcher assumption
+- **Quality**: Score 0.185 indicates reasonable cluster separation
+- **Preprocessing**: Enhanced stopword filtering prevents contamination
+
+### General Principles for AI Agents
+
+#### DO Support:
+- Help implement statistical fixes systematically
+- Assist with removing problematic claims from manuscript  
+- Support methodological limitations documentation
+- Help validate effect size formulas against literature
+
+#### DON'T Assume:
+- Current confidence intervals are valid
+- Statistical significance claims are appropriate
+- Effect size conversions are accurate
+- Performance estimates are unbiased
+
+#### Priority Framework:
+1. **Statistical validity** - Ensure numerical claims are justified
+2. **Methodological transparency** - Document approaches honestly
+3. **Systematic improvement** - Follow established remediation plan
+4. **Scientific integrity** - Accuracy over impressive results
+
+## Action Plan Timeline
+
+### Week 1: Critical Statistical Fixes
+1. Remove bootstrap confidence interval claims
+2. Remove statistical significance claims (p-values)  
+3. Validate or remove effect size conversions
+4. Add statistical limitations section
+
+### Week 2: Moderate Issues
+5. Implement multiple testing correction
+6. Add nested CV or performance caveats
+7. Document methodological decisions
+
+### Week 3: Enhancement
+8. Conduct post-hoc power analysis
+9. Add sensitivity analyses
+10. Update limitations documentation
+
+This systematic approach maintains scientific rigor while transparently addressing methodological limitations.

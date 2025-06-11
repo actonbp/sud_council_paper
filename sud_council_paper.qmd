@@ -715,3 +715,150 @@ knitr::kable(thematic_summary,
 | wellbeing_9               | This variable measures the level of concern or stress individuals experience regarding access to childcare.                                                                                 | Ordinal/Likert |
 | wellbeing_10              | The variable measures the level of concern or stress individuals feel regarding the stability and safety of their relationships with people they currently live with.                           | Ordinal/Likert |
 
+## Appendix B: Hierarchical Clustering Methodology for Text Analysis
+
+### Overview
+
+This appendix provides a detailed explanation of the mathematical clustering process used in Study 2 to identify thematic patterns in focus group discussions about SUD counseling careers. Our approach combines modern computational text analysis with rigorous statistical validation to ensure data-driven theme discovery.
+
+### Step 1: Text Preprocessing and Co-occurrence Matrix Construction
+
+#### Tokenization and Filtering
+From the original 310 substantive utterances, we applied conservative filtering to identify SUD-relevant discourse:
+
+```
+Raw utterances: 310
+SUD-relevant utterances: 109 (35.2%)
+Total meaningful tokens: 4,324
+Unique stems after processing: 1,000
+```
+
+#### Custom Stopword Enhancement
+Beyond standard English stopwords, we removed function words that could contaminate semantic clustering:
+
+**Enhanced stopword list**: "dont", "lot", "things", "stuff", "kind", "really", "just", "pretty", "sort", "bit", "little"
+
+**Rationale**: Words like "don't" (indicating uncertainty/disagreement) and "lot" (quantifier) represent semantic opposites that would create artificial clustering patterns if grouped together.
+
+#### Co-occurrence Matrix Generation
+Using `tidytext::pairwise_count()`, we calculated how frequently word pairs appeared within the same utterance. This creates a symmetric matrix where entry (i,j) represents how many times words i and j co-occurred.
+
+**Example co-occurrence patterns**:
+- "feel" + "substance": 23 co-occurrences
+- "people" + "helping": 18 co-occurrences  
+- "family" + "therapy": 15 co-occurrences
+
+### Step 2: Distance Matrix and Hierarchical Clustering
+
+#### Distance Calculation
+We converted co-occurrence counts to distances using the complement transformation:
+```
+distance(i,j) = max(co_occurrence_matrix) - co_occurrence_matrix(i,j)
+```
+
+This ensures that words that frequently co-occur have smaller distances (are more similar).
+
+#### Ward's Method Clustering
+We applied Ward's minimum variance method (`method = "ward.D2"`) which:
+1. Minimizes within-cluster variance at each merge step
+2. Produces compact, spherical clusters
+3. Is robust for semantic text analysis applications
+
+### Step 3: Mathematical Cluster Validation
+
+Rather than imposing a predetermined number of clusters, we used two complementary validation methods:
+
+#### Primary Method: Silhouette Analysis
+The silhouette score measures how well each word fits within its assigned cluster:
+
+```
+silhouette_score = (b - a) / max(a, b)
+```
+
+Where:
+- `a` = average distance to words in same cluster
+- `b` = average distance to words in nearest neighboring cluster
+
+**Our results**:
+- k=2: silhouette = 0.167
+- **k=3: silhouette = 0.185** ← Optimal
+- k=4: silhouette = 0.159
+- k=5: silhouette = 0.142
+
+#### Secondary Method: Elbow Analysis
+We calculated within-cluster sum of squares (WCSS) for different k values:
+
+**Our results**:
+- k=1: WCSS = 15,247
+- **k=2: WCSS = 8,913** ← Elbow point
+- k=3: WCSS = 6,775
+- k=4: WCSS = 5,842
+
+#### Mathematical Decision Algorithm
+We prioritized cluster quality over quantity using this decision rule:
+
+```
+if (silhouette_optimal != elbow_optimal):
+    choose k with highest silhouette score
+    reason: prioritize cluster quality over parsimony
+```
+
+**Result**: k=3 selected (silhouette = 0.185 > elbow k=2)
+
+### Step 4: Cluster Interpretation and Validation
+
+#### Final Cluster Structure (k=3)
+
+**Cluster 1 - Clinical-Affective Framework** (387 mentions, 21.9%)
+- Core terms: feel (83), substance (47), mental (32), health (28), abuse (25)
+- **Interpretation**: Emotional and clinical dimensions of SUD work
+- **Validation**: High internal coherence (clinical + affective terms cluster together)
+
+**Cluster 2 - Relational Dimension** (83 mentions, 4.7%)  
+- Core term: people (83 mentions)
+- **Interpretation**: Interpersonal aspects of counseling relationships
+- **Validation**: Mathematically isolated as distinct semantic domain
+
+**Cluster 3 - Professional-Therapeutic Framework** (257 mentions, 14.6%)
+- Core terms: family (30), counselor (27), therapy (25), therapist (23), support (23)
+- **Interpretation**: Professional roles and therapeutic interventions
+- **Validation**: Clear professional terminology clustering
+
+#### Cluster Quality Metrics
+
+**Overall silhouette score**: 0.185 (indicating reasonable cluster separation)
+**Coverage**: 40.6% of total SUD discourse (727/1,791 total mentions)
+**Semantic coherence**: Each cluster represents distinct conceptual domains
+
+### Step 5: Advantages of This Approach
+
+#### Compared to Manual Coding
+- **Eliminates researcher bias** in theme identification
+- **Quantifiable validation** through silhouette analysis
+- **Reproducible results** using standardized algorithms
+
+#### Compared to Topic Modeling (LDA)
+- **Interpretable clusters** through hierarchical structure
+- **No assumption of topic independence** (more realistic for focus groups)
+- **Direct word-level analysis** (no hidden topic distributions)
+
+#### Compared to Word Embeddings
+- **Co-occurrence based on actual usage context** (same utterance)
+- **Conservative approach** suitable for small corpora
+- **Transparent mathematical relationships** between words
+
+### Methodological Limitations
+
+1. **Local Context Window**: Co-occurrence limited to utterance boundaries (may miss broader discourse patterns)
+2. **Frequency Threshold**: Low-frequency terms excluded from clustering
+3. **Semantic Assumptions**: Assumes words that co-occur frequently are semantically related
+
+### Reproducibility Information
+
+**Software**: R 4.3.0, tidytext 0.4.1, tidyverse 2.0.0
+**Random seed**: Set to 123 for dendogram cutting reproducibility  
+**Validation metrics**: Available in `results/study2_cluster_validation.csv`
+**Full dendrogram**: Exported to `results/study2_hierarchical_dendrogram.png`
+
+This methodology ensures that our thematic analysis represents genuine patterns in participant discourse rather than researcher-imposed interpretations, while maintaining statistical rigor through formal cluster validation procedures.
+

@@ -207,3 +207,215 @@ All required packages listed in `scripts/r/r_package_requirements.R`:
 - ✅ Future updates and modifications are straightforward
 
 **This repository is now optimized for collaborative academic research with clear workflows and comprehensive documentation.**
+
+---
+
+## 📅 **JUNE 5, 2025 UPDATE: METHODOLOGICAL REVIEW & IMPROVEMENTS**
+
+### **🔍 CRITICAL METHODOLOGICAL AUDIT COMPLETED**
+
+Today's session focused on systematic review of analysis methodologies and identification of statistical concerns requiring attention. **Key achievement: Enhanced scientific rigor through transparent identification and documentation of methodological limitations.**
+
+#### **Major Methodological Improvements Implemented:**
+
+**1. Study 2 Clustering Methodology - VALIDATED & ENHANCED**
+- ✅ **Confirmed data-driven approach:** k=3 clusters determined by silhouette analysis (0.185) NOT researcher assumption
+- ✅ **Enhanced stopword filtering:** Added function words ("dont", "lot", "things", "stuff") to prevent semantic contamination  
+- ✅ **Mathematical validation documented:** Clear silhouette vs elbow method decision algorithm
+- ✅ **Added comprehensive appendix:** Full clustering methodology explanation in manuscript (Appendix B)
+
+**2. Statistical Concerns Documentation - TRANSPARENCY ENHANCED**
+- 🔴 **Critical issues identified:** Bootstrap confidence intervals, statistical significance claims, effect size conversions
+- 🟠 **Moderate concerns documented:** Multiple comparisons, nested CV, detection rate inconsistencies
+- 🟡 **Minor improvements noted:** Power analysis, stability metrics, stemming validation
+- ✅ **Complete remediation plan created:** Prioritized action items with timelines
+
+#### **Key Findings from Methodological Review:**
+
+**Study 1 Statistical Issues:**
+- **Bootstrap CIs:** Current confidence interval calculations mathematically invalid (CV standard errors ≠ sampling distribution)
+- **Regularization inference:** P-values inappropriate for L1-regularized models
+- **Effect size conversions:** Cohen's d and correlation formulas need validation for our model type
+- **Multiple testing:** No correction applied to ~15-20 simultaneous predictors
+
+**Study 2 Validation Confirmed:**
+- **Clustering approach validated:** Mathematical optimization genuinely data-driven
+- **Detection consistency verified:** 35.2% rate consistent across final analyses
+- **Preprocessing robustness:** Enhanced stopword filtering eliminates semantic contamination
+- **Methodological transparency:** Complete documentation enables replication
+
+### **📋 IMMEDIATE ACTION PLAN ESTABLISHED**
+
+**Week 1: Critical Statistical Fixes (🔴 Priority)**
+1. Remove all bootstrap confidence interval claims from manuscript and results
+2. Remove statistical significance claims (p-values) from regularized model results  
+3. Validate or remove effect size conversions (Cohen's d, correlation)
+4. Add statistical limitations section to manuscript methodology
+
+**Week 2: Moderate Issues (🟠 Priority)**
+5. Implement multiple testing correction or limit to pre-specified hypotheses
+6. Add nested CV implementation or caveat about optimistic performance
+7. Document all methodological decisions with justifications
+
+**Week 3: Enhancement (🟡 Priority)**
+8. Conduct post-hoc power analysis for primary effects
+9. Add sensitivity analyses for key methodological choices
+10. Update manuscript limitations section with identified concerns
+
+### **🎯 DOCUMENTATION UPDATES COMPLETED**
+
+**1. README.md Enhanced:**
+- ✅ **Added comprehensive "Methodological Concerns & Remediation Plans" section**
+- ✅ **Detailed issue tracking:** Critical → Moderate → Minor priority levels
+- ✅ **Specific action items:** Checkboxes and timelines for systematic resolution
+- ✅ **Transparent approach:** Scientific integrity through honest limitation acknowledgment
+
+**2. Manuscript Improvements:**
+- ✅ **Added Appendix B:** Detailed hierarchical clustering methodology explanation
+- ✅ **Enhanced methodological transparency:** Step-by-step mathematical validation process
+- ✅ **Cluster validation documentation:** Silhouette analysis, elbow method, decision algorithm
+
+**3. Project Documentation:**
+- ✅ **Meeting notes updated:** June 5th methodology review documented
+- ✅ **Cursor rules maintained:** Existing methodological standards preserved
+- ✅ **Archive integrity:** No removal of existing work, only additions
+
+### **🔬 SCIENTIFIC IMPACT OF TODAY'S WORK**
+
+**Methodological Rigor Enhanced:**
+- **Study 2 approach validated:** Confirmed genuinely data-driven clustering (no researcher bias)
+- **Statistical limitations identified:** Honest assessment of Study 1 inference issues
+- **Transparency increased:** Complete documentation of methodological decisions and limitations
+
+**Publication Readiness Status:**
+- **Study 2:** ✅ Methodology robust and well-documented
+- **Study 1:** ⚠️ Requires statistical claim adjustments before submission
+- **Overall:** 🔶 Strong foundations with clearly identified improvement areas
+
+**Collaborative Benefits:**
+- **Clear improvement roadmap:** Prioritized action items for systematic resolution
+- **Enhanced credibility:** Transparent limitation acknowledgment strengthens scientific integrity
+- **Future research guidance:** Lessons learned documented for future projects
+
+### **🎯 UPDATED GUIDELINES FOR AI AGENTS**
+
+**Post-June 5th Methodological Review:**
+
+**DO Support:**
+- ✅ Help implement the Week 1-3 action plan systematically
+- ✅ Assist with removing problematic statistical claims from manuscript
+- ✅ Support methodological limitations section development
+- ✅ Help validate effect size conversion formulas against literature
+- ✅ Assist with nested CV implementation if requested
+
+**DON'T Assume:**
+- ❌ Don't assume current confidence intervals are valid
+- ❌ Don't add new statistical significance claims without proper justification
+- ❌ Don't ignore the documented methodological concerns
+- ❌ Don't remove the limitations tracking system
+
+**Priority Focus Areas:**
+1. **Statistical validity:** Ensure all numerical claims are mathematically justified
+2. **Methodological transparency:** Maintain honest documentation of approaches and limitations
+3. **Systematic improvement:** Follow the established remediation plan
+4. **Scientific integrity:** Prioritize accuracy over impressive-sounding results
+
+---
+
+**UPDATED STATUS:** Research methodology under systematic review with clear improvement plan  
+**Last Updated:** June 5, 2025 - Methodological audit completed, remediation plan established  
+**Current Priority:** Implement critical statistical fixes while maintaining research quality and transparency
+
+---
+
+## 📅 **JUNE 10, 2025 UPDATE: STUDY 2 TRANSITION TO TOPIC MODELING**
+
+### **🔄 MAJOR METHODOLOGICAL SHIFT FOR STUDY 2**
+
+Based on research team discussion, we are transitioning Study 2 from hierarchical clustering to **Latent Dirichlet Allocation (LDA) topic modeling** using the `topicmodels` package, following best practices from tidytext framework.
+
+#### **Key Changes Implemented:**
+
+**1. Repository Cleanup - ARCHIVE & SIMPLIFICATION**
+- ✅ **Archived clustering scripts:** Moved all hierarchical clustering scripts to `archive/study2_clustering_scripts/`
+- ✅ **Simplified documentation:** Archived redundant cursor rules and outdated status files
+- ✅ **Preserved preprocessing:** Kept `study2_text_preprocessing.R` for enhancement
+- ✅ **Created new plan:** [JUNE_10_2025_PLAN.md](JUNE_10_2025_PLAN.md) with detailed implementation roadmap
+
+**2. Methodological Approach - TOPIC MODELING**
+- 🔄 **From clustering to LDA:** Probabilistic topic discovery instead of hard clusters
+- 🔄 **Less conservative filtering:** Target ~40-50% utterance inclusion (vs 19.7%)
+- 🔄 **Moderator removal:** First speaker per session excluded from analysis
+- 🔄 **Multiple k exploration:** Test 2-8 topics for optimal interpretability
+
+**3. Technical Implementation Plan**
+- **Phase 1:** Enhanced preprocessing with moderator removal and inclusive filtering
+- **Phase 2:** LDA implementation with multiple k values and validation metrics
+- **Phase 3:** Research team interpretation of topic word distributions
+
+#### **Repository Structure Updates:**
+
+**Current Scripts (scripts/r/):**
+- `r_package_requirements.R` - Updated with `topicmodels` and `ldatuning`
+- `study1_main_analysis.R` - Unchanged (Study 1 complete)
+- `study2_text_preprocessing.R` - To be enhanced with moderator removal
+- `study2_cooccurrence_analysis.R` - Keep for reference
+- `study2_methodology_validation.R` - To be updated for topic modeling
+- `study2_create_visualizations.R` - To be updated for topic visualization
+
+**Planned New Scripts:**
+- `study2_topic_modeling.R` - Core LDA implementation
+- `study2_topic_visualization.R` - Topic-specific visualizations
+
+**Archived Files:**
+```
+archive/
+├── study2_clustering_scripts/     # All clustering-related scripts
+│   ├── study2_clustering_*.R
+│   ├── study2_kmeans_comparison.R
+│   ├── study2_alternative_clustering.R
+│   ├── singleton_diagnosis.R
+│   └── cooccurrence_frequency_table.R
+└── old_documentation/            # Outdated docs
+    ├── STUDY2_METHODOLOGY_UPDATE.md
+    ├── PROJECT_STATUS.md
+    └── [redundant cursor rules]
+```
+
+### **🎯 IMMEDIATE NEXT STEPS**
+
+**Week 1 Tasks:**
+1. [ ] Update `study2_text_preprocessing.R` to identify and remove moderator utterances
+2. [ ] Implement less conservative filtering (counseling/therapy/substance/career terms)
+3. [ ] Create `study2_topic_modeling.R` script following tidytext vignette
+4. [ ] Test on sample data with k=2,3,4,5,6,7,8
+
+**Expected Outcomes:**
+- Higher utterance inclusion rate improving representativeness
+- Data-driven topics without researcher-imposed categories
+- Clear probabilistic topic assignments for each utterance
+- Interpretable word-topic distributions for team naming
+
+### **🔬 METHODOLOGICAL RATIONALE**
+
+**Why Topic Modeling over Clustering:**
+- **Probabilistic membership:** Documents can belong to multiple topics
+- **Better suited for short texts:** LDA handles focus group utterances well
+- **Established framework:** Well-documented in tidytext ecosystem
+- **Interpretability:** Word probability distributions are intuitive
+
+**Filtering Strategy Change:**
+- **Old:** Required specific substance terms (conservative)
+- **New:** Include counseling OR substance OR career terms (inclusive)
+- **Rationale:** Capture broader discourse about SUD counseling careers
+
+### **📚 KEY REFERENCES FOR IMPLEMENTATION**
+- [Tidy Topic Modeling vignette](https://juliasilge.github.io/tidytext/articles/topic_modeling.html)
+- [Supervised ML for Text Analysis in R](https://smltar.com)
+- Blei, D. M., Ng, A. Y., & Jordan, M. I. (2003). Latent Dirichlet Allocation
+
+---
+
+**UPDATED STATUS:** Study 2 transitioning to LDA topic modeling with enhanced preprocessing  
+**Last Updated:** June 10, 2025 - Repository cleaned, topic modeling plan established  
+**Current Priority:** Implement enhanced preprocessing and initial topic modeling tests

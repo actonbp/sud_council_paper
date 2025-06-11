@@ -34,6 +34,7 @@ required_packages <- c(
   "patchwork",     # Plot composition
   "scales",        # Scale functions
   "viridis",       # Color palettes
+  "ggrepel",       # Text repelling for labels
   "corrplot",      # Correlation plots
   
   # Parallel processing
@@ -54,10 +55,13 @@ required_packages <- c(
   "text2vec",      # Word embeddings
   "textfeatures",  # Text feature extraction
   "topicmodels",   # Topic modeling
+  "ldatuning",     # LDA tuning for optimal k
   "stm",           # Structural topic models
   "udpipe",        # NLP tasks
   "umap",          # Dimension reduction
-  "factoextra"     # Clustering visualization
+  "factoextra",    # Clustering visualization
+  "BTM",           # Biterm Topic Models for short texts
+  "textstem"       # Text stemming utilities
 )
 
 # Check which packages are already installed
