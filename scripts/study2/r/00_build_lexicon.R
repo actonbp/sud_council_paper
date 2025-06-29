@@ -42,36 +42,41 @@ lexicon_seed <- tibble(
 #   • Uncomment the section below.
 # -------------------------------------------------------------------------
 
-expanded_lexicon <- lexicon_seed  # <- default (no expansion)
+expanded_lexicon <- lexicon_seed  # default
 
-# # Uncomment to auto-expand ------------------------------------------------
-# try({
-#   library(text2vec)
-#   embed_path <- 'data/embeddings/glove.6B.300d.txt'
-#   if (file.exists(embed_path)) {
-#     message('loading embeddings — this may take a while…')
-#     glove <- read.table(embed_path, quote = "", comment.char = "", fill = TRUE,
-#                         col.names = c('term', paste0('V', 1:300)))
-#     vocab <- glove$term
-#     mat   <- as.matrix(glove[ , -1])
-#     rownames(mat) <- vocab
-#     get_nns <- function(w, top_n = 25, cos_thresh = 0.45) {
-#       if (!w %in% rownames(mat)) return(character())
-#       target <- mat[w, , drop = FALSE]
-#       sims   <- text2vec::sim2(x = mat, y = target, method = 'cosine', norm = 'l2')[ , 1]
-#       nn     <- sort(sims, decreasing = TRUE)
-#       nn     <- nn[nn >= cos_thresh]
-#       setdiff(names(nn)[seq_len(min(top_n, length(nn)))], w)
-#     }
-#     new_terms_c  <- unique(unlist(lapply(seed_certain,   get_nns)))
-#     new_terms_uc <- unique(unlist(lapply(seed_uncertain, get_nns)))
-#     expanded_lexicon <- bind_rows(
-#       lexicon_seed,
-#       tibble(term = new_terms_c,  category = 'certain'),
-#       tibble(term = new_terms_uc, category = 'uncertain')
-#     ) %>% distinct(term, .keep_all = TRUE)
-#   }
-# }, silent = TRUE)
+# Attempt auto-expansion if embedding file is present -----------------------
+embed_path <- 'data/embeddings/glove.6B.300d.txt'
+if (file.exists(embed_path)) {
+  message('🔍 Embedding file detected — expanding lexicon…')
+  suppressPackageStartupMessages(library(text2vec))
+  glove <- read.table(embed_path, quote = "", comment.char = "", fill = TRUE,
+                      col.names = c('term', paste0('V', 1:300)))
+  vocab <- glove$term
+  mat   <- as.matrix(glove[ , -1])
+  rownames(mat) <- vocab
+
+  get_nns <- function(w, top_n = 25, cos_thresh = 0.45) {
+    if (!w %in% rownames(mat)) return(character())
+    target <- mat[w, , drop = FALSE]
+    sims   <- text2vec::sim2(x = mat, y = target, method = 'cosine', norm = 'l2')[ , 1]
+    nn     <- sort(sims, decreasing = TRUE)
+    nn     <- nn[nn >= cos_thresh]
+    setdiff(names(nn)[seq_len(min(top_n, length(nn)))], w)
+  }
+
+  new_terms_c  <- unique(unlist(lapply(seed_certain,   get_nns)))
+  new_terms_uc <- unique(unlist(lapply(seed_uncertain, get_nns)))
+
+  expanded_lexicon <- bind_rows(
+    lexicon_seed,
+    tibble(term = new_terms_c,  category = 'certain'),
+    tibble(term = new_terms_uc, category = 'uncertain')
+  ) %>% distinct(term, .keep_all = TRUE)
+
+  message('📈 Lexicon expanded from ', nrow(lexicon_seed), ' to ', nrow(expanded_lexicon), ' terms.')
+} else {
+  message('ℹ️  Embedding file not found; using seed lexicon only.')
+}
 
 # -------------------------------------------------------------------------
 # 3. Save outputs ----------------------------------------------------------

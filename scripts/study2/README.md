@@ -16,4 +16,19 @@ Planned numbered scripts (R):
 
 Python helpers (under `python/`) will mirror the numbering when needed (e.g., `00_embedding_expand.py`).
 
-Each script writes its outputs to `results/` or subfolders thereof so the manuscript chunks can source clean artefacts without rerunning heavy computation during compilation. 
+Each script writes its outputs to `results/` or subfolders thereof so the manuscript chunks can source clean artefacts without rerunning heavy computation during compilation.
+
+### Embedding download (one-time)
+
+`00_build_lexicon.R` will auto-expand the seed dictionary **only if** the file
+`data/embeddings/glove.6B.300d.txt` exists.  Use the helper:
+
+```bash
+# install dependency once
+pip install gensim==4.3.2
+
+# download and convert the vectors (~5–10 min)
+python scripts/study2/python/00_download_embeddings.py
+```
+
+Then rerun `00_build_lexicon.R` and `01_score_utterances.R`. 

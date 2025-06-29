@@ -8,6 +8,7 @@ suppressPackageStartupMessages({
   library(tidyverse)
   library(tidytext)
   library(spacyr)
+  library(stringr)
 })
 
 # ---------------------------------------------------------------------------
@@ -36,21 +37,74 @@ message('Loaded ', nrow(df), ' utterances (participants only).')
 # ---------------------------------------------------------------------------
 # 2. Initialise spaCy --------------------------------------------------------
 # ---------------------------------------------------------------------------
+
+# Flag for spacy availability
+use_spacy <- FALSE
+
+# Try initialise spaCy; if fails, keep FALSE
 tryCatch({
   spacy_initialize(model = "en_core_web_sm", refresh_settings = FALSE)
+  use_spacy <- TRUE
 }, error = function(e) {
-  message('spaCy not available; falling back to tidy tokenisation')
+  message('spaCy not available; falling back to token = "words"')
 })
+
+# Choose tokenizer
+tok_fun <- if (use_spacy) "spacyr_lemmatize" else "words"
+
+# ---------------------------------------------------------------------------
+# 3A. Define stop-word/filler/domain lists ----------------------------------
+# ---------------------------------------------------------------------------
+
+data("stop_words", package = "tidytext")
+
+filler_words  <- c("uh", "um", "like", "yeah", "you", "know", "kinda", "sorta", "okay", "right")
+domain_terms  <- c("counselor", "counselors", "counseling", "therapist", "therapy",
+                   "mental", "health", "substance", "addiction", "field")
+
+custom_stop   <- unique(c(stop_words$word, filler_words, domain_terms))
+
+# helper to clean tokens -----------------------------------------------------
+clean_tok <- function(x) {
+  x <- str_replace_all(x, "[0-9]+", "")           # remove numbers
+  x <- str_replace_all(x, "[^a-z'\\-]", "")      # keep letters / apostrophe / hyphen
+  str_trim(x)
+}
 
 # ---------------------------------------------------------------------------
 # 3. Tokenise & lemmatise ----------------------------------------------------
 # ---------------------------------------------------------------------------
 
-tidy_tokens <- df %>%
-  select(session, Speaker, Text) %>%
-  unnest_tokens(output = "lemma", input = Text, token = "spacyr_lemmatize",
-                to_lower = TRUE, drop = FALSE) %>%
-  filter(str_detect(lemma, '^[a-z][a-z\'\-]+$'))
+if (use_spacy) {
+  # Use spaCy to get lemmas directly
+  parsed <- spacy_parse(df$Text, lemma = TRUE, pos = FALSE, entity = FALSE)
+  tidy_tokens <- parsed %>%
+    mutate(doc_id = as.integer(str_remove(doc_id, "text"))) %>%
+    mutate(session = df$session[doc_id],
+           Speaker = df$Speaker[doc_id],
+           Text    = df$Text[doc_id]) %>%
+    rename(lemma = lemma) %>%
+    select(session, Speaker, Text, lemma) %>%
+    mutate(lemma = clean_tok(lemma)) %>%
+    filter(
+      nchar(lemma) >= 3,
+      lemma != "",
+      !lemma %in% custom_stop,
+      str_detect(lemma, "^[a-z][a-z'\\-]+$")
+    )
+} else {
+  tidy_tokens <- df %>%
+    select(session, Speaker, Text) %>%
+    unnest_tokens(output = "lemma", input = Text, token = tok_fun,
+                  to_lower = TRUE, drop = FALSE) %>%
+    mutate(lemma = clean_tok(lemma)) %>%
+    filter(
+      nchar(lemma) >= 3,
+      lemma != "",
+      !lemma %in% custom_stop,
+      str_detect(lemma, "^[a-z][a-z'\\-]+$")
+    )
+}
 
 # ---------------------------------------------------------------------------
 # 4. Apply lexicon -----------------------------------------------------------
@@ -98,4 +152,4 @@ message('✅ Scoring complete.  Output written to results/study2/')
 # ---------------------------------------------------------------------------
 # 6. Clean up ----------------------------------------------------------------
 # ---------------------------------------------------------------------------
-try(spacy_finalize(), silent = TRUE) 
+if (use_spacy) try(spacy_finalize(), silent = TRUE) 
