@@ -1,0 +1,5 @@
+numpy==2.0.0
+pandas==2.2.2
+scikit-learn==1.5.0
+gensim==4.4.0
+scipy==1.12.0
