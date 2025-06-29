@@ -108,7 +108,7 @@ ls data/survey/survey_raw.csv        # Must exist
 ls data/survey/ml_ready_survey_data.csv  # Must exist
 
 # 2. Run complete Study 1 analysis (takes ~5-10 minutes)
-Rscript scripts/r/study1_main_analysis.R
+Rscript scripts/study1/r/study1_main_analysis.R
 
 # 3. Check outputs were created
 ls results/r/study1_logistic_fs_modern/  # Should contain:
@@ -150,9 +150,10 @@ if (study2_files >= 3) {
 ```bash
 # Complete analysis pipeline from scratch (15-20 minutes total)
 echo "Running complete analysis pipeline..."
-Rscript scripts/r/study1_main_analysis.R
-Rscript scripts/r/study2_text_preprocessing.R  
-Rscript scripts/r/study2_cooccurrence_analysis.R
+Rscript scripts/study1/r/study1_main_analysis.R
+Rscript scripts/study2/r/00_build_lexicon.R  
+Rscript scripts/study2/r/01_score_utterances.R
+Rscript scripts/study2/r/02_exploratory_lda.R
 Rscript scripts/r/study2_methodology_validation.R
 Rscript scripts/r/study2_create_visualizations.R
 echo "✅ All analyses complete! Ready to compile manuscript."
@@ -166,7 +167,7 @@ echo "✅ All analyses complete! Ready to compile manuscript."
 - **Method:** L1-regularized logistic regression (Lasso) using tidymodels
 - **Key Finding:** Students uncertain about mental health careers show 74% higher odds of SUD counseling interest
 - **Performance:** Cross-validation ROC AUC = 0.787 [95% CI: 0.766, 0.809]
-- **Script:** `scripts/r/study1_main_analysis.R`
+- **Script:** `scripts/study1/r/study1_main_analysis.R`
 
 ### **Study 2: Qualitative Analysis (N=19, 7 focus groups)**
 - **Status:** Currently being redesigned with tidytext approach
@@ -191,11 +192,14 @@ sud_council_paper/
 │   └── _extensions/wjschne/apaquarto/     # APA formatting system
 │
 ├── 📁 scripts/r/                     # ✅ ALL ANALYSIS SCRIPTS
-│   ├── r_package_requirements.R           # Install required packages
-│   ├── study1/                            # Study 1: Complete analysis
-│   │   └── study1_main_analysis.R         # Tidymodels L1 regression
-│   └── study2/                            # Study 2: Empty (to be rebuilt)
-│       └── README.md                      # Placeholder for new analysis
+│   ├── study1/
+│   │   ├── r/          # Quantitative analysis (tidymodels)
+│   │   │   ├── r_package_requirements.R
+│   │   │   └── study1_main_analysis.R
+│   │   └── python/     # (empty)
+│   └── study2/
+│       ├── r/          # Dictionary & topic-model pipeline (in progress)
+│       └── python/     # Embedding helpers (optional)
 │
 ├── 📁 results/                       # ✅ ALL OUTPUTS
 │   └── r/
@@ -332,15 +336,15 @@ Rscript scripts/r/r_package_requirements.R
 ### **Study 1 (Quantitative):**
 ```r
 # Complete tidymodels analysis pipeline
-Rscript scripts/r/study1/study1_main_analysis.R
+Rscript scripts/study1/r/study1_main_analysis.R
 ```
 
 ### **Study 2 (Qualitative) - NEW LDA Pipeline:**
 ```r
 # Follow the workflow guide: scripts/r/study2/STUDY2_WORKFLOW.md
-Rscript scripts/r/study2/study2_data_preparation.R      # Step 1: Moderator removal
-Rscript scripts/r/study2/study2_lda_topic_modeling.R    # Step 2: LDA modeling  
-Rscript scripts/r/study2/study2_lda_visualizations.R    # Step 3: Publication figures
+Rscript scripts/study2/r/00_build_lexicon.R      # Step 1: Build lexicon
+Rscript scripts/study2/r/01_score_utterances.R   # Step 2: Score utterances
+Rscript scripts/study2/r/02_exploratory_lda.R    # Step 3: Optional LDA
 ```
 
 ---
@@ -675,11 +679,12 @@ R --version    # Should be R 4.0+
 
 # Solution: Run analyses in correct order
 # Study 1:
-Rscript scripts/r/study1_main_analysis.R
+Rscript scripts/study1/r/study1_main_analysis.R
 
 # Study 2 (run all 4 in order):
-Rscript scripts/r/study2_text_preprocessing.R
-Rscript scripts/r/study2_cooccurrence_analysis.R  
+Rscript scripts/study2/r/00_build_lexicon.R
+Rscript scripts/study2/r/01_score_utterances.R
+Rscript scripts/study2/r/02_exploratory_lda.R
 Rscript scripts/r/study2_methodology_validation.R
 Rscript scripts/r/study2_create_visualizations.R
 
@@ -694,7 +699,7 @@ ls results/study2_*.png                   # Study 2 figures
 
 # Solution: Run R scripts individually first
 cd /path/to/sud_council_paper
-Rscript scripts/r/study1_main_analysis.R   # Must complete successfully
+Rscript scripts/study1/r/study1_main_analysis.R   # Must complete successfully
 
 # Then try Quarto again:
 quarto render sud_council_paper.qmd --to apaquarto-docx
