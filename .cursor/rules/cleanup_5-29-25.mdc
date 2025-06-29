@@ -1,0 +1,68 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Repository Cleanup Summary - June 29, 2025
+
+## What We Did
+
+### 1. Created Clean Manuscript Structure
+- Moved all manuscript files to `manuscript/` folder:
+  - `sud_council_paper.qmd` (main document)
+  - `sud_council_paper.docx` (compiled output)
+  - `references.bib` (bibliography)
+  - `_extensions/wjschne/apaquarto/` (APA formatting)
+
+### 2. Archived All Study 2 Work
+- Moved all Study 2 scripts to `archive/2025-06-29/`
+- Archived all Study 2 results and outputs
+- Created empty `scripts/r/study2/` folder with placeholder for fresh tidytext implementation
+
+### 3. Simplified Repository Structure
+- Archived meetings folder
+- Archived config folder
+- Kept only 2 cursor rules (data-privacy.mdc, sud-research-project.mdc)
+- Removed all build artifacts
+
+### 4. Cleaned Data Directory
+- Kept only essential Study 1 data:
+  - `data/survey/ml_ready_survey_data.csv`
+  - `data/survey/survey_raw.csv`
+- Archived all focus group data (Study 2)
+- Archived all processed data folders
+
+### 5. Updated Documentation
+- Updated README.md with new paths
+- Simplified Study 2 section to note redesign in progress
+- Updated compilation commands to use `manuscript/` folder
+
+## Final Clean Structure
+
+```
+manuscript/               # All manuscript files
+scripts/r/
+  ├── study1/            # Complete Study 1 analysis
+  └── study2/            # Empty, ready for new work
+results/r/
+  └── study1_logistic_fs_modern/  # Study 1 results only
+data/survey/             # Study 1 data only
+.cursor/rules/           # Minimal rules
+README.md
+CLAUDE.md
+archive/2025-06-29/      # Everything else preserved
+```
+
+## Key Commands Updated
+
+Compile manuscript:
+```bash
+quarto render manuscript/sud_council_paper.qmd --to apaquarto-docx
+```
+
+## Next Steps
+
+1. Study 1 is complete and working
+2. Study 2 can now be rebuilt from scratch with tidytext
+3. Repository is clean and easy to navigate
+4. All historical work is preserved in archive 
