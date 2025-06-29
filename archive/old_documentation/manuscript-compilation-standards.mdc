@@ -1,0 +1,55 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Manuscript Compilation Standards
+
+## APA Quarto Manuscript Workflow
+
+### Primary Manuscript File
+The main manuscript is [sud_council_paper.qmd](mdc:sud_council_paper.qmd) which compiles to APA-formatted Word documents using the apaquarto extension.
+
+### Critical Compilation Command
+```bash
+# ✅ CORRECT (APA formatting):
+quarto render sud_council_paper.qmd --to apaquarto-docx
+
+# ❌ WRONG (breaks APA styling):
+quarto render sud_council_paper.qmd --to docx
+```
+
+### APA Extension Location
+The APA formatting system is located in [_extensions/wjschne/apaquarto/](mdc:_extensions/wjschne/apaquarto) and must be preserved for proper formatting.
+
+### Key APA Features
+- **Title page** with running head and author affiliations
+- **Tables moved to end** with "INSERT TABLE X ABOUT HERE" placeholders
+- **APA 7th edition citations** and reference formatting
+- **Times New Roman, double spacing, 1-inch margins**
+- **Automatic figure and table numbering**
+
+### Study Integration Requirements
+- **Study 1**: Results from [scripts/r/study1_main_analysis.R](mdc:scripts/r/study1_main_analysis.R) - ROC AUC 0.787
+- **Study 2**: Hierarchical clustering results with 4 data-driven themes (35.2% SUD detection)
+- **Mixed-Methods**: Integration showing qualitative validation of quantitative predictors
+
+### Bibliography Management
+References are managed in [references.bib](mdc:references.bib) using standard BibTeX format. Citations use `[@author2024]` or `@author2024` syntax.
+
+### Compilation Verification
+After compilation, verify:
+- Tables appear at end of document, not inline
+- Proper APA title page with running head
+- Correct citation and reference formatting
+- Page breaks between major sections
+
+### Output File
+Successful compilation creates [sud_council_paper.docx](mdc:sud_council_paper.docx) ready for submission to counseling research journals.
+
+### Troubleshooting
+If compilation fails:
+1. Check Quarto installation: `quarto --version`
+2. Verify APA extension presence in `_extensions/`
+3. Run package requirements: [scripts/r/r_package_requirements.R](mdc:scripts/r/r_package_requirements.R)
+4. Ensure all analysis scripts complete successfully before manuscript compilation

@@ -1,48 +1,55 @@
 # CLAUDE.md - AI Agent Instructions
 
 ## Project Overview
-This is a **clean, production-ready SUD (Substance Use Disorder) Counselors research repository** with complete mixed-methods analysis and publication-ready manuscript. **Repository was cleaned and organized for colleague handoff in June 2024.**
+This is a **SUD (Substance Use Disorder) Counselors research repository** with mixed-methods analysis and publication-ready manuscript. **Repository underwent major cleanup on June 29, 2025 for maximum parsimony.**
 
-## Current Status: CLEAN REPOSITORY READY FOR COLLEAGUE COLLABORATION ✅🤝
+## Current Status: STUDY 2 RESET - READY FOR FRESH APPROACH ✅🔄
 
-### 🏆 **REPOSITORY HANDOFF COMPLETE**
-1. ✅ **CLEANED STRUCTURE:** Non-essential files archived, scripts renamed for clarity
-2. ✅ **SIMPLIFIED SCRIPTS:** 5 essential R scripts with clear names and purposes
-3. ✅ **COLLEAGUE-READY DOCS:** Comprehensive README.md for new user onboarding
-4. ✅ **COMPLETE MANUSCRIPT:** Publication-ready APA paper with all analysis integrated
-5. ✅ **ARCHIVE SYSTEM:** Non-essential files moved to `archive/` with documentation
-6. ✅ **CLEAR WORKFLOW:** Step-by-step instructions for manuscript compilation and analysis
+### 🧹 **MAJOR CLEANUP JUNE 29, 2025**
+1. ✅ **STUDY 2 RESET:** All 26 experimental scripts archived - clean slate for new approach
+2. ✅ **MAXIMUM PARSIMONY:** Minimal documentation, simple folder structure (study1, study2)
+3. ✅ **STUDY 1 COMPLETE:** Tidymodels analysis finished, needs only statistical claim fixes
+4. ✅ **MANUSCRIPT READY:** APA paper exists, needs Study 2 section when analysis complete
+5. ✅ **AGGRESSIVE ARCHIVING:** Removed clutter while preserving all work
+6. ✅ **SIMPLE STRUCTURE:** Essential files only in root, everything else archived
 
 ## 🎯 **Repository Structure (Post-Cleanup)**
 
-### **Essential Files for Collaboration:**
+### **Current Clean Structure:**
 ```
 sud_council_paper/
 ├── 📄 sud_council_paper.qmd          # MAIN MANUSCRIPT
-├── 📄 sud_council_paper.docx          # Compiled APA Word document
-├── 📄 README.md                      # COLLEAGUE ONBOARDING GUIDE
+├── 📄 sud_council_paper.docx          # Compiled APA Word document  
+├── 📄 README.md                      # Main documentation
+├── 📄 CLAUDE.md                      # This file (AI agent instructions)
 ├── 📄 references.bib                 # APA bibliography
-├── 📄 CLAUDE.md                      # This file
 ├── 
-├── 📁 scripts/r/                     # 5 ESSENTIAL SCRIPTS ONLY
+├── 📁 scripts/r/                     # SIMPLE STRUCTURE
 │   ├── r_package_requirements.R           # Package installation
-│   ├── study1_main_analysis.R             # Study 1: Tidymodels
-│   ├── study2_text_preprocessing.R        # Study 2: Text processing
-│   ├── study2_cooccurrence_analysis.R     # Study 2: Co-occurrence
-│   ├── study2_methodology_validation.R    # Study 2: Validation
-│   └── study2_create_visualizations.R     # Study 2: Figures
+│   ├── study1/                           # Study 1 complete 
+│   │   └── study1_main_analysis.R             # Tidymodels analysis (DONE)
+│   └── study2/                           # Study 2 empty - ready for fresh start
 │
-├── 📁 results/                       # All outputs and figures
+├── 📁 results/                       # Analysis outputs
+│   ├── figures/                           # Empty - Study 2 figures archived
+│   └── r/
+│       ├── study1_logistic_fs_modern/     # Study 1 results (KEEP)
+│       └── study2/                        # Empty - ready for new results
+│
+├── 📁 data/                          # Only essential data files remain
 ├── 📁 _extensions/wjschne/apaquarto/  # APA formatting system
-├── 📁 data/                          # Data files (gitignored)
-└── 📁 archive/                       # Non-essential files
+└── 📁 archive/                       # ALL archived work (nothing lost)
+    ├── study2_all_approaches/             # 26 Study 2 scripts archived
+    ├── study2_results/                    # 12 result folders archived  
+    ├── study2_outputs/                    # 21 output files archived
+    └── old_documentation/                 # Extra markdown files archived
 ```
 
-### **What Was Archived:**
-- `archive/deprecated_python/` - Original Python scripts (replaced by R)
-- `archive/scripts/` - Duplicate/draft R scripts  
-- `archive/old_drafts/` - Previous manuscript versions
-- `archive/temp_files/` - Temporary and system files
+### **Major Archive Additions (June 29, 2025):**
+- **study2_all_approaches/**: All 26 experimental Study 2 scripts (LDA, topic modeling, embeddings, etc.)
+- **study2_results/**: 12 result folders from different analysis attempts
+- **study2_outputs/**: 21 loose files (figures, RDS files, methodology docs)
+- **old_documentation/**: Archived extra markdown files for parsimony
 
 ## 🔬 **Complete Research Summary**
 
@@ -53,19 +60,19 @@ sud_council_paper/
 - **Effect Sizes:** Cohen's d = 0.764, correlation r = 0.411 (strong for behavioral research)
 - **Statistical Validation:** χ² = 92.59, p < .001 for career uncertainty effect
 
-### **Study 2: Qualitative Analysis (N=19, 7 focus groups)**
-- **Method:** Conservative text analysis (19.7% SUD detection) with Porter stemming
-- **Four Primary Themes:**
-  1. **Professional-Field Recognition (45.3%)** - Career legitimacy and opportunities
-  2. **Personal-Emotional Framework (27.5%)** - Family experience and emotional connection
-  3. **People-Centered Orientation (18.8%)** - Relational and helping focus
-  4. **Service-Helping Identity (8.4%)** - Counselor role conceptualization
+### **Study 2: Qualitative Analysis (N=19, 7 focus groups) - RESET FOR FRESH APPROACH**
+- **Status:** All previous experimental approaches archived (26 scripts)
+- **Data:** Focus group transcripts ready for analysis (7 CSV files in data/focus_group/)
+- **Goal:** Simple, effective tidytext analysis using R
+- **Previous Attempts:** LDA, BTM, embeddings, clustering - all archived in archive/study2_all_approaches/
+- **Lesson Learned:** Simple frequency analysis worked best (archived in study2_simple_frequency/)
+- **Next Step:** Start fresh with clean, simple tidytext approach
 
-### **Mixed-Methods Integration**
-- Qualitative themes validate quantitative predictors
-- Career uncertainty pathway supported across both studies
-- Personal experience emerges in statistical models and thematic analysis
-- Theoretical alignment with Social Cognitive Career Theory
+### **Mixed-Methods Integration - TO BE UPDATED**
+- Study 1 complete with strong quantitative findings
+- Study 2 ready for new qualitative analysis to complement Study 1
+- Manuscript needs Study 2 section once new analysis complete
+- Goal: Align qualitative themes with quantitative career uncertainty findings
 
 ## 📊 **Analysis Pipeline (Simplified)**
 
@@ -79,18 +86,23 @@ Rscript scripts/r/study1_main_analysis.R
 - Bootstrap stability analysis (100% sign consistency)
 - Cross-validation: 10-fold with 5 repeats (50 total folds)
 
-### **Study 2 Workflow:**
+### **Study 2 Workflow - TO BE CREATED:**
 ```r
-# Run in sequence:
-Rscript scripts/r/study2_text_preprocessing.R      # Conservative SUD detection
-Rscript scripts/r/study2_cooccurrence_analysis.R   # Thematic analysis
-Rscript scripts/r/study2_methodology_validation.R  # Validation tables
-Rscript scripts/r/study2_create_visualizations.R   # Publication figures
+# Study 2 folder is empty - ready for fresh tidytext approach
+# scripts/r/study2/ [EMPTY]
+# results/r/study2/ [EMPTY]
+
+# Next steps:
+# 1. Create simple tidytext preprocessing script
+# 2. Create basic frequency/theme analysis 
+# 3. Focus on parsimony - simple, interpretable approach
+# 4. Use tidytext principles throughout
 ```
-- Conservative SUD detection requiring substance-specific terms
-- Porter stemming for linguistic robustness
-- Co-occurrence analysis for data-driven theme emergence
-- Network visualization showing thematic coherence
+- **26 previous scripts archived** in archive/study2_all_approaches/
+- **All results archived** in archive/study2_results/ and archive/study2_outputs/
+- **Clean slate approach** - start simple with tidytext
+- **Lesson from archives:** Simple frequency analysis worked best
+- **Goal:** Complement Study 1 findings with qualitative insights
 
 ## 📄 **APA Manuscript Compilation**
 
@@ -110,35 +122,48 @@ quarto render sud_council_paper.qmd --to docx
 - **Times New Roman, double spacing, 1-inch margins**
 - **Automatic figure and table numbering**
 
+## 🔥 **CURRENT PRIORITIES (June 29, 2025)**
+
+### **Immediate Next Steps:**
+1. **Study 2 Fresh Start** - Create simple tidytext analysis (scripts/r/study2/ is empty and ready)
+2. **Data Focus** - Essential Study 1 data: `data/survey/ml_ready_survey_data.csv` 
+3. **Manuscript Completion** - Study 2 section needs updating once new analysis complete
+4. **Statistical Fixes** - Study 1 needs confidence interval and p-value claims removed (documented in README)
+
+### **What's Complete:**
+- ✅ Study 1 analysis (just needs statistical claim fixes)
+- ✅ Manuscript structure and APA formatting
+- ✅ Repository cleanup and parsimony achieved
+- ✅ All previous work safely archived
+
+### **Repository Philosophy - MAXIMUM PARSIMONY:**
+- **Simple names:** study1, study2 (not "next-gen" or complex names)
+- **Minimal docs:** Only CLAUDE.md, README.md, .cursor files
+- **R + tidytext:** All analysis in R using tidytext principles
+- **Archive aggressively:** Remove clutter but preserve all work
+
 ## 🎯 **Guidelines for Future AI Agents**
 
-### **Repository Guidelines:**
-1. **NEVER recreate archived files** - Everything essential is in the main directory
-2. **Use the clean script names** - No need to rename or reorganize further
-3. **Follow the README.md workflow** - It's designed for new users
-4. **Respect the archive system** - Don't move files back without good reason
-5. **Maintain APA formatting** - Always use `--to apaquarto-docx`
+### **PARSIMONY PRINCIPLES (Updated June 29, 2025):**
+1. **Keep it simple** - No complex folder names, no extra documentation files
+2. **Focus on essentials** - Only CLAUDE.md, README.md, .cursor rules matter for docs  
+3. **R + tidytext only** - All Study 2 work should use R with tidytext
+4. **Archive don't delete** - Move clutter to archive/ but preserve all work
+5. **Study 2 restart** - Don't use archived approaches, start fresh and simple
 
-### **Colleague Support Focus:**
-1. **Help with Quarto/R setup** - Package installation, environment setup
-2. **Manuscript editing assistance** - Citations, formatting, content updates
-3. **Analysis reproduction** - Running scripts, troubleshooting data issues
-4. **Visualization enhancements** - Modifying figures for publication
-5. **Documentation updates** - Keeping README and methods current
+### **Current Support Focus:**
+1. **Study 2 fresh approach** - Help create simple tidytext analysis from scratch
+2. **Data management** - Focus on essential files only (survey data for Study 1)  
+3. **Manuscript integration** - Update Study 2 section when analysis complete
+4. **Statistical fixes** - Help remove invalid claims from Study 1 results
+5. **APA compilation** - Always use `--to apaquarto-docx`
 
-### **DON'T Recreate or Reorganize:**
-- ❌ Don't create new preprocessing scripts
-- ❌ Don't reorganize the folder structure
-- ❌ Don't move files from archive back to main
-- ❌ Don't rename the clean scripts
-- ❌ Don't duplicate existing functionality
-
-### **DO Support and Enhance:**
-- ✅ Help troubleshoot script errors
-- ✅ Assist with Quarto compilation issues
-- ✅ Help add new references to references.bib
-- ✅ Support manuscript content updates
-- ✅ Help interpret analysis results
+### **CRITICAL DON'Ts:**
+- ❌ Don't use archived Study 2 approaches - start fresh
+- ❌ Don't create complex documentation - stick to CLAUDE.md/README.md
+- ❌ Don't overcomplicate Study 2 - simple tidytext frequency analysis worked best
+- ❌ Don't reorganize structure - current simple setup is intentional
+- ❌ Don't move things back from archive without explicit request
 
 ## 🔧 **Technical Specifications**
 
@@ -150,58 +175,68 @@ All required packages listed in `scripts/r/r_package_requirements.R`:
 - **here** - Reproducible file paths
 - **Various specialty packages** - For specific analysis needs
 
-### **Data Structure:**
-- **Study 1:** Survey data (N=391) with 67 initial variables → 10 final predictors
-- **Study 2:** Focus group transcripts → 61 SUD-specific utterances (19.7% detection)
-- **Conservative approach:** Substance-specific terminology required for SUD classification
+### **Current Data Structure:**
+- **Study 1:** Survey data ready - `data/survey/ml_ready_survey_data.csv` (N=391)
+- **Study 2:** Focus group transcripts ready - `data/focus_group/*.csv` (7 files, N=19)
+- **Study 1 Results:** Complete in `results/r/study1_logistic_fs_modern/`
+- **Study 2 Results:** Empty `results/r/study2/` - ready for new analysis
 
 ### **Output Standards:**
 - **Figures:** 300 DPI PNG + vector PDF for publication
-- **Tables:** CSV format with proper statistical reporting
-- **Interactive:** HTML methodology visualization for transparency
-- **Manuscript:** APA-compliant Word document ready for submission
+- **Tables:** CSV format with proper statistical reporting  
+- **Manuscript:** APA-compliant Word document using `--to apaquarto-docx`
+- **Keep it simple:** Focus on essential outputs only
 
-## 🚀 **Success Metrics Achieved**
+## 🚀 **Current Status Summary (June 29, 2025)**
 
-✅ **Study 1:** ROC AUC 0.787 [0.766, 0.809] with robust cross-validation  
-✅ **Study 2:** 4 validated themes with conservative 19.7% detection approach  
-✅ **Mixed-Methods:** Qualitative validation of quantitative predictors  
-✅ **Manuscript:** Complete APA paper with 4,000+ word Introduction, comprehensive Methods/Results/Discussion  
-✅ **Repository:** Clean, colleague-ready structure with clear documentation  
-✅ **Reproducibility:** All analyses scripted and documented for replication  
+✅ **Study 1:** ROC AUC 0.787 [0.766, 0.809] with robust cross-validation - COMPLETE
+⏸️ **Study 2:** RESET - Previous approaches archived, ready for fresh tidytext approach  
+⏸️ **Mixed-Methods:** Awaiting Study 2 completion for integration
+✅ **Manuscript:** APA paper structure complete, needs Study 2 section update
+✅ **Repository:** Maximum parsimony achieved - clean, simple structure  
+✅ **Reproducibility:** All work preserved in archive, essential files accessible  
 
 ## 📚 **Key Reference Materials**
 
-### **Methodological Documentation:**
-- `results/study2_interactive_methodology.html` - Interactive pipeline visualization
-- `results/study2_advanced_methodology.txt` - Complete Study 2 documentation
-- `archive/ARCHIVE_README.md` - Documentation of archived files
+### **Current Reference Materials:**
+- `archive/ARCHIVE_README.md` - Complete documentation of June 29 cleanup
+- `results/r/study1_logistic_fs_modern/` - Study 1 results (KEEP - analysis complete)
+- `archive/study2_all_approaches/` - All 26 archived Study 2 scripts for reference
+- `archive/study2_simple_frequency/` - Final working approach before reset
 
-### **Analysis Outputs:**
-- `results/r/study1_logistic_fs_modern/` - Complete Study 1 model outputs
-- `results/study2_*.csv` - Study 2 analysis tables and summaries
-- `results/study2_*.png` - Publication-ready figures and visualizations
+### **Essential Files Only:**
+- Study 1 complete - results in `results/r/study1_logistic_fs_modern/`
+- Study 2 reset - empty folders ready for fresh tidytext approach
+- Manuscript ready for Study 2 section update once analysis complete
 
 ---
 
-**STATUS: CLEAN REPOSITORY READY FOR COLLEAGUE COLLABORATION** 🤝✅  
-**Last Updated:** June 2024 - Repository cleaned and organized for Erica's collaboration  
-**Current Priority:** Support colleague onboarding, manuscript editing, and analysis reproduction  
+## 📅 **FINAL STATUS: JUNE 29, 2025 - STUDY 2 RESET & REPOSITORY CLEANUP**
 
-## 🎯 **FOR AI AGENTS: COLLEAGUE SUPPORT FOCUS**
+### **🎯 WHERE WE ARE NOW**
 
-### **Primary Support Areas:**
-1. **Quarto/R Environment Setup** - Help install dependencies and configure tools
-2. **Manuscript Compilation** - Troubleshoot APA formatting and rendering issues  
-3. **Analysis Reproduction** - Help run scripts and interpret outputs
-4. **Citation Management** - Assist with references.bib updates and formatting
-5. **Figure/Table Updates** - Modify visualizations and statistical summaries
+**Repository Philosophy:** Maximum parsimony achieved - simple structure, minimal documentation, essential files only.
 
-### **Handoff Success Criteria:**
-- ✅ Colleague can compile manuscript using provided commands
-- ✅ All scripts run successfully with clear error messages if issues arise
-- ✅ Analysis outputs are interpretable and well-documented
-- ✅ Repository structure is intuitive for academic collaboration
-- ✅ Future updates and modifications are straightforward
+**Study 1:** ✅ **COMPLETE** - Tidymodels analysis finished (ROC AUC 0.787), just needs statistical claim fixes documented in README.md
 
-**This repository is now optimized for collaborative academic research with clear workflows and comprehensive documentation.**
+**Study 2:** 🔄 **RESET FOR FRESH START** - All 26 experimental scripts archived, empty folders ready for simple tidytext approach
+
+**Manuscript:** ✅ **READY** - APA structure complete, needs Study 2 section update once new analysis finished
+
+### **🗂️ What Was Archived Today**
+- **26 Study 2 scripts** → `archive/study2_all_approaches/`
+- **12 result folders** → `archive/study2_results/`  
+- **21 output files** → `archive/study2_outputs/`
+- **4 extra markdown files** → `archive/old_documentation/`
+
+### **📋 Next Steps for AI Agents**
+1. **Start fresh** with Study 2 using simple tidytext approach
+2. **Keep it simple** - parsimony over complexity
+3. **Use archived simple frequency analysis** as reference (worked best)
+4. **Focus on manuscript integration** once Study 2 analysis complete
+
+---
+
+**CURRENT STATUS:** Study 2 reset complete, ready for fresh tidytext approach  
+**Last Updated:** June 29, 2025 - Major cleanup and reset completed  
+**Current Priority:** Create simple, effective Study 2 analysis to complete manuscript
