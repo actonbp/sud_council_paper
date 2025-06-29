@@ -727,3 +727,12 @@ quarto render sud_council_paper.qmd --to apaquarto-docx
 **Last Updated:** June 2025 - Enhanced with APA improvements and meeting organization  
 **Status:** ✅ Publication-ready manuscript with complete analysis pipeline  
 **Contact:** Use GitHub issues for questions about the repository
+
+## 🔄 Repository Updates
+
+### 2025-06-29
+- Major cleanup: archived all legacy Study 2 content, meetings, configs, and excess cursor rules.
+- Created `manuscript/` directory containing Quarto manuscript, compiled Word file, bibliography, and APA extension.
+- Kept Study 1 scripts and minimal data (`ml_ready_survey_data.csv`, `survey_raw.csv`).
+- Updated README commands and paths to use `manuscript/` prefix.
+- Repository structure diagram and quick-start guide reflect new layout.
