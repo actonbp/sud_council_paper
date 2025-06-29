@@ -6,7 +6,7 @@
 
 ---
 
-## 🎯 **FOR ERICA: QUICK START GUIDE**
+## 🎯 **FOR ERIKA: QUICK START GUIDE**
 
 ### **What You Need to Know:**
 This repository contains a **complete, publication-ready academic study** with:
@@ -16,11 +16,11 @@ This repository contains a **complete, publication-ready academic study** with:
 - ✅ **All analysis scripts:** Clean, documented, and reproducible
 
 ### **Key Files You'll Use:**
-- 📄 **`sud_council_paper.qmd`** - Main manuscript (edit this)
-- 📄 **`sud_council_paper.docx`** - Compiled Word version
-- 📁 **`scripts/r/`** - All analysis scripts (5 total, clearly named)
+- 📄 **`manuscript/sud_council_paper.qmd`** - Main manuscript (edit this)
+- 📄 **`manuscript/sud_council_paper.docx`** - Compiled Word version
+- 📁 **`scripts/r/`** - All analysis scripts (clearly organized)
 - 📁 **`results/`** - All figures, tables, and outputs
-- 📄 **`references.bib`** - Bibliography (add new references here)
+- 📄 **`manuscript/references.bib`** - Bibliography (add new references here)
 
 ---
 
@@ -71,17 +71,16 @@ Rscript -e "source('scripts/r/r_package_requirements.R'); cat('Data check comple
 #### **Step 4: Compile Manuscript**
 ```bash
 # 🎯 THE CRITICAL COMMAND (use this EXACT command):
-quarto render sud_council_paper.qmd --to apaquarto-docx
+quarto render manuscript/sud_council_paper.qmd --to apaquarto-docx
 
 # ❌ NEVER use this (breaks APA formatting):
-# quarto render sud_council_paper.qmd --to docx
+# quarto render manuscript/sud_council_paper.qmd --to docx
 ```
 
 #### **Step 5: Verify Success**
 ```bash
 # Check outputs were created
-ls sud_council_paper.docx          # Main manuscript
-ls sud_council_paper_files/        # Supporting files
+ls manuscript/sud_council_paper.docx          # Main manuscript
 
 # Open in Word to verify APA formatting:
 # - Title page with running head
@@ -93,7 +92,7 @@ ls sud_council_paper_files/        # Supporting files
 ### **🔧 Quick Compilation (After Setup)**
 ```bash
 # For daily work after initial setup:
-quarto render sud_council_paper.qmd --to apaquarto-docx && open sud_council_paper.docx
+quarto render manuscript/sud_council_paper.qmd --to apaquarto-docx && open manuscript/sud_council_paper.docx
 ```
 
 ---
@@ -119,21 +118,11 @@ ls results/r/study1_logistic_fs_modern/  # Should contain:
 # - features_used.txt        (selected variables)
 ```
 
-#### **Study 2: Text Analysis (Run in Order)**
+#### **Study 2: Text Analysis**
 ```bash
-# 1. Verify focus group data exists
-ls data/focus_group/*.csv | wc -l    # Should show 7 files
-
-# 2. Run Study 2 pipeline (each script ~2-5 minutes)
-Rscript scripts/r/study2_text_preprocessing.R        # Step 1: Text processing
-Rscript scripts/r/study2_cooccurrence_analysis.R     # Step 2: Theme analysis  
-Rscript scripts/r/study2_methodology_validation.R    # Step 3: Validation tables
-Rscript scripts/r/study2_create_visualizations.R     # Step 4: Publication figures
-
-# 3. Check Study 2 outputs
-ls results/study2_*.png              # Visualization files
-ls results/study2_*.csv              # Analysis tables
-ls results/study2_*.html             # Interactive methodology demo
+# Study 2 is currently being redesigned
+# All previous scripts and results have been archived
+# New tidytext implementation coming soon
 ```
 
 #### **🔍 Quick Analysis Verification**
@@ -180,11 +169,9 @@ echo "✅ All analyses complete! Ready to compile manuscript."
 - **Script:** `scripts/r/study1_main_analysis.R`
 
 ### **Study 2: Qualitative Analysis (N=19, 7 focus groups)**
-- **Method:** Mathematical cluster optimization using silhouette analysis (k=3) + elbow method validation
-- **Key Innovation:** Data-driven cluster count determination (NO researcher-imposed assumptions)
-- **Key Finding:** Three mathematically-optimized themes emerge (Clinical-Affective 21.9%, Professional-Therapeutic 14.6%, Relational 4.7%)
-- **Validation:** Silhouette score 0.185 indicates reasonable cluster separation + genuine data-driven methodology
-- **Scripts:** 4 scripts for preprocessing, analysis, validation, and visualization
+- **Status:** Currently being redesigned with tidytext approach
+- **Previous work:** All legacy scripts and results archived in `archive/2025-06-29/`
+- **Next steps:** Fresh implementation using modern text analysis methods
 
 ### **Mixed-Methods Integration**
 - Qualitative themes validate and explain quantitative predictors
@@ -197,35 +184,32 @@ echo "✅ All analyses complete! Ready to compile manuscript."
 
 ```
 sud_council_paper/
-├── 📄 sud_council_paper.qmd          # ✅ MAIN MANUSCRIPT (edit this)
-├── 📄 sud_council_paper.docx          # ✅ Compiled Word document  
-├── 📄 references.bib                 # ✅ Bibliography (APA format)
-├── 📄 README.md                      # This file
-├── 📄 CLAUDE.md                      # AI agent instructions
-├── 
+├── 📁 manuscript/                    # ✅ MANUSCRIPT & APA FORMATTING
+│   ├── sud_council_paper.qmd              # Main manuscript (edit this)
+│   ├── sud_council_paper.docx             # Compiled Word document  
+│   ├── references.bib                     # Bibliography (APA format)
+│   └── _extensions/wjschne/apaquarto/     # APA formatting system
+│
 ├── 📁 scripts/r/                     # ✅ ALL ANALYSIS SCRIPTS
 │   ├── r_package_requirements.R           # Install required packages
-│   ├── study1_main_analysis.R             # Study 1: Tidymodels analysis  
-│   ├── study2_text_preprocessing.R        # Study 2: Text processing
-│   ├── study2_cooccurrence_analysis.R     # Study 2: Co-occurrence analysis
-│   ├── study2_methodology_validation.R    # Study 2: Validation tables
-│   └── study2_create_visualizations.R     # Study 2: Publication figures
+│   ├── study1/                            # Study 1: Complete analysis
+│   │   └── study1_main_analysis.R         # Tidymodels L1 regression
+│   └── study2/                            # Study 2: Empty (to be rebuilt)
+│       └── README.md                      # Placeholder for new analysis
 │
 ├── 📁 results/                       # ✅ ALL OUTPUTS
-│   ├── r/study1_logistic_fs_modern/       # Study 1 model outputs
-│   ├── study2_*.csv                       # Study 2 analysis tables
-│   ├── study2_*.png                       # Study 2 publication figures
-│   ├── study2_cluster_output.txt          # ✅ Complete clustering analysis output
-│   ├── study2_cluster_themes_for_naming.txt # ✅ Clean theme naming worksheet
-│   └── study2_interactive_methodology.html # Interactive methodology demo
+│   └── r/
+│       └── study1_logistic_fs_modern/     # Study 1 model outputs
 │
-├── 📁 meetings/                      # ✅ MEETING PREP & QUARTO REPORTS
-│   └── README.md                          # Meeting organization guide
-├── 📁 _extensions/wjschne/apaquarto/  # ✅ APA FORMATTING SYSTEM
-├── 📁 config/                        # Analysis configuration
 ├── 📁 data/                          # ⚠️  DATA FILES (NOT INCLUDED - see below)
-├── 📁 archive/                       # Non-essential files moved here
-└── 📁 venv/                          # Python environment (legacy)
+│   └── survey/                            # Study 1 survey data only
+│       ├── ml_ready_survey_data.csv       # Analysis-ready data
+│       └── survey_raw.csv                 # Raw survey data
+│
+├── 📄 README.md                      # This file
+├── 📄 CLAUDE.md                      # AI agent instructions
+├── 📁 .cursor/rules/                 # Cursor AI configuration
+└── 📁 archive/2025-06-29/            # All legacy files preserved here
 ```
 
 ### **⚠️ DATA ACCESS NOTICE**
