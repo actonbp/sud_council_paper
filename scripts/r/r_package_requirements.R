@@ -47,21 +47,31 @@ required_packages <- c(
   "gt",            # Grammar of tables
   "here",          # Project-relative paths
   
-  # For qualitative analysis with tidytext (Study 2)
-  "tidytext",      # Tidy text analysis
+  # Text analysis with tidymodels (Study 2 - NEW APPROACH)
+  "textrecipes",   # Text preprocessing for tidymodels (MAIN PACKAGE)
+  "tidytext",      # Tidy text analysis foundation
   "SnowballC",     # Porter stemming
+  "stopwords",     # Additional stopword sources
+  
+  # Topic modeling engines  
+  "topicmodels",   # LDA engine for textrecipes
+  "text2vec",      # Alternative text vectorization
+  
+  # Additional text analysis (for comparison/validation)
   "widyr",         # Pairwise operations for co-occurrence analysis
-  "quanteda",      # Text analysis
-  "text2vec",      # Word embeddings
+  "quanteda",      # Text analysis (backup methods)
   "textfeatures",  # Text feature extraction
-  "topicmodels",   # Topic modeling
-  "ldatuning",     # LDA tuning for optimal k
-  "stm",           # Structural topic models
+  "ldatuning",     # LDA tuning for optimal k (if needed)
+  "stm",           # Structural topic models (alternative)
+  "BTM",           # Biterm Topic Models for short texts (comparison)
   "udpipe",        # NLP tasks
   "umap",          # Dimension reduction
   "factoextra",    # Clustering visualization
-  "BTM",           # Biterm Topic Models for short texts
-  "textstem"       # Text stemming utilities
+  "textstem",      # Text stemming utilities
+  
+  # Enhanced visualization for text
+  "RColorBrewer",  # Color palettes for topic plots
+  "wordcloud"      # Word cloud generation (optional)
 )
 
 # Check which packages are already installed
