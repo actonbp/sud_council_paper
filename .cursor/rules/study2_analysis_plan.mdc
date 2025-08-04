@@ -1,0 +1,253 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+A Modern, Tidy Approach to Text Classification: From Career Identity Theory to Predictive Models in RPart I: Foundational Concepts and Theoretical GroundingThis report provides an exhaustive, expert-level guide to modern text classification in the R programming language, situated within the tidyverse ecosystem. The central objective is to develop and evaluate a model capable of classifying student utterances as indicative of "certainty" or "uncertainty" regarding their career identity. This analysis is not merely a technical exercise; it is deeply grounded in established psychological theories of career development. Using a sample focus group transcript where students discuss their perceptions of Substance Use Disorder (SUD) counseling, this report will demonstrate a complete, reproducible workflow. The analysis will traverse from theoretical conceptualization and the creation of a theory-driven lexicon to the implementation of both supervised and unsupervised machine learning models using the tidytext and tidymodels frameworks.Section 1: The Tidy Text and Tidymodels PhilosophyThe modern landscape of data analysis in R is defined by the principles of the tidyverse, a collection of packages designed for data science that share an underlying design philosophy, grammar, and data structures. This philosophy emphasizes readable, consistent, and composable code. For text analysis and predictive modeling, two key extensions of this philosophy are the tidytext package and the tidymodels ecosystem. Together, they provide a powerful, integrated framework for tackling complex natural language processing tasks in a structured and methodologically sound manner.1.1 Introduction to Tidy Data Principles for TextThe foundational concept of the tidytext package is the transformation of text into a tidy data structure.1 In tidy data, each variable forms a column, each observation forms a row, and each type of observational unit forms a table. For text, this translates to a simple but powerful principle: one token per row.1 A token is a meaningful unit of text, most commonly a single word, but it can also be a sentence, n-gram, or character.This structure is achieved primarily through the tidytext::unnest_tokens() function. This function takes a data frame containing text and converts it into a new data frame where each row represents a single token, while preserving metadata from the original data, such as a document ID, speaker ID, or timestamp.1 For example, consider an utterance from the provided focus group data 1:Original Utterance (Speaker 131): "So for me, I said fear. Because like from the way I thought about it, it was like if someone comes to you for help, you would have to like, really understand where they're coming from and you have to like, use the correct words and the correct like, emotions to help them."Applying unnest_tokens() would transform this single row into multiple rows:SpeakerWord131so131for131me131i131said131fear......The profound advantage of this format is that it makes text data compatible with the full suite of tidyverse tools, particularly dplyr. Standard data manipulation verbs like filter(), mutate(), group_by(), summarise(), and count() can now be applied to text to perform complex analyses with intuitive, readable code. One can easily filter out common "stop words" (e.g., "the", "a", "is") using an anti_join(), count word frequencies with count(), or, as will be demonstrated, join the tokens to a custom dictionary of theoretically meaningful terms using an inner_join().1 This approach democratizes text analysis, making it accessible to any analyst already proficient in the tidyverse without needing to learn an entirely new set of tools.1.2 The Tidymodels Ecosystem: A Modern, Modular FrameworkJust as tidytext brings tidy principles to text manipulation, the tidymodels ecosystem brings them to statistical and machine learning modeling.4 It is not a single package but a meta-package that installs and loads a core set of packages, each designed to handle a specific stage of the modeling process.5 This modular design is its greatest strength, promoting code that is organized, reproducible, and rigorous.1 The key components include:rsample: For creating data splits (training/testing) and resampling sets (cross-validation, bootstrapping).1recipes: For creating feature engineering and preprocessing pipelines. The textrecipes extension provides steps specifically for text data, such as tokenization, filtering, and vectorization.1parsnip: For specifying models using a clean, unified interface, regardless of the underlying computational engine (e.g., glm, glmnet, ranger).1workflows: For bundling a preprocessor (recipe) and a model (parsnip specification) into a single, portable object.8tune: For tuning model hyperparameters to optimize performance.1yardstick: For measuring and evaluating model performance using a standardized set of metrics.1The separation of these concerns is more than a matter of convenience; it represents a powerful methodological paradigm. It enables a researcher to conduct controlled computational experiments. For instance, a single, complex text preprocessing recipe can be developed and then paired with multiple different model specifications (e.g., logistic regression, random forest, boosted trees) within a workflow_set.9 This ensures that the feature engineering is held constant across all models, allowing for a fair and direct comparison of the algorithms themselves. This rigorous, modular approach is a significant advancement over older, monolithic modeling functions where changing the model often required rewriting the entire data preparation code. The ecosystem is under continuous development, with recent updates in 2024-2025 focusing on improvements critical for real-world applications, such as more informative error messaging, enhanced support for sparse data formats common in text analysis, and new model types like quantile regression.11Section 2: Translating Career Identity Theory into Analyzable FeaturesA robust text classification model is built not only on sound technical methods but also on a strong theoretical foundation. For the task of classifying career certainty, we must first translate abstract concepts from developmental psychology into concrete, measurable linguistic features. This involves understanding the core theories of career identity, mapping them to the desired "certain/uncertain" labels, and operationalizing them by constructing a theory-driven lexicon.2.1 A Primer on Career Identity DevelopmentThe study of career identity has deep roots in developmental psychology, most notably in the work of Erik Erikson. Erikson's theory of psychosocial development posits that adolescents face the critical stage of Identity versus Role Confusion.14 During this period, individuals grapple with questions of self, values, and their place in the world, with vocational choice being a central component of this struggle.14 Successfully navigating this stage results in a coherent sense of self, or identity achievement, while failure leads to confusion about one's role in society.Building directly on Erikson's work, James Marcia proposed a more granular framework known as the Identity Status Model.14 Marcia's model is not a rigid sequence of stages but rather four distinct statuses that describe an individual's identity formation process. These statuses are defined by the interplay of two key dimensions 15:Exploration (or Crisis): The extent to which an individual has actively considered and weighed various alternatives for their identity, such as different careers, values, or beliefs.Commitment: The degree of personal investment an individual has made in a specific choice or path.Based on whether an individual has experienced high or low levels of exploration and commitment, they can be categorized into one of four statuses 17:Identity Diffusion (Low Exploration, Low Commitment): The individual has not explored meaningful options nor made any commitments. They may seem apathetic or undecided, avoiding the identity-formation task altogether.Identity Foreclosure (Low Exploration, High Commitment): The individual has made a commitment without a period of exploration. These choices are often based on the values and expectations of others, such as parents or authority figures, rather than on personal discovery.Identity Moratorium (High Exploration, Low Commitment): The individual is in the midst of an identity crisis. They are actively exploring different options and alternatives but have not yet made a firm commitment. This status is often characterized by anxiety and questioning.Identity Achievement (High Exploration, High Commitment): The individual has gone through a period of exploration and has emerged with a clear, self-chosen commitment to a particular identity, career, or set of values. This is considered the most mature and adaptive status.2.2 Mapping Identity Statuses to Certainty and UncertaintyFor the purpose of a binary classification task, Marcia's four statuses can be logically mapped onto the labels of "Certain" and "Uncertain." This mapping provides the theoretical justification for labeling the training data.Certain: This category encompasses statuses where a firm commitment has been made.Identity Achievement: Represents a self-assured certainty born from exploration and resolution.Identity Foreclosure: Represents a form of certainty, albeit one that is externally derived and potentially less stable if challenged. The individual expresses commitment, even if they haven't explored alternatives.Uncertain: This category includes statuses defined by a lack of commitment.Identity Moratorium: This is the quintessential state of uncertainty, characterized by active questioning and crisis without resolution.Identity Diffusion: This is a more passive state of uncertainty, where the individual has not even begun the process of exploration or commitment.This binary framework simplifies the complexity of the theory but provides a clear and defensible target for a machine learning model to predict.2.3 Building a Theory-Driven Lexicon for Career CertaintyThe next crucial step is to operationalize these theoretical constructs by creating a lexicon—a custom dictionary of words and phrases that serve as linguistic indicators of career certainty and uncertainty. A simplistic list of words like "sure" or "maybe" would be insufficient. A more sophisticated and powerful approach involves synthesizing multiple complementary theories to create a richer, more nuanced feature set.While Marcia's theory describes the state of being certain or uncertain, Social Cognitive Career Theory (SCCT) describes the cognitive drivers that lead to career interests and choices.20 SCCT highlights three core variables:Self-Efficacy: An individual's belief in their own capability to perform the tasks required for a particular career ("Can I do this?").23Outcome Expectations: An individual's beliefs about the likely consequences of pursuing a career ("What will happen if I do this?"), such as financial reward, personal satisfaction, or stress.23Personal Goals: The intention to engage in a particular activity or to produce a particular outcome.24Low self-efficacy and negative outcome expectations are likely causal precursors to an uncertain identity state. Therefore, language reflecting these constructs serves as a powerful leading indicator of uncertainty. For example, in the focus group transcript, one student expresses low self-efficacy by stating, "I didn't know, like, how capable I was to, like, help them".1 Another expresses negative outcome expectations regarding salary: "I think like 54,000. It's not like a lot of money, right?".1 Both utterances are clear linguistic markers of uncertainty.By combining Marcia's statuses, SCCT's cognitive drivers, and concepts from research on career indecision (e.g., choice anxiety, lack of information) 25, we can construct a multi-faceted lexicon. This approach moves beyond simple pattern matching to search for the linguistic fingerprints of the underlying psychological mechanisms of career identity formation.Table 1: A Lexicon of Career Identity LanguageThe following table operationalizes this multi-theory approach. It provides a sample of terms, their association with Marcia's statuses, their classification as "Certain" or "Uncertain," and the underlying theoretical construct they represent. In a full-scale project, this lexicon would be expanded significantly through literature review and expert consultation.Token / PhraseIdentity Status AssociationCertainty LabelTheoretical ConstructExample Context from Transcript 1"i want to be"AchievementCertainCommitment"I want to be a pediatric allergist.""i'm thinking"MoratoriumUncertainExploration"I'm thinking medical school.""i don't know"Diffusion / MoratoriumUncertainExploration / Lack of Info"I don't know what the road would be to that.""maybe"MoratoriumUncertainExploration"Maybe some of you are interested in that.""probably"Foreclosure / MoratoriumUncertainExploration / Low Certainty"I would probably just go to the big ones.""i feel like"MoratoriumUncertainExploration / Low Certainty"I feel like it's pretty hard to relate to somebody...""fear", "scary"MoratoriumUncertainSelf-Efficacy (Low)"So for me, I said fear... that could be a little scary.""not capable"MoratoriumUncertainSelf-Efficacy (Low)"...changed my mind because I didn't know, like, how capable I was...""competitive"MoratoriumUncertainOutcome Expectation (Barrier)"...being a therapist is really competitive.""lot of money"Achievement / ForeclosureCertainOutcome Expectation (Positive)"...you can make like well over 100 grand.""not a lot of money"MoratoriumUncertainOutcome Expectation (Negative)"54,000. It's not like a lot of money, right?""fulfilling"AchievementCertainOutcome Expectation (Positive)"a job that's extremely fulfilling...""satisfied"AchievementCertainOutcome Expectation (Positive)"I said, satisfied because I think that you would get a certain satisfaction...""hopeful"AchievementCertainOutcome Expectation (Positive)"And I said hopeful because you see so many people struggling..."2.4 Exploratory Analysis: Applying the Lexicon to the Focus Group DataWith the lexicon established, a preliminary analysis can be performed using tidytext and dplyr. The process involves tokenizing the student utterances, joining them with the lexicon table, and then counting the number of "Certain" and "Uncertain" words used by each speaker. This provides an immediate, interpretable snapshot of the language in the dataset and demonstrates the utility of the theory-driven approach before any complex modeling is undertaken. This initial pass can help validate the lexicon and generate hypotheses about which speakers or which topics of conversation are most associated with career uncertainty.Part II: The Supervised Machine Learning Workflow with tidymodelsThis part provides a comprehensive, step-by-step guide to building a supervised machine learning model to classify student utterances. The workflow will adhere strictly to the tidymodels framework, ensuring a modern, reproducible, and rigorous approach. We will use the focus group transcript as our source data, applying the theoretical concepts developed in Part I to create a labeled dataset for training and evaluation.Section 3: Data Preparation and Feature Engineering with recipesThe quality of a machine learning model is fundamentally dependent on the quality of the data and features it is trained on. The recipes package provides a powerful and expressive framework for defining a sequence of feature engineering steps that transform raw data into a format suitable for modeling.3.1 Initial Data StructuringThe first step is to load the raw focus group transcript and structure it for analysis.1 This involves several key actions:Loading Data: The 11_6_2024_130pm_Focus_Group_full.csv file is loaded into an R data frame, or more specifically, a tibble.Filtering: The moderator's speech (identified by Speaker == "NM") is removed, as the goal is to analyze the students' language. Any non-student speakers would also be filtered out.Creating the Outcome Variable (label): This is the most critical step for supervised learning. A new column, label, must be created and populated with the categories "certain" or "uncertain". Since we do not have pre-existing labels, this requires manual annotation based on the theoretical framework from Section 2.2. A researcher would read each utterance and assign a label based on whether the language reflects a state of commitment (Achievement/Foreclosure) or a state of exploration/indecision (Moratorium/Diffusion).For example, consider these utterances from the transcript 1:Utterance (Speaker 161): "Well, I mean, called selfish, I think like 54,000. It's not like a lot of money, right?"Rationale: This utterance focuses on a negative outcome expectation (low salary), a key driver of uncertainty according to SCCT. It reflects exploration of barriers rather than commitment.Label: uncertainUtterance (Speaker 115): "I want to be a pediatric allergist."Rationale: This is a direct, unambiguous statement of a specific career goal. It reflects high commitment and likely represents Identity Achievement.Label: certainUtterance (Speaker 156): "I mean, I think it's a very good idea... But. I don't know. I just haven't looked into it enough, I guess."Rationale: This utterance perfectly captures the state of Moratorium. It expresses interest ("good idea") but explicitly states a lack of exploration ("haven't looked into it enough") and commitment ("I don't know").Label: uncertainThis manual labeling process creates the "ground truth" that the model will learn from. For a real project, this would involve multiple annotators and measures of inter-rater reliability to ensure consistency. For this guide, a representative subset of the data will be labeled to demonstrate the workflow.3.2 The recipes Pipeline: A Blueprint for PreprocessingThe recipe() function is the starting point for defining the feature engineering pipeline.1 It begins with a formula, such as recipe(label ~ Text, data = training_data), which specifies that the label column is the outcome to be predicted from the Text column. Subsequent steps are then added to this recipe object using the pipe operator (%>%).3.3 Core Text Preprocessing StepsSeveral standard preprocessing steps are essential for cleaning and structuring text data for modeling 1:Tokenization: The step_tokenize() function is used to split the text in the Text column into individual tokens (words). This is the foundational step that converts free text into discrete units for analysis.Stop-Word Removal: The step_stopwords() function removes common words that carry little semantic content (e.g., "a", "an", "the", "is"). This helps the model focus on more informative terms. It is often beneficial to add custom, domain-specific stop words to the default list. For this project, words like "counseling," "counselor," "mental," "health," and "student" might be added, as they are likely to appear in all utterances and thus have little discriminatory power between the "certain" and "uncertain" classes.N-gram Generation: While tokenizing into single words (unigrams) is standard, some meaning is captured in multi-word phrases. The step_ngram() function can be used to generate n-grams (e.g., bigrams like "not sure," trigrams like "I don't know"). Including n-grams in the feature set can sometimes improve model performance by capturing contextual information that is lost with a "bag of words" approach.283.4 A Deep Dive: Stemming vs. LemmatizationAfter tokenization, it is standard practice to normalize words to their root form. This prevents the model from treating different forms of the same word (e.g., "run", "runs", "running") as distinct features. Two common techniques for this are stemming and lemmatization.Stemming: This is a crude, rule-based heuristic process that chops off common prefixes and suffixes to produce a "stem".29 For example, "running," "runs," and "ran" might all be stemmed to "run." However, it is a blunt instrument and can often produce non-words (e.g., "caring" might become "car") or incorrectly conflate words. The most common algorithm is the Porter stemmer, available in R via packages like SnowballC. In textrecipes, this is implemented with step_stem().Lemmatization: This is a more sophisticated, linguistically-informed process. It uses a dictionary and morphological analysis to return the base or dictionary form of a word, known as the lemma.31 For example, it can correctly identify that the lemma of "better" is "good," a connection that stemming would miss. For a theory-driven analysis where the semantic meaning of words is paramount, lemmatization is the superior choice.Implementing lemmatization within the tidymodels framework requires a specific approach. The spacyr package provides an R interface to the powerful Python spaCy library for natural language processing.33 A common pitfall is to misunderstand how textrecipes::step_lemma() functions. It does not perform lemmatization itself; rather, it extracts lemma attributes that must have been previously generated during the tokenization step.35 Therefore, the correct implementation is a two-step process: first, tokenize using the spacyr engine, and second, apply step_lemma to extract the results.36The practical workflow is:Install the necessary Python environment for spaCy using spacyr::spacy_install().Initialize the spaCy session in R with spacyr::spacy_initialize().In the recipe, specify the tokenizer engine: step_tokenize(Text, engine = "spacyr").Follow this with the lemmatization step: step_lemma(Text).This careful sequence ensures that the linguistically rich information generated by spaCy is correctly passed through the tidymodels pipeline.3.5 Vectorizing Text for ModelingAfter preprocessing, the list of tokens for each utterance must be converted into a numeric format that a machine learning algorithm can use. A common and effective method is Term Frequency-Inverse Document Frequency (TF-IDF), implemented with step_tfidf().1Term Frequency (TF): This is simply the count of a token within a given document (utterance).Inverse Document Frequency (IDF): This measures how rare a token is across the entire corpus of documents. The IDF is high for words that appear in few documents and low for words that appear in many.TF-IDF is the product of these two values. It gives higher weight to words that are frequent within a specific utterance but rare across all utterances, effectively identifying terms that are characteristic of a particular document.Before vectorization, it is also wise to filter the vocabulary using step_tokenfilter().1 This step can remove extremely rare words that are unlikely to be predictive (e.g., min_times = 5) and can cap the total number of features by keeping only the most frequent tokens (e.g., max_tokens = 1000). This helps to manage the dimensionality of the data and prevent overfitting.Table 2: The Complete Preprocessing RecipeThe following code block presents a complete, reproducible recipe that encapsulates the best practices discussed. It serves as the definitive blueprint for feature engineering in this analysis.R# Assumes 'training_data' is a tibble with 'Text' and 'label' columns
+# and that spacyr has been initialized.
+
+# Load necessary libraries
+library(recipes)
+library(textrecipes)
+library(themis) # For handling class imbalance
+
+# Define custom stop words relevant to the domain
+custom_stops <- c("counseling", "counselor", "mental", "health", "sud")
+
+# Create the full preprocessing recipe
+sud_recipe <- recipe(label ~ Text, data = training_data) %>%
+  # Step 1: Tokenize using spaCy engine to enable lemmatization
+  step_tokenize(Text, engine = "spacyr") %>%
+  
+  # Step 2: Extract the lemmas (linguistically correct root words)
+  step_lemma(Text) %>%
+  
+  # Step 3: Remove default and custom stop words
+  step_stopwords(Text, custom_stopword_source = custom_stops) %>%
+  
+  # Step 4: Filter vocabulary to keep the top 500 most frequent tokens
+  # This controls the number of features and removes rare, noisy words.
+  step_tokenfilter(Text, max_tokens = 500) %>%
+  
+  # Step 5: Calculate TF-IDF weights for the remaining tokens
+  step_tfidf(Text) %>%
+  
+  # Step 6 (Optional but recommended): Handle class imbalance if one
+  # class (e.g., 'certain') is much rarer than the other.
+  # step_downsample() randomly samples the majority class to match the minority.
+  step_downsample(label)
+
+# Print the recipe to inspect it
+# print(sud_recipe)
+This single recipe object, sud_recipe, now contains all the instructions needed to transform raw text utterances into a clean, high-dimensional feature matrix ready for modeling.Section 4: Building, Tuning, and Evaluating a Classification ModelWith a robust preprocessing recipe defined, the next stage is to specify a model, bundle it with the recipe into a workflow, and rigorously evaluate its performance.4.1 Data Splitting and ResamplingBefore any modeling, the labeled dataset must be split to prevent data leakage and ensure an unbiased evaluation of the final model's performance. The rsample package provides the tools for this.1Initial Split: The initial_split() function divides the data into a training set and a testing set. The model will be developed, trained, and tuned using only the training set. The testing set is held out and used only once, at the very end, to estimate the final model's performance on new, unseen data. Stratification on the outcome variable (label) is crucial to ensure that both the training and testing sets have a similar proportion of "certain" and "uncertain" cases.Cross-Validation: To get a reliable estimate of model performance during development and to tune hyperparameters, we use cross-validation on the training set. The vfold_cv() function creates k "folds" (typically 5 or 10). The model is then trained on k-1 folds and evaluated on the remaining fold, a process that is repeated k times. This gives a more robust performance estimate than a single train/validation split.4.2 Specifying and Tuning a glmnet ModelFor text classification problems, which often involve a very large number of features (one for each token), a regularized regression model is an excellent choice. The Lasso (L1 regularization), implemented in the glmnet package, is particularly well-suited because it performs automatic feature selection by shrinking the coefficients of unimportant features to exactly zero.1Using parsnip, we can specify a logistic regression model with a tunable penalty parameter:R# Specify a logistic regression model with a lasso penalty
+# The penalty is set to tune(), meaning we will find the optimal value.
+# The mixture = 1 specifies a pure lasso model.
+lasso_spec <- logistic_reg(penalty = tune(), mixture = 1) %>%
+  set_engine("glmnet")
+The penalty hyperparameter controls the amount of regularization. A larger penalty will shrink more coefficients to zero, resulting in a simpler model. The tune() function tells tidymodels that this is a value we need to optimize.4.3 Uniting Preprocessing and Modeling with workflowsA workflow object is the central organizing tool in tidymodels. It bundles the preprocessing recipe and the parsnip model specification into a single, cohesive unit.1 This is incredibly powerful because it ensures that the exact same preprocessing steps are applied consistently during training, resampling, and prediction.R# Create the workflow
+lasso_wf <- workflow() %>%
+  add_recipe(sud_recipe) %>%
+  add_model(lasso_spec)
+This lasso_wf object now contains the entire modeling plan: take the raw data, apply the full text preprocessing pipeline, and then fit a tunable lasso model to the result.4.4 Tuning and EvaluationThe tune package is used to find the optimal value for the penalty hyperparameter. The tune_grid() function systematically fits the workflow across the cross-validation folds for a range of candidate penalty values.R# Define a grid of penalty values to try
+penalty_grid <- grid_regular(penalty(), levels = 30)
+
+# Tune the workflow using the cross-validation folds
+lasso_tune_res <- tune_grid(
+  object = lasso_wf,
+  resamples = cv_folds, # The cross-validation folds from vfold_cv()
+  grid = penalty_grid,
+  metrics = metric_set(roc_auc, accuracy) # Metrics to evaluate
+)
+After the tuning process is complete, we can visualize the results to see how performance changes with different penalty values and select the best-performing hyperparameter. The yardstick package provides the metrics, such as roc_auc (Area Under the Receiver Operating Characteristic Curve) and accuracy, which are standard for binary classification tasks.1roc_auc is often preferred for imbalanced datasets as it measures the model's ability to discriminate between the two classes across all possible classification thresholds.4.5 Interpreting the ModelOnce the best penalty value is identified, the final workflow is trained on the entire training dataset. The most insightful step is then to examine the model's coefficients to understand what it has learned. The broom::tidy() function can extract the coefficients from the fitted glmnet model.1By sorting the coefficients by their magnitude, we can identify the words and phrases that the model found most predictive of the "certain" and "uncertain" classes. This provides an empirical, data-driven list of key terms. The final step in the analysis loop is to compare this list of empirically derived predictors to the theory-driven lexicon created in Table 1. This comparison serves as a powerful form of validation. Where do the model's findings align with the theory? What new, unexpected words did the model identify as important? This dialogue between theory and empirical results can lead to new insights into the linguistic expression of career identity and refine the theoretical framework itself.Part III: Alternative and Advanced Analytical PathsWhile the supervised classification workflow provides a powerful tool for prediction based on pre-defined labels, a comprehensive analysis benefits from exploring alternative methods. Unsupervised techniques can uncover latent structures in the data without relying on labels, while advanced comparison frameworks can rigorously test multiple modeling strategies against each other.Section 5: Unsupervised Discovery with Topic ModelingSupervised learning answers the question: "Can we predict label Y from text X?". However, it is constrained by the predefined labels. An unsupervised approach like topic modeling addresses a different question: "What are the underlying themes or topics being discussed in text X?".38 For the focus group data, this can reveal what students are talking about when they express certainty or uncertainty, potentially uncovering themes like "financial concerns," "personal fulfillment," or "academic requirements" that are not explicit in the labels themselves.5.1 Rationale for Unsupervised MethodsThe primary value of topic modeling in this context is exploratory discovery.39 It can identify natural groupings of words that co-occur frequently, providing a high-level summary of a large text corpus. These discovered topics can validate the themes identified during the creation of the theoretical lexicon or, more excitingly, reveal unexpected patterns that were not anticipated by the theory. This can lead to new research questions and a richer understanding of the students' perspectives.5.2 A Tidy Approach to Latent Dirichlet Allocation (LDA)Latent Dirichlet Allocation (LDA) is a popular generative statistical model for topic modeling.38 It operates on two key principles: 1) every document is a mixture of topics, and 2) every topic is a mixture of words. The tidytext framework provides a seamless pipeline for fitting and interpreting LDA models.The workflow is as follows:Prepare Tidy Data: The process begins with a tidy data frame of tokens, such as the lemmatized and stop-word-filtered data prepared in the supervised workflow.Create a Document-Term Matrix (DTM): The topicmodels package, which contains the LDA() function, requires the data to be in a DTM format—a sparse matrix where rows represent documents (utterances) and columns represent terms (tokens), with the cell values typically being word counts.40 The tidytext::cast_dtm() function easily converts a tidy data frame into this format.Fit the LDA Model: The topicmodels::LDA() function is used to fit the model. The most important parameter is k, the number of topics to discover.40 Choosing k is a critical and often subjective step, frequently involving fitting models with several different values of k and selecting the one that yields the most coherent and interpretable topics.41Tidy the Model Output: After fitting, the tidytext::tidy() function is used to convert the complex model object back into tidy data frames.40 This is the key to making the results interpretable.tidy(lda_model, matrix = "beta"): This returns the per-topic-per-word probabilities. The beta (β) value represents the probability that a given word belongs to a given topic. These are used to interpret the meaning of each topic.tidy(lda_model, matrix = "gamma"): This returns the per-document-per-topic probabilities. The gamma (γ) value represents the proportion of each topic that makes up a given document. These are used to see what topics are prevalent in each utterance.5.3 Interpreting Topic ModelsThe output of an LDA model is purely mathematical; interpretation requires human judgment.43 The primary method is to examine the top words for each topic (those with the highest beta probabilities) and assign a descriptive, human-readable label that captures the theme.Table 3: Top Terms per Discovered Topic (Hypothetical Example)Assuming we fit an LDA model with k = 3 to the focus group data, the tidied beta matrix might yield the following top terms, which a researcher could then interpret.Topic NumberTop 10 Words (Highest Probability)Interpreted Label1money, pay, job, school, year, phd, degree, expensive, program, livingPractical & Financial Barriers2feel, help, person, people, satisfaction, compassion, understand, workPersonal Fulfillment & Empathy3think, know, maybe, sure, guess, idea, like, right, kind, feelCognitive Uncertainty & HedgingThe discovery of such topics would be highly insightful. For example, it might reveal that expressions of uncertainty are often embedded within conversations about Topic 1 (finances) and Topic 3 (hedging language), while expressions of certainty are linked to Topic 2 (fulfillment).This leads to a powerful synthesis of unsupervised and supervised methods. The document-topic probabilities (gamma values) from the LDA model can be treated as new, engineered features for the supervised classifier. For each utterance, we can add columns like topic1_gamma, topic2_gamma, and topic3_gamma. This enriches the supervised model by providing it with information not just about which words are present, but also what latent topics the utterance is about. An utterance with a high gamma value for the "Practical & Financial Barriers" topic might be highly predictive of the "uncertain" class, even beyond the predictive power of the individual words themselves. This technique combines the discovery power of unsupervised learning with the predictive accuracy of supervised learning.Section 6: Comparing Multiple Models with workflow_setsIn any realistic modeling project, a researcher will want to try more than one type of algorithm. The workflowsets package is designed for this exact purpose: to provide a tidy and efficient framework for fitting, tuning, and comparing multiple modeling workflows simultaneously.96.1 The Power of workflow_setsA workflow_set is essentially a table of modeling experiments. It is created by providing a list of preprocessors (e.g., different recipes) and a list of model specifications (parsnip objects). The package then creates all possible combinations.45 This structure streamlines the process of comparing, for example, how a logistic regression model performs compared to a random forest model using the exact same feature engineering pipeline.6.2 Case Study: glmnet vs. Random ForestTo demonstrate, we can create a workflow_set to compare our glmnet model against a parsnip::rand_forest() model. A random forest is a powerful, tree-based ensemble model that can capture non-linear relationships in the data and is often a strong performer in classification tasks.R# Define a tunable random forest model
+rf_spec <- rand_forest(mtry = tune(), trees = 1000, min_n = tune()) %>%
+  set_engine("ranger") %>%
+  set_mode("classification")
+
+# Create the workflow set
+# Both models will use the same preprocessing recipe
+model_set <- workflow_set(
+  preproc = list(text_recipe = sud_recipe),
+  models = list(lasso = lasso_spec, rf = rf_spec)
+)
+6.3 Tuning, Ranking, and VisualizingThe workflow_map() function is the workhorse of the package. It applies a function, such as tune_grid(), to every workflow in the set.9 This will run the hyperparameter tuning process for both the lasso model and the random forest model.Once tuning is complete, the results can be easily analyzed. The rank_results() function provides a ranked table of all model configurations based on a chosen metric (e.g., roc_auc), and the autoplot() function creates a visual summary, making it easy to see which modeling approach performed best after tuning.46 This provides a definitive, data-driven answer to the question of which algorithm is most suitable for this specific text classification problem, completing the cycle of rigorous, comparative model development.Part IV: Synthesis and RecommendationsThe preceding sections have detailed a comprehensive and modern approach to text classification, moving from theoretical grounding to the implementation of multiple analytical strategies. This final part synthesizes these findings, compares the different methods, and provides actionable recommendations for a researcher undertaking a similar project.Section 7: Final Synthesis and Actionable RecommendationsThe analysis has explored three distinct but complementary pathways for analyzing the language of career identity: a theory-driven dictionary approach, a data-driven supervised machine learning model, and an exploratory unsupervised topic model. Each offers unique advantages and disadvantages.7.1 Comparing Analytical ApproachesA summary of the strengths and weaknesses of each method is crucial for making informed methodological choices.ApproachProsConsBest Use Case1. Dictionary-BasedHighly Interpretable: Results are directly tied to the theoretical lexicon.Brittle & Incomplete: Fails to capture novel or nuanced language; performance is capped by lexicon quality.Initial Exploration: Quick, theory-grounded baseline analysis.Fast & Simple: Computationally inexpensive; easy to implement with dplyr.Lacks Discovery: Cannot identify predictive terms that were not pre-specified by the researcher.Validating Theory: Testing the presence of theoretical constructs in text.2. Supervised Machine LearningHigh Performance: Can achieve high predictive accuracy by learning complex patterns from data.Requires Labeled Data: Manual annotation can be time-consuming and expensive.Prediction & Classification: Building a model to automatically categorize new data.Data-Driven Discovery: Identifies empirically important features, even those not anticipated by theory."Black Box" Problem: Complex models (e.g., random forests) can be difficult to interpret directly.Feature Discovery: Identifying the most powerful linguistic predictors.3. Unsupervised Topic ModelingExploratory Power: Discovers latent thematic structures without needing pre-defined labels.Subjective Interpretation: Labeling topics requires human judgment and is not always straightforward.Hypothesis Generation: Understanding the main themes in a corpus.No Labels Required: Can be applied to any raw text corpus.Indirect Prediction: Does not directly classify documents according to a specific outcome variable.Feature Engineering: Creating topic-proportion features for supervised models.7.2 Recommendations for the Researcher's ProjectFor a project aiming to classify career certainty with both rigor and insight, a hybrid approach that leverages the strengths of all three methods is recommended:Start with Theory and a Lexicon: Begin by developing a robust, multi-theory lexicon as detailed in Part I. Use this for an initial dictionary-based analysis. This grounds the project in established theory and provides a set of highly interpretable baseline results. It forces clarity on what is meant by "certainty" and "uncertainty."Build a Supervised Model for Performance: Implement the full tidymodels supervised workflow as outlined in Part II. This will likely yield the highest predictive accuracy. Crucially, interpret the final model's coefficients (or variable importance for tree-based models) and compare them to the initial lexicon. This dialogue between the theory-driven lexicon and the data-driven model is a key source of insight.Use Topic Modeling for Context and Feature Engineering: Apply unsupervised topic modeling (Part III) as a parallel exploratory track. Use it to answer the "why" question: what are the broader themes within which students express their certainty or uncertainty? The most advanced application is to then use the topic proportions (gamma values) as engineered features in the supervised model, potentially boosting its performance and interpretability.Compare Rigorously with workflow_sets: Do not settle on a single algorithm. Use workflow_sets to systematically compare several models (e.g., glmnet, rand_forest, boost_tree). This ensures that the final selected model is demonstrably the best-performing one for the specific dataset and task, lending significant credibility to the results.7.3 Limitations and Future DirectionsThis analysis, while comprehensive in its approach, has limitations inherent in the provided sample data. The focus group transcript represents a small number of speakers and utterances, which limits the generalizability of any trained model. Furthermore, the process of manual labeling, while theoretically grounded, is subjective and would require a formal validation process with multiple annotators in a full research study.Future work could explore several advanced avenues:Word Embeddings: The TF-IDF representation treats each word as independent. Word embeddings are a more advanced technique that represents words as dense vectors in a high-dimensional space, where words with similar meanings are located close to each other. The textrecipes::step_word_embeddings() function allows for the integration of pre-trained embeddings (like GloVe or Word2Vec) into the tidymodels workflow, which can capture semantic relationships and often improve model performance.27Deep Learning Models: For larger datasets, deep learning models like Recurrent Neural Networks (RNNs) or Transformers can capture complex sequential patterns in text. The brulee package provides an interface to fit neural networks (including multi-layer perceptrons) within the tidymodels ecosystem, offering a pathway to more complex architectures.11Larger and More Diverse Data: The most impactful future direction would be to apply this workflow to a much larger dataset, including multiple focus groups, survey open-ends, or online forum posts. A larger dataset would allow for the training of a more robust and generalizable model, moving from a proof-of-concept to a genuinely useful analytical tool for career development research.By following the integrated, theory-driven, and technically modern workflow detailed in this report, researchers can move beyond simple keyword counting and build powerful, insightful, and reproducible models for text analysis in R.Appendix: Complete Reproducible R ScriptR#################################################################
+# Part I: Foundational Concepts & Data Preparation
+#################################################################
+
+# --- 1. Load Libraries ---
+# Main tidyverse packages
+library(tidyverse)
+library(tidytext)
+
+# Tidymodels ecosystem
+library(tidymodels)
+library(textrecipes)
+library(themis) # For dealing with class imbalance
+
+# For specific modeling and analysis
+library(topicmodels)
+library(spacyr)
+
+# --- 2. Load and Clean Data ---
+# In a real scenario, you would load your CSV file
+# focus_group_data <- read_csv("11_6_2024_130pm_Focus_Group_full.csv")
+
+# For this reproducible example, we will create a sample tibble
+# based on the structure of the provided data.
+focus_group_data <- tibble::tribble(
+  ~Speaker, ~Text,
+  "NM", "So what do folks on this call know about mental health counseling professions?",
+  "161", "I think I mean mental health counseling. You don't have to necessarily. You don't have to like a Ph.D. or anything like that. Right.",
+  "156", "That it requires a lot of patience.",
+  "131", "So for me, I said fear. Because like from the way I thought about it, it was like if someone comes to you for help, you would have to like, really understand where they're coming from...",
+  "115", "I want to be a pediatric allergist.",
+  "161", "Well, I mean, called selfish, I think like 54,000. It's not like a lot of money, right?",
+  "156", "I mean, I think it's a very good idea. You know. I know. Honestly. Like, it's not like I'm not considering it at all. But. I don't know. I just haven't looked into it enough, I guess.",
+  "131", "she told me about how like for like being a therapist is really competitive... it might take like a toll on you if you're like, not like strong enough...",
+  "145", "I'm thinking medical school."
+)
+
+# Filter out moderator and create labeled data
+labeled_utterances <- focus_group_data %>%
+  filter(Speaker!= "NM") %>%
+  mutate(
+    label = case_when(
+      str_detect(Text, "pediatric allergist") ~ "certain",
+      str_detect(Text, "haven't looked into it enough") ~ "uncertain",
+      str_detect(Text, "fear|competitive|not like strong enough") ~ "uncertain",
+      str_detect(Text, "not like a lot of money") ~ "uncertain",
+      str_detect(Text, "thinking medical school") ~ "uncertain",
+      TRUE ~ "uncertain" # Default to uncertain for other examples
+    ),
+    label = as.factor(label)
+  ) %>%
+  select(Speaker, Text, label)
+
+# View the labeled data
+print(labeled_utterances)
+
+# --- 3. Initial Data Split ---
+set.seed(123)
+data_split <- initial_split(labeled_utterances, prop = 0.80, strata = label)
+train_data <- training(data_split)
+test_data <- testing(data_split)
+
+# Create cross-validation folds from the training data
+set.seed(234)
+cv_folds <- vfold_cv(train_data, v = 5, strata = label)
+
+
+#################################################################
+# Part II: Supervised Machine Learning with Tidymodels
+#################################################################
+
+# --- 4. Initialize spaCy for Lemmatization ---
+# This step requires a Python environment with spaCy installed.
+# Run spacy_install() once if needed.
+# spacy_install()
+spacy_initialize(model = "en_core_web_sm")
+
+# --- 5. Define the Preprocessing Recipe ---
+custom_stops <- c("counseling", "counselor", "mental", "health", "sud")
+
+sud_recipe <- recipe(label ~ Text, data = train_data) %>%
+  step_tokenize(Text, engine = "spacyr") %>%
+  step_lemma(Text) %>%
+  step_stopwords(Text, custom_stopword_source = custom_stops) %>%
+  step_tokenfilter(Text, max_tokens = 500) %>%
+  step_tfidf(Text) %>%
+  step_downsample(label) # Handles class imbalance
+
+# --- 6. Define the Model and Workflow ---
+lasso_spec <- logistic_reg(penalty = tune(), mixture = 1) %>%
+  set_engine("glmnet")
+
+lasso_wf <- workflow() %>%
+  add_recipe(sud_recipe) %>%
+  add_model(lasso_spec)
+
+# --- 7. Tune the Model ---
+set.seed(345)
+penalty_grid <- grid_regular(penalty(), levels = 20)
+
+lasso_tune_res <- tune_grid(
+  object = lasso_wf,
+  resamples = cv_folds,
+  grid = penalty_grid,
+  metrics = metric_set(roc_auc, accuracy)
+)
+
+# --- 8. Evaluate and Finalize the Model ---
+# Show tuning results
+collect_metrics(lasso_tune_res)
+autoplot(lasso_tune_res)
+
+# Select the best penalty based on roc_auc
+best_penalty <- select_best(lasso_tune_res, "roc_auc")
+final_lasso_wf <- finalize_workflow(lasso_wf, best_penalty)
+
+# Fit the final model to the training data and evaluate on the test set
+final_fit <- last_fit(final_lasso_wf, data_split)
+collect_metrics(final_fit)
+
+# --- 9. Interpret the Final Model ---
+# Extract coefficients to see most important words
+final_model_fit <- extract_workflow(final_fit) %>%
+  tidy() %>%
+  filter(estimate!= 0) %>%
+  arrange(desc(abs(estimate)))
+
+print("Top predictive terms from the lasso model:")
+print(final_model_fit)
+
+
+#################################################################
+# Part III: Unsupervised Topic Modeling
+#################################################################
+
+# --- 10. Prepare Data for Topic Modeling ---
+# Reuse the labeled data, but we only need the text
+# Create a document identifier
+docs_for_lda <- labeled_utterances %>%
+  mutate(doc_id = row_number())
+
+# Tidy and preprocess text
+tidy_docs <- docs_for_lda %>%
+  unnest_tokens(word, Text) %>%
+  anti_join(get_stopwords()) %>%
+  # A simple filter for demonstration
+  filter(!str_detect(word, "[0-9]"))
+
+# Count words per document
+word_counts <- tidy_docs %>%
+  count(doc_id, word, sort = TRUE)
+
+# --- 11. Create DTM and Fit LDA Model ---
+# Cast to a DocumentTermMatrix
+docs_dtm <- word_counts %>%
+  cast_dtm(doc_id, word, n)
+
+# Fit an LDA model (e.g., with k=3 topics)
+set.seed(456)
+docs_lda <- LDA(docs_dtm, k = 3, control = list(seed = 456))
+
+# --- 12. Interpret the LDA Model ---
+# Tidy the beta matrix (per-topic-per-word probabilities)
+lda_beta <- tidy(docs_lda, matrix = "beta")
+
+# Find top 5 terms per topic
+top_terms <- lda_beta %>%
+  group_by(topic) %>%
+  slice_max(beta, n = 5) %>%
+  ungroup() %>%
+  arrange(topic, -beta)
+
+print("Top terms per discovered topic:")
+print(top_terms)
+
+# Tidy the gamma matrix (per-document-per-topic probabilities)
+lda_gamma <- tidy(docs_lda, matrix = "gamma")
+print("Document-topic probabilities (gamma):")
+print(lda_gamma)
+
+# --- Finalize spaCy session ---
+spacy_finalize()

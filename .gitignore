@@ -91,6 +91,9 @@ desktop.ini
 *.temp
 _temp_*
 
+# R plot outputs
+Rplots.pdf
+
 # Backup files
 *.bak
 *.backup

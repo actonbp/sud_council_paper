@@ -1,0 +1,29 @@
+OPTIMAL BALANCED TOPIC ANALYSIS - SUD COUNSELING RESEARCH
+============================================================
+
+METHODOLOGY - STRATEGIC BALANCE:
+• Strategic removal of circular terms only
+• Preserved meaningful field context
+• Enhanced phrase detection and weighting
+• 4-topic model for optimal separation
+• Circular terms removed: 90 instances
+• Meaningful phrases discovered: 78
+
+BALANCED RESEARCH THEMES:
+------------------------------
+
+Helping People through Personal Experience (43.1%)
+  Key phrases: trying_help, people_battling, money_career, people_telling
+  Key words: family, careers, people, career
+
+Personal Experience & Background (18.8%)
+  Key phrases: medical_field, big_responsibility, career_path_choose, talking_people
+  Key words: helping, career, supportive, supported, personally
+
+Career Planning & Considerations (18.8%)
+  Key phrases: helping_people, help_people, find_interesting, people_mental_health
+  Key words: people, personal, personally, important
+
+Professional Field Considerations (19.3%)
+  Key phrases: whole_family, people_lives, med_school, mental_health_field
+  Key words: people, support, important, personally

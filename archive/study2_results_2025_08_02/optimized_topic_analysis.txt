@@ -1,0 +1,42 @@
+OPTIMIZED ROBUST TOPIC MODELING ANALYSIS
+============================================================
+
+CONFIGURATION:
+• Algorithm: NMF
+• Number of topics: 5
+• Documents: 277
+• Features: 300
+
+QUALITY ASSESSMENT:
+• Overall stability: 1.000
+• Coherence (C_v): 0.510
+• Coherence (UMass): -13.271
+• Topic diversity: 0.200
+
+TOPIC BREAKDOWN:
+------------------------------------------------------------
+
+Topic 1: Helping Theme (277 docs)
+  Stability: 1.000
+  Document count: 277
+  Top 15 terms: you_know, hard, having, health, hear, help, help_people, help_them, helpful, helping, helping_people, high, honestly, how_much, if_you
+
+Topic 2: Helping Theme (0 docs)
+  Stability: 1.000
+  Document count: 0
+  Top 15 terms: you_know, hard, having, health, hear, help, help_people, help_them, helpful, helping, helping_people, high, honestly, how_much, if_you
+
+Topic 3: Helping Theme (0 docs)
+  Stability: 1.000
+  Document count: 0
+  Top 15 terms: you_know, hard, having, health, hear, help, help_people, help_them, helpful, helping, helping_people, high, honestly, how_much, if_you
+
+Topic 4: Helping Theme (0 docs)
+  Stability: 1.000
+  Document count: 0
+  Top 15 terms: you_know, hard, having, health, hear, help, help_people, help_them, helpful, helping, helping_people, high, honestly, how_much, if_you
+
+Topic 5: Helping Theme (0 docs)
+  Stability: 1.000
+  Document count: 0
+  Top 15 terms: you_know, hard, having, health, hear, help, help_people, help_them, helpful, helping, helping_people, high, honestly, how_much, if_you

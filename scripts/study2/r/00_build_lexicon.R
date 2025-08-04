@@ -45,7 +45,10 @@ lexicon_seed <- tibble(
 expanded_lexicon <- lexicon_seed  # default
 
 # Attempt auto-expansion if embedding file is present -----------------------
-embed_path <- 'data/embeddings/glove.6B.300d.txt'
+embed_dir <- 'data/embeddings'
+txt_files <- list.files(embed_dir, pattern = '\\.(txt|vec)$', full.names = TRUE)
+embed_path <- if (length(txt_files)) txt_files[[1]] else ''
+
 if (file.exists(embed_path)) {
   message('🔍 Embedding file detected — expanding lexicon…')
   suppressPackageStartupMessages(library(text2vec))
@@ -55,7 +58,8 @@ if (file.exists(embed_path)) {
   mat   <- as.matrix(glove[ , -1])
   rownames(mat) <- vocab
 
-  get_nns <- function(w, top_n = 25, cos_thresh = 0.45) {
+  # helper: nearest neighbours with stricter similarity
+  get_nns <- function(w, top_n = 15, cos_thresh = 0.60) {
     if (!w %in% rownames(mat)) return(character())
     target <- mat[w, , drop = FALSE]
     sims   <- text2vec::sim2(x = mat, y = target, method = 'cosine', norm = 'l2')[ , 1]
@@ -64,8 +68,18 @@ if (file.exists(embed_path)) {
     setdiff(names(nn)[seq_len(min(top_n, length(nn)))], w)
   }
 
-  new_terms_c  <- unique(unlist(lapply(seed_certain,   get_nns)))
-  new_terms_uc <- unique(unlist(lapply(seed_uncertain, get_nns)))
+  # tidytext stop-word list for post-filtering --------------------------------
+  suppressPackageStartupMessages(library(tidytext))
+  stop_l <- unique(tidytext::stop_words$word)
+
+  clean_candidates <- function(x) {
+    x <- x[!x %in% stop_l]          # drop common stop words
+    x <- x[nchar(x) >= 4]           # drop very short tokens
+    x
+  }
+
+  new_terms_c  <- clean_candidates(unique(unlist(lapply(seed_certain,   get_nns))))
+  new_terms_uc <- clean_candidates(unique(unlist(lapply(seed_uncertain, get_nns))))
 
   expanded_lexicon <- bind_rows(
     lexicon_seed,

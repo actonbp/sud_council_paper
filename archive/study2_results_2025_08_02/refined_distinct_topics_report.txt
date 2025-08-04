@@ -1,0 +1,37 @@
+REFINED DISTINCT TOPIC ANALYSIS
+============================================================
+
+OPTIMAL CONFIGURATION:
+• Number of topics: 4
+• Algorithm: LDA
+• Documents analyzed: 261
+• Combined quality score: 0.538
+
+DISTINCTIVENESS METRICS:
+• Topic diversity: 0.900
+• Topic coherence: 0.269
+• Topic balance: 0.699
+• Overlap penalty: 0.067
+
+DISTINCT THEMES IDENTIFIED:
+------------------------------------------------------------
+
+Altruistic Helping Motivation (89 docs)
+  • Document count: 89
+  • Proportion: 34.10%
+  • Key terms: help, school, ve, also, go, support, people, job, family, don, friends, things, now, better, many
+
+Altruistic Helping Motivation (53 docs)
+  • Document count: 53
+  • Proportion: 20.31%
+  • Key terms: people, helping, re, someone, profession, career, different, helping people, thing, one, person, path, around, general
+
+Career/Practical Considerations (40 docs)
+  • Document count: 40
+  • Proportion: 15.33%
+  • Key terms: well, still, job, ll, need, work, money, amount, field, interesting, makes, road, hard
+
+Altruistic Helping Motivation (79 docs)
+  • Document count: 79
+  • Proportion: 30.27%
+  • Key terms: don, health, mental, mean, mental health, parents, re, supportive, much, counselor, nervous, patients, little, worry

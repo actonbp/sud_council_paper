@@ -1,0 +1,345 @@
+{
+  "timestamp": "2025-08-02T15:18:17.793617",
+  "n_patterns_tested": 10,
+  "n_replicable": 5,
+  "detailed_results": [
+    {
+      "pattern": "MH + Family SU treatment + mentions 'help' -> INTERESTED",
+      "n_total": 8,
+      "n_interested": 7,
+      "n_not_interested": 1,
+      "accuracy_full": 0.875,
+      "cv_accuracies": [],
+      "cv_mean": null,
+      "cv_std": null,
+      "participant_ids": [
+        122,
+        145,
+        155,
+        158,
+        165,
+        169,
+        173,
+        174
+      ]
+    },
+    {
+      "pattern": "No MH treatment + mentions money -> NOT_INTERESTED",
+      "n_total": 12,
+      "n_interested": 3,
+      "n_not_interested": 9,
+      "accuracy_full": 0.75,
+      "cv_accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        0.6666666666666666,
+        0.6
+      ],
+      "cv_mean": 0.8533333333333333,
+      "cv_std": 0.1808621328833405,
+      "participant_ids": [
+        101,
+        102,
+        106,
+        109,
+        112,
+        125,
+        131,
+        133,
+        147,
+        149,
+        164,
+        167
+      ]
+    },
+    {
+      "pattern": "Multiracial + mentions pressure -> INTERESTED",
+      "n_total": 10,
+      "n_interested": 8,
+      "n_not_interested": 2,
+      "accuracy_full": 0.8,
+      "cv_accuracies": [
+        1.0,
+        0.5,
+        0.6666666666666666,
+        1.0,
+        1.0
+      ],
+      "cv_mean": 0.8333333333333333,
+      "cv_std": 0.21081851067789195,
+      "participant_ids": [
+        102,
+        113,
+        117,
+        145,
+        161,
+        162,
+        165,
+        169,
+        173,
+        175
+      ]
+    },
+    {
+      "pattern": "Sophomore + employed -> INTERESTED",
+      "n_total": 6,
+      "n_interested": 5,
+      "n_not_interested": 1,
+      "accuracy_full": 0.8333333333333334,
+      "cv_accuracies": [],
+      "cv_mean": null,
+      "cv_std": null,
+      "participant_ids": [
+        113,
+        117,
+        121,
+        135,
+        141,
+        174
+      ]
+    },
+    {
+      "pattern": "High income + mentions pressure -> Mixed",
+      "n_total": 11,
+      "n_interested": 7,
+      "n_not_interested": 4,
+      "accuracy_full": 0.6363636363636364,
+      "cv_accuracies": [
+        0.5,
+        0.5,
+        0.5,
+        1.0
+      ],
+      "cv_mean": 0.625,
+      "cv_std": 0.21650635094610965,
+      "participant_ids": [
+        102,
+        109,
+        115,
+        137,
+        148,
+        149,
+        161,
+        162,
+        165,
+        169,
+        175
+      ]
+    },
+    {
+      "pattern": "Uses interested-group words -> INTERESTED",
+      "n_total": 16,
+      "n_interested": 14,
+      "n_not_interested": 2,
+      "accuracy_full": 0.875,
+      "cv_accuracies": [
+        0.75,
+        0.75,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "cv_mean": 0.9,
+      "cv_std": 0.1224744871391589,
+      "participant_ids": [
+        106,
+        112,
+        113,
+        117,
+        121,
+        131,
+        135,
+        141,
+        148,
+        151,
+        155,
+        161,
+        165,
+        169,
+        173,
+        174
+      ]
+    },
+    {
+      "pattern": "Uses not-interested-group words -> NOT_INTERESTED",
+      "n_total": 14,
+      "n_interested": 4,
+      "n_not_interested": 10,
+      "accuracy_full": 0.7142857142857143,
+      "cv_accuracies": [
+        1.0,
+        1.0,
+        0.3333333333333333,
+        1.0,
+        0.6
+      ],
+      "cv_mean": 0.7866666666666667,
+      "cv_std": 0.2745501370929867,
+      "participant_ids": [
+        101,
+        105,
+        106,
+        118,
+        125,
+        133,
+        135,
+        147,
+        149,
+        155,
+        158,
+        161,
+        164,
+        167
+      ]
+    },
+    {
+      "pattern": "Mentions personal therapy -> INTERESTED",
+      "n_total": 8,
+      "n_interested": 4,
+      "n_not_interested": 4,
+      "accuracy_full": 0.5,
+      "cv_accuracies": [],
+      "cv_mean": null,
+      "cv_std": null,
+      "participant_ids": [
+        102,
+        122,
+        125,
+        131,
+        135,
+        155,
+        164,
+        167
+      ]
+    },
+    {
+      "pattern": "Low safety area + treatment experience -> INTERESTED",
+      "n_total": 3,
+      "n_interested": 3,
+      "n_not_interested": 0,
+      "accuracy_full": 1.0,
+      "cv_accuracies": [],
+      "cv_mean": null,
+      "cv_std": null,
+      "participant_ids": [
+        151,
+        155,
+        173
+      ]
+    },
+    {
+      "pattern": "No employment + no treatment + mentions career -> NOT_INTERESTED",
+      "n_total": 13,
+      "n_interested": 4,
+      "n_not_interested": 9,
+      "accuracy_full": 0.6923076923076923,
+      "cv_accuracies": [
+        0.5,
+        0.6666666666666666,
+        0.8,
+        0.6666666666666666
+      ],
+      "cv_mean": 0.6583333333333333,
+      "cv_std": 0.10639287779003088,
+      "participant_ids": [
+        101,
+        105,
+        106,
+        112,
+        118,
+        125,
+        131,
+        133,
+        137,
+        149,
+        154,
+        167,
+        175
+      ]
+    }
+  ],
+  "robustness_rankings": [
+    {
+      "pattern": "Uses interested-group words -> INTERESTED",
+      "robustness_score": 0.7832576538582524,
+      "accuracy": 0.875,
+      "consistency": 0.8775255128608411,
+      "coverage": 0.4,
+      "cv_reliability": 0.9,
+      "n": 16
+    },
+    {
+      "pattern": "No MH treatment + mentions money -> NOT_INTERESTED",
+      "robustness_score": 0.6910746934683313,
+      "accuracy": 0.75,
+      "consistency": 0.8191378671166595,
+      "coverage": 0.3,
+      "cv_reliability": 0.8533333333333333,
+      "n": 12
+    },
+    {
+      "pattern": "Multiracial + mentions pressure -> INTERESTED",
+      "robustness_score": 0.6900877801299659,
+      "accuracy": 0.8,
+      "consistency": 0.7891814893221081,
+      "coverage": 0.25,
+      "cv_reliability": 0.8333333333333333,
+      "n": 10
+    },
+    {
+      "pattern": "No employment + no treatment + mentions career -> NOT_INTERESTED",
+      "robustness_score": 0.6758385469194009,
+      "accuracy": 0.6923076923076923,
+      "consistency": 0.8936071222099691,
+      "coverage": 0.325,
+      "cv_reliability": 0.6583333333333333,
+      "n": 13
+    },
+    {
+      "pattern": "Uses not-interested-group words -> NOT_INTERESTED",
+      "robustness_score": 0.6520159112530564,
+      "accuracy": 0.7142857142857143,
+      "consistency": 0.7254498629070133,
+      "coverage": 0.35,
+      "cv_reliability": 0.7866666666666667,
+      "n": 14
+    },
+    {
+      "pattern": "MH + Family SU treatment + mentions 'help' -> INTERESTED",
+      "robustness_score": 0.6275000000000001,
+      "accuracy": 0.875,
+      "consistency": 0.5,
+      "coverage": 0.2,
+      "cv_reliability": 0.875,
+      "n": 8
+    },
+    {
+      "pattern": "High income + mentions pressure -> Mixed",
+      "robustness_score": 0.6070935492616217,
+      "accuracy": 0.6363636363636364,
+      "consistency": 0.7834936490538904,
+      "coverage": 0.275,
+      "cv_reliability": 0.625,
+      "n": 11
+    },
+    {
+      "pattern": "Sophomore + employed -> INTERESTED",
+      "robustness_score": 0.5966666666666668,
+      "accuracy": 0.8333333333333334,
+      "consistency": 0.5,
+      "coverage": 0.15,
+      "cv_reliability": 0.8333333333333334,
+      "n": 6
+    },
+    {
+      "pattern": "Mentions personal therapy -> INTERESTED",
+      "robustness_score": 0.44,
+      "accuracy": 0.5,
+      "consistency": 0.5,
+      "coverage": 0.2,
+      "cv_reliability": 0.5,
+      "n": 8
+    }
+  ]
+}

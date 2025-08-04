@@ -1,0 +1,52 @@
+DESCRIPTIVE ROBUST ANALYSIS - SUD COUNSELING RESEARCH
+============================================================
+
+METHODOLOGY - Simple & Robust Approaches:
+• Frequency analysis of meaningful terms
+• Co-occurrence analysis (words appearing together)
+• Keyword-in-context analysis
+• Collocation analysis (statistically significant pairs)
+• Simple theme creation from patterns
+
+KEY FINDINGS:
+---------------
+
+1. MOST FREQUENT THEMES (by word count):
+   • Helping Service: 206 mentions (2.6%)
+   • Career Professional: 150 mentions (1.9%)
+   • Family Personal: 80 mentions (1.0%)
+   • Education Learning: 39 mentions (0.5%)
+   • Responsibility Importance: 24 mentions (0.3%)
+
+2. TOP WORD ASSOCIATIONS:
+   • 'like' + 'people': 163 times together
+   • 'help' + 'like': 77 times together
+   • 'like' + 'work': 50 times together
+   • 'family' + 'like': 50 times together
+   • 'just' + 'people': 45 times together
+   • 'help' + 'people': 30 times together
+   • 'like' + 'school': 26 times together
+   • 'like' + 'support': 23 times together
+   • 'because' + 'people': 22 times together
+   • 'people' + 'think': 22 times together
+
+3. MEANINGFUL PHRASES:
+   • 'mental health': 36 times
+   • 'substance abuse': 21 times
+   • 'but think': 16 times
+   • 'helping people': 12 times
+   • 'but definitely': 12 times
+   • 'little bit': 11 times
+   • 'know what': 11 times
+   • 'what want': 11 times
+   • 'people who': 10 times
+   • 'because think': 9 times
+
+4. CATEGORY FREQUENCIES:
+   • Uncertainty: 452 total mentions
+   • Career Work: 175 total mentions
+   • People Focus: 156 total mentions
+   • Family Personal: 106 total mentions
+   • Helping Service: 101 total mentions
+   • Emotions Attitudes: 63 total mentions
+   • Education: 50 total mentions

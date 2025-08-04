@@ -1,0 +1,109 @@
+PHRASE FREQUENCY ANALYSIS BY TOPIC - SUD COUNSELING RESEARCH
+=================================================================
+
+METHODOLOGY:
+• Analyzed phrase frequencies within each topic cluster
+• Ranked phrases by frequency within topic
+• Categorized phrases by semantic meaning
+• Based on optimal balanced 4-topic model
+
+TOPIC 1: Helping People through Personal Experience
+--------------------------------------------------
+Documents: 70
+Total phrase instances: 97
+Unique phrases: 52
+
+Top 10 Most Frequent Phrases:
+ 1. substance_abuse           |   9 times ( 9.3%)
+ 2. big_deal                  |   3 times ( 3.1%)
+ 3. talking_people            |   3 times ( 3.1%)
+ 4. career_path_choose        |   3 times ( 3.1%)
+ 5. great_emotions            |   3 times ( 3.1%)
+ 6. spend_time                |   3 times ( 3.1%)
+ 7. mental_health             |   3 times ( 3.1%)
+ 8. someone_life              |   3 times ( 3.1%)
+ 9. substance_use             |   2 times ( 2.1%)
+10. big_issue                 |   2 times ( 2.1%)
+
+Phrase Categories:
+  Career & Professional: career_path_choose
+  Responsibility & Awareness: big_deal, big_issue, bigger_deal
+  Other: substance_abuse, talking_people, great_emotions, spend_time, mental_health
+
+TOPIC 2: Personal Experience & Background
+--------------------------------------------------
+Documents: 36
+Total phrase instances: 88
+Unique phrases: 51
+
+Top 10 Most Frequent Phrases:
+ 1. little_bit                |   5 times ( 5.7%)
+ 2. whole_family              |   5 times ( 5.7%)
+ 3. mental_health             |   4 times ( 4.5%)
+ 4. high_school               |   4 times ( 4.5%)
+ 5. helping_people            |   3 times ( 3.4%)
+ 6. family_members            |   2 times ( 2.3%)
+ 7. psychology_major          |   2 times ( 2.3%)
+ 8. pre_health                |   2 times ( 2.3%)
+ 9. fields_psychology         |   2 times ( 2.3%)
+10. little_bit_nervous        |   2 times ( 2.3%)
+
+Phrase Categories:
+  Helping & Service: helping_people, trying_help
+  Family & Personal: whole_family, family_members
+  Career & Professional: working_mental_health
+  Field & Medical: fields_psychology
+  Educational: high_school
+  Other: little_bit, mental_health, psychology_major, pre_health, little_bit_nervous
+
+TOPIC 3: Career Planning & Considerations
+--------------------------------------------------
+Documents: 49
+Total phrase instances: 97
+Unique phrases: 49
+
+Top 10 Most Frequent Phrases:
+ 1. help_people               |   8 times ( 8.2%)
+ 2. helping_people            |   7 times ( 7.2%)
+ 3. every_day                 |   6 times ( 6.2%)
+ 4. find_interesting          |   4 times ( 4.1%)
+ 5. big_responsibility        |   3 times ( 3.1%)
+ 6. medical_field             |   3 times ( 3.1%)
+ 7. makes_sense               |   3 times ( 3.1%)
+ 8. little_bit                |   3 times ( 3.1%)
+ 9. strong_personality        |   2 times ( 2.1%)
+10. amount_money              |   2 times ( 2.1%)
+
+Phrase Categories:
+  Helping & Service: help_people, helping_people
+  Family & Personal: strong_personality, parents_friends
+  Responsibility & Awareness: big_responsibility, important_familiar
+  Field & Medical: medical_field
+  Other: every_day, find_interesting, makes_sense, little_bit, amount_money
+
+TOPIC 4: Professional Field Considerations
+--------------------------------------------------
+Documents: 42
+Total phrase instances: 82
+Unique phrases: 44
+
+Top 10 Most Frequent Phrases:
+ 1. mental_health             |  13 times (15.9%)
+ 2. substance_abuse           |   7 times ( 8.5%)
+ 3. pre_med                   |   4 times ( 4.9%)
+ 4. terms_job                 |   2 times ( 2.4%)
+ 5. personal_experience       |   2 times ( 2.4%)
+ 6. personal_connection       |   2 times ( 2.4%)
+ 7. ultimately_supportive     |   2 times ( 2.4%)
+ 8. school_hard               |   2 times ( 2.4%)
+ 9. family_friends            |   2 times ( 2.4%)
+10. using_drugs               |   2 times ( 2.4%)
+
+Phrase Categories:
+  Helping & Service: ultimately_supportive, terms_helpful
+  Family & Personal: personal_experience, personal_connection, family_friends
+  Career & Professional: terms_job, jobs_every_day
+  Field & Medical: pre_med
+  Educational: school_hard
+  Other: mental_health, substance_abuse, using_drugs, become_mental_health, worry_money
+

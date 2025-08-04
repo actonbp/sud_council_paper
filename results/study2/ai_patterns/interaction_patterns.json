@@ -1,0 +1,155 @@
+{
+  "timestamp": "2025-08-02T15:16:21.674020",
+  "simple_patterns": [
+    {
+      "pattern": "Has mental health treatment + mentions \"help\"",
+      "n_total": 12,
+      "n_interested": 9,
+      "accuracy": 0.75,
+      "participants": [
+        100,
+        115,
+        117,
+        122,
+        145,
+        151,
+        155,
+        158,
+        165,
+        169,
+        173,
+        174
+      ]
+    },
+    {
+      "pattern": "No mental health treatment + mentions money/salary",
+      "n_total": 12,
+      "n_not_interested": 9,
+      "accuracy": 0.75,
+      "participants": [
+        101,
+        102,
+        106,
+        109,
+        112,
+        125,
+        131,
+        133,
+        147,
+        149,
+        164,
+        167
+      ]
+    },
+    {
+      "pattern": "Family/friend SU treatment + mentions family",
+      "n_total": 7,
+      "n_interested": 7,
+      "accuracy": 1.0,
+      "participants": [
+        102,
+        155,
+        161,
+        165,
+        169,
+        173,
+        174
+      ]
+    },
+    {
+      "pattern": "Sophomore + mentions career/job",
+      "n_total": 14,
+      "n_interested": 8,
+      "accuracy": 0.5714285714285714,
+      "participants": [
+        100,
+        101,
+        113,
+        117,
+        118,
+        133,
+        135,
+        137,
+        141,
+        149,
+        151,
+        155,
+        158,
+        174
+      ]
+    },
+    {
+      "pattern": "High household income (7+) + mentions pressure/stress",
+      "n_total": 11,
+      "by_label": {
+        "INTERESTED": 7,
+        "NOT_INTERESTED": 4
+      },
+      "participants": [
+        102,
+        109,
+        115,
+        137,
+        148,
+        149,
+        161,
+        162,
+        165,
+        169,
+        175
+      ]
+    }
+  ],
+  "hypothesis_tests": [
+    {
+      "hypothesis": "Women who mention family",
+      "prediction": "NOT_INTERESTED",
+      "n": 9,
+      "accuracy": 0.5555555555555556,
+      "actual_distribution": {
+        "NOT_INTERESTED": 5,
+        "INTERESTED": 4
+      }
+    },
+    {
+      "hypothesis": "Has both MH + family SU treatment + mentions helping",
+      "prediction": "INTERESTED",
+      "n": 8,
+      "accuracy": 0.875,
+      "actual_distribution": {
+        "INTERESTED": 7,
+        "NOT_INTERESTED": 1
+      }
+    },
+    {
+      "hypothesis": "Low income (\u22645) + mentions money",
+      "prediction": "INTERESTED",
+      "n": 5,
+      "accuracy": 0.6,
+      "actual_distribution": {
+        "INTERESTED": 3,
+        "NOT_INTERESTED": 2
+      }
+    },
+    {
+      "hypothesis": "Not employed + mentions career",
+      "prediction": "Mixed",
+      "n": 19,
+      "actual_distribution": {
+        "NOT_INTERESTED": 11,
+        "INTERESTED": 8
+      }
+    },
+    {
+      "hypothesis": "Multiracial + mentions pressure/stress",
+      "prediction": "INTERESTED",
+      "n": 10,
+      "accuracy": 0.8,
+      "actual_distribution": {
+        "INTERESTED": 8,
+        "NOT_INTERESTED": 2
+      }
+    }
+  ],
+  "complex_patterns": "You haven't provided the full dataset, so I can't give you precise numbers or the top 5 most accurate interaction patterns.  However, I can demonstrate the *process* of finding these patterns using the provided 12 participants as an example.  You can then apply this same process to your full dataset.\n\n**Process for Finding Interaction Patterns:**\n\n1. **Create Contingency Tables:**  For each demographic variable and each text feature, create a contingency table showing the relationship with the \"label\" (INTERESTED/NOT_INTERESTED).  For example:\n\n    * **Gender x Mentions Family:**\n\n        | Gender | INTERESTED | NOT_INTERESTED |\n        |---|---|---|\n        | Female | 2 | 4 |\n        | Male | 2 | 4 |\n\n\n    * **MH Treatment x Mentions Help:**\n\n        | MH Treatment | INTERESTED | NOT_INTERESTED |\n        |---|---|---|\n        | True | 0 | 2 |\n        | False | 4 | 6 |\n\n2. **Calculate Percentages:** Within each cell of the contingency table, calculate the percentage of INTERESTED vs. NOT_INTERESTED.  Continuing the example above:\n\n    * **Gender x Mentions Family:**  No clear pattern emerges as the distribution is equal across genders.\n\n    * **MH Treatment x Mentions Help:**\n\n        | MH Treatment | INTERESTED | NOT_INTERESTED |\n        |---|---|---|\n        | True | 0% | 100% |\n        | False | 40% | 60% |\n\n3. **Identify Potential Patterns:** Look for cells with high percentages (e.g., 80% or higher) in one category (INTERESTED or NOT_INTERESTED).  These suggest potential interaction patterns.  In our small example, the \"MH Treatment = True and Mentions Help = True\" group shows a potential pattern (100% NOT_INTERESTED), but there are only 2 participants in this group, so it's not statistically significant.\n\n4. **Combine Demographics and Text Features:** Based on potential patterns observed in individual tables, combine demographics and text features to create new contingency tables. For example:\n\n   * **High Income (Household Income >= 9) x Mentions Money:** (This example combines a demographic and a text feature)\n\n       | High Income & Mentions Money | INTERESTED | NOT_INTERESTED |\n       |---|---|---|\n       | True | 0 | 2 |\n       | False | 4 | 6 |\n\n\n5. **Evaluate Accuracy and Significance:**  Calculate the percentage of INTERESTED vs. NOT_INTERESTED for each combined pattern.  Ensure the pattern has at least 5 participants and achieves at least 80% accuracy in predicting interest.  In our example, \"High Income and Mentions Money\" shows 100% NOT_INTERESTED (2 out of 2 participants). However, only 2 participants fit this pattern, so we need more data to confirm its significance.\n\n6. **Interpret Meaningful Patterns:**  Once you've identified accurate and significant interaction patterns, consider *why* these combinations might be meaningful. This requires careful interpretation based on the context of your research and the specific demographics and text features involved. For instance, if high-income students who mention money are often not interested in counseling, it could suggest they prioritize financially lucrative career paths.\n\n**Applying this to your full dataset:**\n\nYou'll need to repeat this process with all possible combinations of your demographic variables and text features. A systematic approach using code (e.g., Python with Pandas and Numpy) is highly recommended for efficiently generating contingency tables, calculating percentages, and filtering for significant patterns.\n\n**Example Python Code Snippet (Illustrative):**\n\n```python\nimport pandas as pd\n\n# Assuming your data is in a Pandas DataFrame called 'df'\ndf['high_income'] = df['demographics'].apply(lambda x: x['household_income'] >= 9)\n\ncontingency_table = pd.crosstab(\n    index=[df['high_income'], df['text_features'].apply(lambda x: x['mentions_money'])],\n    columns=df['label'],\n    normalize='index' # Calculate percentages within each combination\n)\n\nprint(contingency_table)\n\n# Filter for patterns meeting the criteria (at least 5 participants, 80% accuracy)\n# ... (further filtering logic)\n```\n\n\n\nBy following these steps and applying them to your complete dataset, you can effectively identify and analyze the interaction patterns that best predict interest in counseling. Remember to consider the limitations of your sample size and the potential for spurious correlations when interpreting your results.\n"
+}

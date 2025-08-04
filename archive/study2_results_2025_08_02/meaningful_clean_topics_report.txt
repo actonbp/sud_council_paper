@@ -1,0 +1,36 @@
+MEANINGFUL CLEAN TOPIC ANALYSIS
+======================================================================
+
+MEANINGFUL CONFIGURATION:
+• Number of topics: 3
+• Algorithm: LDA
+• Documents analyzed: 230
+• Meaningful score: 0.527
+
+MEANINGFULNESS METRICS:
+• Topic diversity: 0.733
+• Topic coherence: 0.255
+• Average term length: 6.0 characters
+• Phrase ratio: 6.7%
+• Topic balance: 0.956
+
+MEANINGFUL THEMES:
+----------------------------------------------------------------------
+
+Career & Professional Development (72 docs)
+  • Document count: 72 (31.3%)
+  • Key phrases: mental_health
+  • Important terms: people, job, counselor, help, important, better, work, field, need, wanted, cannot, past
+  • Term characteristics: 1 phrases, 14 single words
+
+Mental Health Focus (80 docs)
+  • Document count: 80 (34.8%)
+  • Key phrases: mental_health
+  • Important terms: people, help, big, mean, work, parents, pretty, health, field, stuff, sometimes, future
+  • Term characteristics: 1 phrases, 14 single words
+
+Career & Professional Development (78 docs)
+  • Document count: 78 (33.9%)
+  • Key phrases: 
+  • Important terms: job, people, working, little, life, interesting, hard, field, counseling, love, career, different
+  • Term characteristics: 0 phrases, 15 single words

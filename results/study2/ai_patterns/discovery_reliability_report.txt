@@ -1,0 +1,113 @@
+
+PATTERN DISCOVERY RELIABILITY TEST
+==================================
+Generated: 2025-08-02 15:39:23.740903
+
+This test ran pattern discovery twice independently to verify that patterns
+are reliable and not due to random variation in AI responses.
+
+DISCOVERY RUN 1:
+================
+Based on the limited provided data, it's challenging to perform a thorough analysis and extract truly insightful patterns with the required criteria.  The "Said" data excerpts are too short and lack context for meaningful thematic analysis.  However, by focusing on demographics and treatment history, we can propose some preliminary patterns.  A larger dataset and more complete textual data would be needed for robust findings.
+
+**Hypothetical Patterns (based on limited data):**
+
+**PATTERN 1: Personal Experience with Mental Health Treatment Predicts Interest**
+- Rule: Participants who have received mental health treatment (MH treatment: 1.0) are more likely to be interested.
+- Accuracy:  *This requires the full dataset to calculate.  Let's assume hypothetically 15/20 interested participants had MH treatment, while only 5/20 not interested did.*  15/20 = 75% (Interested)
+- Group: INTERESTED
+
+**PATTERN 2: Lack of Personal Mental Health Treatment Predicts Disinterest**
+- Rule: Participants who have *not* received mental health treatment (MH treatment: 2.0) are more likely to be *not* interested.
+- Accuracy: *Again, needs full dataset.  Using the hypothetical numbers from Pattern 1, this would be 15/20 = 75% (Not Interested)* 
+- Group: NOT_INTERESTED
+
+**PATTERN 3: First-Year Students Show More Interest**
+- Rule: Participants in their first year (Year: 1.0) are more likely to be interested.
+- Accuracy: *Needs full dataset.  Let's assume 12/20 interested are Year 1, and only 4/20 not interested are.* 12/20 = 60% (This does NOT meet the 75% criteria, highlighting the limitations of this data).
+- Group: INTERESTED (though accuracy needs to be verified with complete data)
+
+
+
+**Important Considerations and Limitations:**
+
+* **Data Scarcity:** The provided text snippets are insufficient for qualitative analysis of language patterns.  Larger samples of their spoken words are needed.
+* **Context is Missing:** We don't know the questions asked in the focus groups, which heavily influences responses.
+* **Coding Clarity:** The meaning of coded values (1.0, 2.0, 3.0) for demographics and treatment history isn't fully explained.  More detailed coding descriptions are necessary (e.g.,  Does 1.0 for employment mean employed full-time, part-time, or something else?).
+* **Need for Statistical Tests:** With the full dataset, statistical tests (e.g., chi-squared) should be used to determine if these patterns are statistically significant and not due to chance.
+
+This analysis serves as a preliminary exploration.  A more robust analysis requires the complete dataset and further clarification on the data coding.
+
+
+DISCOVERY RUN 2:
+================
+After analyzing the limited provided data from 40 participants, it's challenging to extract robust patterns meeting all specified criteria (5+ participants, 75%+ accuracy, specific & measurable) based solely on the coded demographics and short snippets of their statements. The 'Said' sections offer rich qualitative data, but require deeper analysis (e.g., thematic coding) beyond the scope of this immediate task.  
+
+Therefore, the following patterns rely heavily on available demographic information and offer preliminary observations based on the "Said" excerpts. Further qualitative analysis is highly recommended to refine and validate these observations.
+
+**PATTERN 1: Personal Mental Health Treatment Experience and Interest**
+- Rule: Participants who indicated having received mental health treatment (MH treatment: 1.0) are more likely to be INTERESTED.
+- Accuracy:  This pattern requires analyzing all 40 participants' data to determine the exact accuracy. Estimate based on provided examples: 3/3 INTERESTED participants mentioned personal MH treatment experiences. This doesn't meet the 5 participant minimum yet, but is promising for further investigation across the full dataset.
+- Group: INTERESTED
+
+**PATTERN 2: Uncertainty about the Profession and Lack of Interest**
+- Rule: Participants expressing uncertainty or lack of knowledge about the specifics of a SUD counseling career (using phrases like "I don't know," "not sure," or questioning job details) are more likely to be NOT_INTERESTED.
+- Accuracy: Requires full dataset analysis. Based on examples: 2/3 NOT_INTERESTED participants expressed uncertainty (Participants 101 & 105).  This doesn't meet the 5 participant minimum yet.
+- Group: NOT_INTERESTED
+
+
+**PATTERN 3: Explicit Expression of Doubt or Discomfort related to Counseling and Lack of Interest**
+- Rule: Participants who explicitly state doubts about their ability or comfort level with emotional aspects of counseling (e.g., "not good with emotions," "don't think I could do that") are likely NOT_INTERESTED.
+- Accuracy: Requires full dataset analysis.  Participant 105 explicitly expresses discomfort with emotions, suggesting a potential pattern. Needs further verification across the entire dataset.
+- Group: NOT_INTERESTED
+
+**POTENTIAL PATTERNS (Requiring Full Data Analysis):**
+
+**PATTERN 4:  Family History of Substance Use Treatment and Interest**
+- Rule:  Participants with a family history of substance use treatment may be more likely to be INTERESTED.  This needs verification as the examples are mixed (2/3 INTERESTED participants report family SU treatment).
+- Accuracy:  Requires full dataset analysis.
+- Group: Potentially INTERESTED
+
+**PATTERN 5:  Employment Status and Interest**
+- Rule: Employment status (Employed: 1.0, 2.0, 3.0) may correlate with interest. The provided examples don't offer a clear distinction yet.  A cross-tabulation of employment status and interest across all 40 participants is needed.
+- Accuracy: Requires full dataset analysis.
+- Group:  Unknown (requires further analysis)
+
+
+**Important Considerations:**
+
+* **Limited Data:** The provided snippets offer a glimpse but don't represent the full richness of the focus group data.  Thorough qualitative analysis of the "Said" sections is essential for extracting more nuanced patterns.
+* **Sample Size:**  With only 40 participants, identified patterns should be treated as preliminary observations and require careful validation with larger datasets if possible.
+* **Coding Consistency:** It's crucial to ensure consistent coding practices across all participant data to avoid introducing bias into the analysis.
+
+
+By analyzing the full dataset and performing deeper qualitative analysis of the verbal responses, more robust and insightful patterns distinguishing INTERESTED and NOT_INTERESTED participants can be identified.
+
+
+COMPARISON ANALYSIS:
+====================
+REPLICATED PATTERNS:
+- Pattern: Personal Mental Health Treatment Experience and Interest
+  Run 1 version: Participants who have received mental health treatment (MH treatment: 1.0) are more likely to be interested.
+  Run 2 version: Participants who indicated having received mental health treatment (MH treatment: 1.0) are more likely to be INTERESTED.
+
+
+UNIQUE TO RUN 1:
+- Lack of Personal Mental Health Treatment Predicts Disinterest
+- First-Year Students Show More Interest
+
+UNIQUE TO RUN 2:
+- Uncertainty about the Profession and Lack of Interest
+- Explicit Expression of Doubt or Discomfort related to Counseling and Lack of Interest
+- Family History of Substance Use Treatment and Interest
+- Employment Status and Interest
+
+
+CONSISTENCY SCORE: 1/6 patterns replicated (16.7%)  *(Note:  We're counting the total number of distinct patterns identified across *both* runs as the denominator. There are 3 unique to Run 1 + 3 unique to Run 2 + 1 replicated = 7 distinct patterns total)*
+
+
+INTERPRETATION:
+===============
+Patterns that appear in both runs can be considered more reliable findings.
+The consistency score indicates how reproducible our pattern discovery is.
+Higher consistency (>70%) suggests robust patterns that reviewers can trust.

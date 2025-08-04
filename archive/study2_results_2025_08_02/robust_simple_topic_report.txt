@@ -1,0 +1,38 @@
+ROBUST SIMPLE TOPIC MODELING - SUD COUNSELING RESEARCH
+============================================================
+
+METHODOLOGY - Bottom-Up Discovery:
+• Strategic domain filtering (removed circular terms only)
+• N-gram extraction using sklearn CountVectorizer
+• Weighted TF-IDF (phrases get 2-3x weight)
+• LDA topic modeling with 4 topics
+• Robustness testing across 5 runs
+
+ROBUSTNESS ASSESSMENT:
+• Overall stability: 0.184 (POOR)
+• Individual topic stability: ['0.256', '0.194', '0.122', '0.166']
+
+DISCOVERED TOPICS:
+--------------------
+
+Service-Oriented Helping with Responsibility (34.2%)
+  Documents: 67
+  Key words: work, working, interesting, people, field
+  Stability: 0.256
+
+Personal & Family Experience Driving Service (21.9%)
+  Documents: 43
+  Key words: supportive, support, care, abuse, parents
+  Stability: 0.194
+
+Personal & Family Experience Driving Service (25.5%)
+  Documents: 50
+  Key phrases: help_people
+  Key words: personal, people, school, personally, probably
+  Stability: 0.122
+
+People-Focused Helping & Support (18.4%)
+  Documents: 36
+  Key phrases: helping_people, help_people
+  Key words: people, helping, help, interested, field
+  Stability: 0.166

@@ -1,0 +1,55 @@
+DOMAIN-FILTERED UNDERLYING THEMES ANALYSIS
+================================================================================
+
+DOMAIN FILTERING CONFIGURATION:
+• Number of underlying themes: 2
+• Algorithm: LDA
+• Documents analyzed: 231
+• Underlying themes score: 0.753
+
+DOMAIN FILTERING IMPACT:
+• Target domain terms removed: 35
+• Total domain term occurrences removed: 373
+• Meaningful phrases discovered: 153
+
+QUALITY METRICS:
+• Theme diversity: 0.867
+• Topic coherence: 0.340
+• Theme balance: 0.978
+• Theme quality: 0.850
+
+UNDERLYING THEMES (DOMAIN TERMS REMOVED):
+--------------------------------------------------------------------------------
+
+Career & Practical Considerations (113 docs)
+  • Key phrases: little_bit
+  • Key words: help, people, job, work, field, stuff, pretty, important, else, long
+  • Top motivations: career practical, helping altruism, life meaning
+
+Helping & Altruistic Motivation (118 docs)
+  • Key phrases: helping_people
+  • Key words: helping, parents, different, people, working, mean, family, similar, school, job
+  • Top motivations: helping altruism, career practical, social impact
+
+REMOVED DOMAIN TERMS:
+----------------------------------------
+  • 'mental': 57 occurrences
+  • 'health': 52 occurrences
+  • 'substance': 38 occurrences
+  • 'counselor': 31 occurrences
+  • 'abuse': 26 occurrences
+  • 'profession': 19 occurrences
+  • 'therapist': 18 occurrences
+  • 'therapy': 17 occurrences
+  • 'psychology': 16 occurrences
+  • 'counseling': 11 occurrences
+  • 'alcohol': 9 occurrences
+  • 'addiction': 9 occurrences
+  • 'psychologist': 8 occurrences
+  • 'patients': 8 occurrences
+  • 'drug': 7 occurrences
+  • 'clinic': 7 occurrences
+  • 'patient': 7 occurrences
+  • 'disorder': 6 occurrences
+  • 'substances': 4 occurrences
+  • 'client': 3 occurrences

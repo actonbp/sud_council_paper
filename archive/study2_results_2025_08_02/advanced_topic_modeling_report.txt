@@ -1,0 +1,53 @@
+ADVANCED TOPIC MODELING COMPARISON - SUD COUNSELING RESEARCH
+=================================================================
+
+OBJECTIVE:
+Capture the core patterns identified: education, family, helping people
+Test different approaches beyond traditional LDA
+
+APPROACHES TESTED:
+--------------------
+
+BERTopic:
+  • Topics: 3
+  • Core patterns captured: 0
+  • Balance score: 0.681
+
+Semantic Clustering:
+  • Topics: 4
+  • Core patterns captured: 2
+  • Balance score: 0.72
+
+Focused LDA:
+  • Topics: 3
+  • Core patterns captured: 2
+  • Balance score: 0.328
+
+DETAILED RESULTS BY APPROACH:
+-----------------------------------
+
+BERTopic:
+  Topic 0: Like-Centered Theme (26.0%)
+    Top terms: like, to, it, that, and, of, the, you
+  Topic 1: Like-Centered Theme (25.1%)
+    Top terms: like, it, of, the, and, that, to, think
+  Topic 2: Like-Centered Theme (11.5%)
+    Top terms: like, my, they, me, would, and, think, to
+
+Semantic Clustering:
+  Topic 0: Helping People & Service Motivation (22.9%)
+    Top terms: like, think, just, know, really, supportive, want, people
+  Topic 1: Like-Centered Theme (26.9%)
+    Top terms: like, just, know, people, think, feel, health, mental
+  Topic 2: Like-Centered Theme (15.4%)
+    Top terms: like, think, yeah, just, know, don, mean, just like
+  Topic 3: Professional & Work Focus (34.8%)
+    Top terms: like, think, just, kind, know, really, want, people
+
+Focused LDA:
+  Topic 0: Education & Learning Focus (14.1%)
+    Top terms: think, school, okay, yeah, profession, health, mental, mental health
+  Topic 1: Support & Care Orientation (21.1%)
+    Top terms: yeah, supportive, think, ll, like like, probably, doctor, sure
+  Topic 2: Helping People & Service Motivation (64.8%)
+    Top terms: know, think, people, like like, feel, kind, don, feel like

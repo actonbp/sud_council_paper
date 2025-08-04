@@ -1,0 +1,27 @@
+STUDY 2: Participant-Level Text Analysis Results
+===============================================
+
+Dataset: 40 participants (20 interested, 20 not interested)
+Features: 234 TF-IDF terms
+
+Model Selection:
+- Tested 100 hyperparameter combinations
+- Best penalty: 0.12743
+- Best mixture: 1 (Lasso)
+
+Cross-Validation Performance (5-fold, 5 repeats):
+- ROC AUC: 0.62 [95% CI: 0.062-0.812]
+- Accuracy: 0.595
+- Sensitivity: 0.45
+- Specificity: 0.74
+
+Feature Selection:
+- Active features: 7 out of 234 (3%)
+- Features stable in >75% bootstraps: 0
+
+Key Terms Predicting INTEREST:
+research, negative, patients
+
+Key Terms Predicting DISINTEREST:
+pre, school, talk, reading
+

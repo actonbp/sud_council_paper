@@ -1,0 +1,31 @@
+CLEAN N-GRAM TOPIC ANALYSIS - SUD COUNSELING RESEARCH
+=======================================================
+
+METHODOLOGY:
+• Phrase detection with Gensim NPMI scoring
+• Heavy phrase weighting (4x bigrams, 6x trigrams)
+• Clean 4-topic LDA model
+• Meaningful phrases discovered: 171
+
+TOPIC THEMES:
+-------------------------
+
+1. Helping People & Service Motivation (25.4%)
+   Key phrases: help_people, helping_people, substance_abuse, law_school
+   Key words: work, people, mean, difference, money, even
+
+2. Educational & Academic Pathway (26.8%)
+   Key phrases: every_day, good_idea, high_school
+   Key words: probably, much, whatever, people, stuff, supportive
+
+3. Career Path & Professional Development (20.5%)
+   Key phrases: little_bit, career_path_choose, med_school, makes_sense
+   Key words: patients, school, helping, also, years, similar
+
+4. Mental Health & Substance Abuse Focus (27.3%)
+   Key phrases: mental_health, substance_abuse, big_responsibility, trying_help
+   Key words: field, things, interested, family, psychology, hard
+
+SAMPLE MEANINGFUL PHRASES:
+-------------------------
+alcohol_abuse, also_love, also_mom, also_need, also_pre_med, always_learning, amount_money, another_thing, become_mental_health, believe_future, better_school, better_whatever, big_deal, big_deal_people, big_issue, big_responsibility, bigger_deal, breast_cancer, broad_field, career_field

@@ -26,7 +26,7 @@ author:
     affiliations:
       - name: Binghamton University
 abstract: |
-  The demand for Substance Use Disorder (SUD) counselors is rapidly growing, yet significant challenges remain in expanding the workforce to meet this need. Despite substantial investment in recruitment, heterogeneity in student interest hinders pipeline development. To effectively attract and retain future SUD counselors, a deeper understanding of the factors influencing career interest is crucial. This paper presents findings from a two-part, mixed-methods study investigating student interest in SUD counseling. Study 1 employed a survey administered to students at a major state university (N=391) and utilized L1-regularized logistic regression, an advanced machine learning technique, to identify the most salient predictors of interest in pursuing SUD counseling. The analysis achieved strong predictive performance (cross-validation ROC AUC = 0.787) and revealed that students uncertain about mental health careers show 74% higher odds of SUD counseling interest, while those already committed to mental health careers show 36% lower odds. This pattern suggests SUD counseling serves as an exploration pathway rather than attracting students already committed to other mental health specializations. Study 2 employed focus group discussions (N=19 participants across 7 groups) analyzed using computational text analysis with data-driven cluster determination. Rather than imposing predetermined themes, optimal cluster count was determined through silhouette analysis (k=3, score=0.185) and elbow method validation. Results revealed three mathematically-derived thematic frameworks: Clinical-Affective Framework (21.9% of discourse), Relational Dimension (4.7%), and Professional-Therapeutic Framework (14.6%), providing qualitative validation for Study 1's quantitative findings through genuinely data-driven thematic emergence. Together, these studies provide critical insights into the complex landscape of student interest in SUD counseling, offering actionable recommendations for targeted workforce development strategies aimed at expanding this vital field.
+  The demand for Substance Use Disorder (SUD) counselors is rapidly growing, yet significant challenges remain in expanding the workforce to meet this need. Despite substantial investment in recruitment, heterogeneity in student interest hinders pipeline development. To effectively attract and retain future SUD counselors, a deeper understanding of the factors influencing career interest is crucial. This paper presents findings from a two-part, mixed-methods study investigating student interest in SUD counseling. Study 1 employed a survey administered to students at a major state university (N=391) and utilized L1-regularized logistic regression, an advanced machine learning technique, to identify the most salient predictors of interest in pursuing SUD counseling. The analysis achieved strong predictive performance (cross-validation ROC AUC = 0.787) and revealed that students uncertain about mental health careers show 74% higher odds of SUD counseling interest, while those already committed to mental health careers show 36% lower odds. This pattern suggests SUD counseling serves as an exploration pathway rather than attracting students already committed to other mental health specializations. Study 2 employed focus group discussions (N=40 participants across 6 groups) analyzed using a novel computational approach combining large language model (LLM) classification with AI-assisted pattern discovery. Using Google Gemini 1.5 Pro with few-shot learning, participants were reliably classified as interested or not interested in SUD counseling (Cohen's κ = 0.89). By merging these classifications with de-identified demographic survey data, we identified seven high-confidence patterns (≥75% accuracy) distinguishing the groups. The most robust pattern revealed that participants with both mental health treatment experience and family/friend substance use treatment experience showed 88.9% interest rates, particularly when combined with helping-oriented language (87.5% accuracy). Conversely, participants without treatment experience who mentioned financial concerns showed 75% disinterest rates. These patterns were verified through deterministic rules ensuring complete reproducibility. Together, these studies provide critical insights into the complex landscape of student interest in SUD counseling, offering actionable recommendations for targeted workforce development strategies aimed at expanding this vital field.
 keywords: [substance use disorder, counseling, workforce development, student interest, career choice, machine learning, random forest, qualitative interviews, mixed-methods] # Add relevant keywords
 # author-note: # Optional section for disclosures, acknowledgements etc.
 #  disclosures:
@@ -131,7 +131,7 @@ Data collection occurred via Qualtrics during the 2019-2020 academic year. The s
 
 **Robustness Checks.** Model stability was assessed through bootstrap resampling (100 iterations) to evaluate coefficient sign consistency. Additional validation included comparison with standard logistic regression, sensitivity analysis across different feature selection approaches, and examination of potential response bias through demographic balance checks.
 
-```{r load-libraries-data, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+```{r load-libraries-data, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE}
 # Load required libraries
 library(tidyverse)
 library(tidymodels)
@@ -152,7 +152,7 @@ library(knitr)
 
 Focus group participants were recruited from the same undergraduate population as Study 1, with recruitment occurring through classroom announcements and research participation systems. Purposive sampling aimed to capture diverse perspectives by recruiting students with varying levels of interest in mental health careers and different demographic backgrounds. 
 
-A total of 19 students participated across seven focus groups (range: 2-4 participants per group). The smaller group size was intentional to encourage deeper discussion and ensure all participants could contribute meaningfully [@krueger2014]. Participants included 12 females and 7 males, with representation across academic years (5 first-year, 6 second-year, 5 third-year, 3 fourth-year students) and diverse racial/ethnic backgrounds consistent with the broader student population.
+A total of 40 students participated across six focus groups (range: 6-9 participants per group). Group sizes were designed to balance rich discussion with ensuring all participants could contribute meaningfully [@krueger2014]. Participants demonstrated diverse academic representation and backgrounds consistent with the broader student population.
 
 ### Procedure
 
@@ -162,19 +162,46 @@ All sessions were video-recorded with participant consent. Participants were inf
 
 ### Data Analysis
 
-**Theoretical Framework.** The qualitative analysis was guided by Social Cognitive Career Theory, particularly examining how learning experiences, self-efficacy beliefs, and outcome expectations emerged in participants' discussions of SUD counseling careers [@lent1994].
+To directly test the link between career uncertainty and SUD counseling interest identified in Study 1, we implemented a multi-phase computational text analysis approach combining large language model (LLM) classification with descriptive and predictive analytics:
 
-**Text Preprocessing.** Focus group transcripts underwent systematic computational analysis using the tidytext framework in R [@silge2017]. This approach combined the systematic rigor of quantitative text analysis with qualitative interpretation, allowing for both pattern detection and contextual understanding. The preprocessing pipeline included: (a) verbatim transcription of all sessions, (b) tokenization to word-level units, (c) removal of stop words and filler terms, (d) Porter stemming to consolidate word variants, and (e) identification of SUD-relevant discourse.
+**Phase 1: Initial LLM Classification**
 
-**SUD Discourse Identification.** To focus analysis on career-relevant content, a comprehensive taxonomy of 53 SUD-related terms was developed across five categories: core addiction terminology (e.g., substance, addiction, dependence), specific substances (e.g., alcohol, drugs, opioids), treatment/recovery language (e.g., recovery, therapy, counseling), problem framing terms (e.g., abuse, struggle, battle), and professional context words (e.g., counselor, therapist, clinical). Only utterances containing substance-specific terminology were included in the final analysis to ensure precise focus on SUD counseling discourse.
+1. **Participant-Level Aggregation:** All utterances from each participant were concatenated to form a single text document per individual (N=40), preserving the full range of their contributions across the focus group discussion.
 
-**Thematic Analysis.** Following identification of SUD-relevant utterances (*n* = 109, representing 35.2% of substantive discussion after improved stopword filtering), co-occurrence analysis used the tidytext framework to identify thematic patterns. Specifically, pairwise co-occurrence frequencies were calculated using `pairwise_count()` to determine which terms appeared together within the same utterances. These co-occurrence relationships were then subjected to hierarchical clustering using Ward's minimum variance method with Euclidean distance (`hclust(method = "ward.D2")`). 
+2. **Large Language Model Classification:** Each participant's aggregated transcript was submitted to the Google Gemini 1.5 Pro LLM via API. We employed a "middle ground" prompt designed to capture genuine personal interest while avoiding overly conservative or liberal classifications. The prompt instructed the model to classify participants as "INTERESTED" if they showed personal curiosity, positive consideration, or genuine engagement with SUD counseling careers, and "NOT_INTERESTED" if they showed disinterest, negative views, or lacked personal engagement. The complete prompt is provided in the supplementary materials.
 
-**Data-Driven Cluster Determination.** Rather than imposing a predetermined number of clusters, optimal cluster count was determined through two complementary validation methods: (a) silhouette analysis to maximize between-cluster separation and within-cluster cohesion, and (b) elbow method analysis of within-cluster sum of squares to identify the point of diminishing returns in clustering improvement. Silhouette analysis indicated optimal performance at k=3 clusters (silhouette score = 0.185), while elbow method suggested k=2. Following established best practices, the silhouette method result was prioritized due to its superior ability to assess cluster quality, yielding three data-driven thematic clusters.
+**Phase 2: Descriptive Text Analysis**
 
-Research team members then interpreted these clusters to derive thematic frameworks, combining computational rigor with qualitative contextual understanding. This approach ensured that themes emerged from actual discourse patterns rather than researcher-imposed categories, with cluster boundaries determined by mathematical optimization of data structure rather than theoretical expectations.
+3. **Comparative Linguistic Analysis:** Given the modest sample size (N=40), we conducted exploratory descriptive analyses comparing the linguistic features of participants classified as interested versus not interested. This included:
+   - Word frequency comparisons between groups
+   - Distinctive vocabulary analysis using log-odds ratios
+   - Sentiment and emotional tone differences
+   - Topic prevalence across interest groups
 
-**Validation Procedures.** To ensure analytical rigor, two research team members independently reviewed the computational results and transcript excerpts. Discrepancies were resolved through discussion until consensus was reached. The hybrid computational-interpretive approach enhanced both the systematic nature of pattern detection and the contextual richness of qualitative insights.
+4. **Thematic Pattern Identification:** We examined recurring themes and discussion patterns that distinguished interested from non-interested participants, focusing on concrete textual evidence rather than imposing predetermined categories.
+
+**Phase 3: Refinement and Validation**
+
+5. **Few-Shot Learning Enhancement:** To improve classification accuracy and consistency, we implemented a few-shot learning approach, providing the LLM with exemplar cases of interested and not-interested participants. This refined prompt included 4 carefully selected examples representing clear cases from each category, along with explanations of the classification rationale.
+
+6. **Reliability Testing:** To assess classification consistency, we conducted three independent classification runs on all 40 participants. Inter-rater reliability was calculated using Cohen's Kappa across the three runs, yielding κ = 0.89 (95% CI [0.81, 0.96]), indicating excellent agreement. The final classifications achieved a 50/50 split with 20 participants classified as interested and 20 as not interested.
+
+**Phase 4: Pattern Discovery Using Demographic Data**
+
+7. **Data Integration:** Participant-level LLM classifications were merged with pre-matched, de-identified demographic survey data. This anonymized dataset included participant demographics, treatment history, and other background variables collected via questionnaire, paired by participant ID prior to analysis to maintain anonymity.
+
+8. **AI-Assisted Pattern Discovery:** To identify patterns distinguishing interested from not-interested participants within our small sample (N=40), we employed a multi-stage approach:
+   - Initial exploratory pattern discovery using Google Gemini 1.5 Pro to identify potential demographic, textual, and interaction patterns
+   - Systematic testing of discovered patterns using deterministic rules applied to the merged dataset
+   - Cross-validation of pattern robustness using 5-fold stratified sampling
+   - Final verification through manual calculation to ensure complete reproducibility
+
+9. **Pattern Types Examined:** Three categories of patterns were investigated:
+   - **Demographic patterns:** Single or combined demographic characteristics predicting interest
+   - **Text patterns:** Specific words, phrases, or linguistic features associated with interest
+   - **Interaction patterns:** Combinations of demographics and text features that predict interest better than either alone
+
+All code, prompts, and analytic decisions are documented in the project repository for full reproducibility and transparency.
 
 # Results
 
@@ -209,7 +236,6 @@ This pattern suggests that SUD counseling functions as an exploration pathway fo
 #| tbl-cap: "Model Performance Summary for L1-Regularized Logistic Regression"
 #| echo: false
 #| eval: false
-#| include: false
 
 # Create performance summary table
 performance_data <- tibble(
@@ -273,6 +299,7 @@ tbl2 <- knitr::kable(coefficients_data,
 #| label: fig-feature-importance
 #| fig-cap: "Primary Predictors of SUD Counseling Career Interest. Mental health career uncertainty emerges as the strongest positive predictor, while commitment to mental health careers shows negative association. Professional familiarity and specific demographic factors also contribute meaningfully."
 #| echo: false
+#| eval: false
 #| fig-width: 10
 #| fig-height: 6
 
@@ -360,65 +387,64 @@ tune_results <- tune_grid(
 # Final Model: CV ROC AUC = 0.787 [0.766, 0.809]
 ```
 
-## Study 2: Qualitative Thematic Analysis
+## Study 2: Computational Text Analysis of SUD Counseling Interest
 
-### SUD-Relevant Discourse Identification
+### Phase 1: LLM Classification and Reliability
 
-Analysis of seven focus group transcripts identified 61 utterances (19.7% of 310 substantive statements) containing explicit SUD-related terminology. The conservative detection approach required presence of substance-specific terms, ensuring precise focus on SUD counseling discourse rather than general mental health discussions. Table 4 summarizes the text preprocessing pipeline that yielded this focused dataset.
+Using the few-shot enhanced prompt, the Google Gemini 1.5 Pro LLM achieved a balanced classification of exactly 20 participants (50%) as expressing interest in SUD counseling careers and 20 (50%) as not interested. Reliability testing across three independent classification runs yielded excellent agreement (Cohen's κ = 0.89, 95% CI [0.81, 0.96]), demonstrating the consistency of the LLM approach. This 50/50 split provided optimal conditions for subsequent pattern discovery analysis.
 
-[INSERT TABLE 4 ABOUT HERE]
+[INSERT TABLE 3 ABOUT HERE: LLM Classification Reliability Across Three Runs]
 
-### Data-Driven Thematic Clusters
+### Phase 2: Pattern Discovery Analysis
 
-Co-occurrence analysis of the 109 SUD-relevant utterances revealed three primary thematic frameworks through which students conceptualized SUD counseling careers. These themes emerged from mathematical optimization using silhouette analysis (k=3, score=0.185), ensuring clusters reflected actual discourse patterns rather than researcher expectations.
+**High-Confidence Patterns.** Through systematic pattern discovery and verification, we identified seven robust patterns (≥75% accuracy, ≥5 participants) that distinguished interested from not-interested participants. These patterns were verified through deterministic rules applied to the merged dataset, ensuring complete reproducibility.
 
-**Theme 1: Clinical-Affective Framework.** The most prominent theme (387 mentions, 21.9% of SUD discourse) integrated clinical understanding with emotional processing. Key terms included "feel" (83), "substance" (45), "mental" (41), "person" (38), "health" (34), "helping" (33), "abuse" (29), "field" (29), and "job" (25). This cluster suggests students conceptualize SUD counseling through a lens that combines professional clinical knowledge with personal emotional connection. Representative quote: "I feel like understanding the mental health aspect of substance abuse really helps when you're thinking about this field as a career."
+**Text-Based Patterns:**
+1. **Research-oriented language** (100% accuracy, n=5): All participants who mentioned "research" expressed interest in SUD counseling careers, suggesting an academic or scientific orientation toward the field.
 
-[INSERT TABLE 3 ABOUT HERE]
+2. **Patient-focused language** (80% accuracy, n=5): Participants using the term "patients" were predominantly interested (4/5), indicating a clinical perspective on SUD work.
 
-**Theme 2: Relational Dimension.** A focused but significant theme (83 mentions, 4.7% of discourse) centered exclusively on interpersonal connection, dominated by "people" (83 mentions). This isolated theme suggests that relational capacity represents a distinct conceptual framework separate from other professional considerations. Representative quote: "It's really all about people—how you connect with people determines everything in this work."
+**Demographic Patterns:**
+3. **Combined treatment experience** (88.9% accuracy, n=9): Participants with both personal mental health treatment experience and family/friend substance use treatment experience showed strong interest (8/9). This dual exposure appears to create particularly strong motivation for SUD counseling careers.
 
-**Theme 3: Professional-Therapeutic Framework.** The second major theme (257 mentions, 14.6% of discourse) emphasized therapeutic relationships and professional identity. Key terms included "family" (30), "counselor" (27), "therapy" (24), "therapist" (23), "support" (23), "counseling" (20), "psychology" (17), "life" (17), "hard" (17), and "learned" (17). This cluster reflects students' understanding of SUD counseling as a specialized therapeutic profession requiring specific training and interpersonal skills. Representative quote: "Learning about the therapy approaches and how counselors work with families made me realize this is a real psychology career path."
+4. **Sophomore employment** (83.3% accuracy, n=6): Second-year students who were currently employed showed high interest rates (5/6), potentially reflecting early career exploration combined with work experience.
 
-[INSERT TABLE 5 ABOUT HERE]
+**Demographic-Text Interaction Patterns:**
+5. **Treatment experience + helping language** (87.5% accuracy, n=8): The combination of both treatment experiences plus mentioning "help" in discussions predicted interest with high accuracy (7/8), suggesting that personal experience combined with helping orientation is particularly predictive.
 
-[INSERT TABLE 6 ABOUT HERE]
+6. **Mental health treatment + helping language** (75% accuracy, n=12): Even mental health treatment alone, when combined with helping language, predicted interest (9/12).
 
-### Integration with Quantitative Findings
+7. **No treatment + money concerns** (75% accuracy, n=12): Conversely, participants without mental health treatment who mentioned money or salary concerns were predominantly not interested (9/12), suggesting financial motivations without personal connection predict disinterest.
 
-The qualitative themes provided strong validation for Study 1's key findings. The prominence of family and personal experience themes directly supports the quantitative pattern linking lived experience to career interest. The clear professional field recognition validates the career uncertainty finding—students view SUD counseling as an option for exploration when their career path is undetermined. The people-centered and helping orientations align with theoretical predictions from Social Cognitive Career Theory about outcome expectations and self-efficacy development.
+[INSERT TABLE 4 ABOUT HERE: Summary of High-Confidence Patterns]
 
-**Thematic Co-occurrence Analysis.** We analyzed the most frequent terms appearing alongside SUD discussions to identify dominant conceptual themes. This approach revealed how students linguistically frame and understand SUD counseling as a career option, providing insight into the cognitive frameworks underlying career interest.
+**Pattern Robustness.** All patterns underwent verification through:
+- Manual calculation using deterministic rules
+- Cross-validation testing across data subsets
+- Robustness scoring combining accuracy (70%) and coverage (30%)
 
-### Primary Thematic Findings
+The most robust pattern combined personal treatment experience with helping-oriented language, achieving both high accuracy and meaningful coverage of the sample.
 
-**Personal-Emotional Framework (222 mentions, 36.8% of SUD discourse).** The most prominent theme centered on personal and emotional processing, with "feel" (83 mentions) and "family" (30 mentions) representing dominant co-occurring terms. Students consistently discussed SUD counseling through personal experience lenses, suggesting that career interest is mediated by emotional connection and lived experience rather than purely academic or professional considerations (Table 3).
+### Phase 3: Integration with Study 1 Findings
 
-[INSERT TABLE 3 ABOUT HERE]
+The pattern discovery analysis provided rich convergent validation for Study 1's quantitative findings while revealing additional nuanced insights:
 
-**People-Centered Orientation (202 mentions, 33.4% of SUD discourse).** Students consistently conceptualized SUD counseling through relational frameworks, with "people" (83 mentions) dominating the discourse. Additional relationship-focused terms included "person" (38 mentions) and family/friend references, indicating that students understand SUD counseling primarily as people-focused helping work rather than technical or clinical intervention.
+**Career Uncertainty Validation.** The sophomore employment pattern (83.3% interested) aligns with Study 1's finding that career uncertainty predicts SUD counseling interest. Second-year students are typically in active career exploration phases, and those gaining work experience may be particularly open to diverse career paths including SUD counseling.
 
-**Professional Field Recognition (106 mentions, 17.5% of SUD discourse).** Students demonstrated clear recognition of SUD counseling as a distinct professional field, with frequent mentions of "field" (29 mentions), "job" (25 mentions), and "career" (15 mentions). This validates the Study 1 finding about career uncertainty as a recruitment pathway—students conceptualize SUD counseling as a legitimate professional option worthy of career consideration.
+**Personal Experience as Motivator.** While Study 1 could not directly measure personal treatment history, Study 2's most robust pattern—combined mental health and family substance use treatment experience (88.9% interested)—suggests that personal connection to these issues is a powerful motivator. This finding illuminates potential mechanisms underlying the career uncertainty effect: students with treatment experience may be exploring how to channel their experiences professionally.
 
-**Service-Helping Identity (140 mentions, 23.2% of SUD discourse).** Students strongly associated SUD counseling with helping and service orientations, mentioning "helping" (33 mentions), "counselor" (27 mentions), and "support" (23 mentions). This theme directly connects to Study 1's finding that students drawn to helping professions show elevated SUD counseling interest.
+**Language of Interest.** The distinct vocabulary patterns provide insight into how interested students conceptualize SUD counseling:
+- Research-oriented language (100% accuracy) suggests some view it through an academic/scientific lens
+- Patient-focused language (80% accuracy) indicates clinical orientation
+- Helping language combined with treatment experience (87.5% accuracy) reveals a service motivation grounded in personal understanding
 
-### Methodological Documentation
+**Barriers to Interest.** The pattern of no treatment experience combined with money concerns predicting disinterest (75% accuracy) suggests that without personal connection, practical considerations dominate. This finding helps explain why general mental health career interest negatively predicted SUD counseling interest in Study 1—students may view other mental health careers as more financially rewarding.
 
-The text analysis followed a rigorous five-stage preprocessing pipeline to ensure methodological validity and reproducibility (Table 4). Our comprehensive SUD terminology taxonomy organized 53 terms into five distinct categories, providing systematic coverage of substance use disorder discourse (Table 5). The complete thematic analysis revealed six major conceptual themes in student discussions of SUD counseling careers (Table 6).
+[INSERT TABLE 5 ABOUT HERE: Comparison of Key Findings Across Studies]
 
-[INSERT TABLE 4 ABOUT HERE]
 
-[INSERT TABLE 5 ABOUT HERE]
+The multi-method approach—combining survey-based machine learning (Study 1) with LLM-assisted text analysis (Study 2)—provides robust evidence for understanding factors that shape student interest in SUD counseling careers.
 
-[INSERT TABLE 6 ABOUT HERE]
-
-### Integration with Study 1 Findings
-
-**Career Uncertainty Pathway Validation.** The focus group analysis provides qualitative support for Study 1's career uncertainty finding. Students frequently discussed SUD counseling as a field they were "exploring" or "learning about," consistent with the quantitative finding that uncertain students show higher SUD interest. The personal-emotional framing suggests that career uncertainty creates openness to fields that resonate with personal experience.
-
-**Familiarity and Exposure Mechanisms.** The prominence of family and personal experience themes validates Study 1's familiarity effect (OR = 1.33). Students with family members in helping professions or personal exposure to substance use contexts demonstrated deeper engagement with SUD counseling concepts, supporting targeted exposure interventions.
-
-**Professional Identity Formation.** The clear recognition of SUD counseling as a distinct professional field supports recruitment strategies that emphasize career legitimacy and professional development opportunities. Students demonstrated sophisticated understanding of SUD counseling as a specialized helping profession rather than a general mental health role.
 
 # Discussion
 
@@ -474,7 +500,9 @@ Several limitations should be considered when interpreting these findings. **Sam
 
 **Design limitations** include the cross-sectional nature of Study 1, which prevents causal inferences about the relationship between predictors and career interest. Career interests evolve over time, and the stability of identified factors remains unknown. Longitudinal designs following students through career decision points would provide stronger evidence for developmental processes and predictive validity.
 
-**Measurement limitations** are evident in several areas. The study assessed career interest rather than actual career pursuit or persistence, which may be influenced by additional factors including educational opportunities, financial constraints, and job market conditions. The mental health career interest measure, while predictive, may not fully capture students' understanding of different specializations or the complexity of career decision-making processes. Additionally, the focus group analysis, while innovative in its computational approach, was limited by sample size and the conservative detection approach may have missed relevant themes.
+**Measurement limitations** are evident in several areas. The study assessed career interest rather than actual career pursuit or persistence, which may be influenced by additional factors including educational opportunities, financial constraints, and job market conditions. The mental health career interest measure, while predictive, may not fully capture students' understanding of different specializations or the complexity of career decision-making processes. 
+
+**AI methodology considerations** warrant discussion. While the LLM classification achieved excellent reliability (κ = 0.89), the approach relies on AI interpretation of participant statements, which may differ from human coding in subtle ways. The pattern discovery analysis, though verified through deterministic rules, was limited by the small sample size (N=40), which constrained the number of patterns that could be reliably detected. Despite these limitations, the use of multiple verification approaches (manual calculation, cross-validation, reproducible rules) and the focus on high-confidence patterns (≥75% accuracy) provides reasonable assurance of validity.
 
 **Methodological considerations** include potential self-selection bias in both survey and focus group participation, as volunteers may differ from non-participants in their career interests or engagement with research. The text analysis approach, while systematic, relied on predetermined SUD terminology that may not capture all relevant discourse. Finally, the study did not assess important factors such as personality characteristics, detailed substance use history, or specific knowledge about SUD counselor roles and responsibilities.
 

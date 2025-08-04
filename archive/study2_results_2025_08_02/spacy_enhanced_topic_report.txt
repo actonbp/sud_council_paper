@@ -1,0 +1,37 @@
+SPACY-ENHANCED TOPIC MODELING - SUD COUNSELING RESEARCH
+=================================================================
+
+METHODOLOGY - spaCy Linguistic Analysis:
+• Parts-of-speech tagging for meaningful words
+• Noun phrase extraction for concepts
+• Named entity recognition for context
+• Lemmatization for word normalization
+• Strategic domain filtering
+• Weighted feature matrix (phrases=3x, verbs/adj=2x)
+
+LINGUISTIC TOPIC ANALYSIS RESULTS:
+-----------------------------------
+
+Personal & Family Experience Driving Service (15.9%)
+  Documents: 36
+  Actions: choose, want, hear, try
+  Descriptors: supportive, sure, good, similar
+  Core tokens: think, supportive, sure, say, choose
+
+People-Focused Helping & Support (35.2%)
+  Documents: 80
+  Actions: like, work, want, need
+  Descriptors: interesting, different, well, interested
+  Core tokens: think, like, kind, know, people
+
+Personal & Family Experience Driving Service (25.6%)
+  Documents: 58
+  Actions: feel, help, work, want
+  Descriptors: mental, personal, little, great
+  Core tokens: feel, help, people, think, know
+
+Mixed Motivational Factors (23.3%)
+  Documents: 53
+  Actions: come, mean, talk, guess
+  Descriptors: able, mental, similar
+  Core tokens: know, come, lot, health, mean

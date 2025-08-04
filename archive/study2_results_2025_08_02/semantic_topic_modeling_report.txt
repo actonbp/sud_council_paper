@@ -1,0 +1,32 @@
+CUSTOM SEMANTIC TOPIC MODELING - SUD COUNSELING RESEARCH
+============================================================
+
+METHODOLOGY:
+• Custom semantic themes based on identified core patterns
+• Three core themes: Education, Family, Helping People
+• Keyword and context phrase matching with weights
+• Document assignment based on highest semantic similarity
+
+SEMANTIC THEMES RESULTS:
+------------------------------
+
+Educational & Academic Pathway (18.1%)
+  Documents: 41
+  Average semantic score: 0.1061
+  Top theme words: school
+  Most representative quote:
+    "yeah, med school and just a lot of school and years coming...."
+
+Family Background & Personal Experience (25.6%)
+  Documents: 58
+  Average semantic score: 0.1657
+  Top theme words: family
+  Most representative quote:
+    "yeah, that's pretty much it. i don't have a personal connection...."
+
+Helping People & Service Motivation (37.0%)
+  Documents: 84
+  Average semantic score: 0.1058
+  Top theme words: people, help, helping
+  Most representative quote:
+    "i think for me it's working in the field, which in theory is centered around helping people instead of like making money for like a company...."

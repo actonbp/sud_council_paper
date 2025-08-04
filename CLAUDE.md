@@ -240,3 +240,59 @@ All required packages listed in `scripts/r/r_package_requirements.R`:
 **CURRENT STATUS:** Study 2 reset complete, ready for fresh tidytext approach  
 **Last Updated:** June 29, 2025 - Major cleanup and reset completed  
 **Current Priority:** Create simple, effective Study 2 analysis to complete manuscript
+
+## 📅 UPDATE: JUNE 30, 2025 – STUDY 2 LLM & SUPERVISED ML ROADMAP
+
+### 🔄 What Changed Since June 29
+- **Pivot in Study 2 Strategy:** We will now employ a large-language-model (Google Gemini 1.5 Pro) to assign participant-level interest labels (Interested / Not-Interested / Unclear) from focus-group transcripts.
+- **Python Interface Added:** A single, self-contained script `scripts/study2/python/01_label_interest_gemini.py` will batch-call the Gemini API and cache JSON responses.  A project-level `.env` file supplies `GEMINI_API_KEY`.
+- **Down-stream R Workflow Unchanged:** All feature engineering and modelling will remain in R/tidymodels for parsimony and consistency.
+
+### 🗂️ Minimal Additions to Repository
+```
+scripts/
+  study2/
+    python/
+      01_label_interest_gemini.py   # NEW – Gemini labelling wrapper
+    r/
+      02_prepare_features.R         # NEW – aggregate utterances → TF-IDF
+      03_ml_predict_interest.R      # NEW – glmnet logistic predicting LLM label
+      04_demographic_predictors.R   # NEW – logistic / χ² on demographics
+results/
+  study2/
+    llm_labels.csv                  # Output of Python script
+    tfidf_participant.feather       # R feature matrix
+    model_performance.txt           # ML metrics
+    demographic_or_table.docx       # Demographic results
+```
+
+### 📊 Revised Study 2 Analysis Pipeline
+1. **LLM Labelling (Python)**  → `llm_labels.csv`
+2. **Feature Prep (R)**         → participant-level TF-IDF / embeddings
+3. **Supervised ML (R)**        → L1-logistic, 5-fold CV, variable importance
+4. **Demographic Correlates (R)** → odds-ratios & CIs
+5. **Manuscript Integration**   → Methods, Results, Appendix prompt text
+
+### ⏩ Immediate Next Actions (for July 1 sprint)
+1. Commit `.env.example` with placeholder `GEMINI_API_KEY`.
+2. Draft & test `01_label_interest_gemini.py` on 2–3 participants (enable caching).
+3. Generate full `llm_labels.csv` once stable.
+4. Implement `02_prepare_features.R`; verify token counts & sparsity.
+5. Build and evaluate ML model (`03_ml_predict_interest.R`).
+6. Merge secure demographic file offline and run `04_demographic_predictors.R`.
+7. Start manuscript edits reflecting the new pipeline.
+
+### 🛡️ Repository Rules (June 30 Update)
+- **Python Allowed Only for LLM Labelling:** All other analysis stays in R/tidytext.
+- **No Raw Data in Git:** Transcripts remain under `data/`, `.gitignore` already excludes them.
+- **Cache LLM Calls:** Avoid duplicate API usage; cache JSON or CSV in `results/study2/`.
+- **Do Not Commit `.env`:** Provide `.env.example` instead.
+
+### 🤖 Guidance for Future AI Agents (Supersedes June 29 directives where conflicting)
+1. Maintain **parsimony**—keep new code minimal and self-documenting.
+2. Accept **Python usage only for Gemini labelling**; otherwise follow R/tidytext principles.
+3. **Archive, don't delete**: If pipeline versions change, move old scripts under `archive/`.
+4. Prioritise **manuscript integration**—all analysis steps should feed APA-ready outputs.
+5. Always compile manuscript with `quarto render sud_council_paper.qmd --to apaquarto-docx`.
+
+---

@@ -1,0 +1,43 @@
+N-GRAM FOCUSED TOPIC ANALYSIS FOR SUD COUNSELING RESEARCH
+============================================================
+
+METHODOLOGY:
+• Phrase detection: Gensim with NPMI scoring
+• N-gram weighting: Bigrams (3x), Trigrams (5x), 4+grams (7x)
+• Topic modeling: LDA optimized for phrase interpretability
+• Meaningful phrases discovered: 174
+• Documents analyzed: 227
+
+KEY FINDINGS:
+------------------------------
+
+Mental Health Field Interest
+• Documents: 25 (12.2%)
+• Key phrases: law_school, people_lives, much_one, worry_money, also_pre_med
+• Key words: whatever, people, hard, psychologist, knows, years, supportive, difference
+
+Mental Health Field Interest
+• Documents: 46 (22.4%)
+• Key phrases: substance_abuse, working_mental_health, good_idea, mean_mental_health, many_different
+• Key words: mean, probably, much, well, also, worry, never, anyone
+
+Helping People & Service Motivation
+• Documents: 45 (22.0%)
+• Key phrases: career_path_choose, helping_people, family_member, find_interesting, parents_supportive
+• Key words: field, work, anything, supportive, nursing, doctor, thing, much
+
+Mental Health Field Interest
+• Documents: 52 (25.4%)
+• Key phrases: little_bit, every_day, mental_health, medical_field
+• Key words: things, working, similar, also, profession, interested, nervous, probably
+
+Helping People & Service Motivation
+• Documents: 37 (18.0%)
+• Key phrases: substance_abuse, helping_people, mental_health, help_people, big_responsibility
+• Key words: helping, emotional, comes, people, life, amount, especially, substance
+
+DISCOVERED MEANINGFUL PHRASES:
+------------------------------
+Bigrams (153): alcohol_abuse, also_love, also_mom, also_need, always_learning, amount_money, another_thing, believe_future, better_school, better_whatever, big_deal, big_issue, big_responsibility, bigger_deal, breast_cancer
+Trigrams (21): also_pre_med, become_mental_health, big_deal_people, career_path_choose, experience_substance_abuse, help_mental_health, helping_people_seeing, jobs_every_day, little_bit_nervous, many_different_ways
+4+ grams (0): 

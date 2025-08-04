@@ -1,0 +1,215 @@
+Language Pattern Analysis Results
+Generated: 2025-08-02 15:14:09.892782
+======================================================================
+
+BASIC FREQUENCY ANALYSIS:
+
+Words more common in INTERESTED:
+  'tell': 13 times (ratio: 117.2x)
+  'done': 8 times (ratio: 72.1x)
+  'problem': 7 times (ratio: 63.1x)
+  'point': 7 times (ratio: 63.1x)
+  'whether': 6 times (ratio: 54.1x)
+  'connection': 6 times (ratio: 54.1x)
+  'research': 6 times (ratio: 54.1x)
+  'impact': 6 times (ratio: 54.1x)
+  'another': 5 times (ratio: 45.1x)
+  'though': 5 times (ratio: 45.1x)
+  'considered': 5 times (ratio: 45.1x)
+  'once': 5 times (ratio: 45.1x)
+  'therapist': 14 times (ratio: 10.5x)
+  'worry': 9 times (ratio: 6.7x)
+  'obviously': 8 times (ratio: 6.0x)
+  'learn': 7 times (ratio: 5.2x)
+  'patients': 7 times (ratio: 5.2x)
+  'many': 13 times (ratio: 4.9x)
+  'making': 6 times (ratio: 4.5x)
+  'such': 12 times (ratio: 4.5x)
+
+Words more common in NOT_INTERESTED:
+  'keep': 8 times (ratio: 96.2x)
+  'type': 6 times (ratio: 72.1x)
+  'looking': 6 times (ratio: 72.1x)
+  'optimistic': 5 times (ratio: 60.1x)
+  'find': 12 times (ratio: 16.0x)
+  'talk': 7 times (ratio: 9.3x)
+  'nursing': 7 times (ratio: 9.3x)
+  'remember': 7 times (ratio: 9.3x)
+  'best': 5 times (ratio: 6.7x)
+  'college': 5 times (ratio: 6.7x)
+  'advice': 5 times (ratio: 6.7x)
+  'school': 25 times (ratio: 4.8x)
+  'year': 7 times (ratio: 4.7x)
+  'should': 7 times (ratio: 4.7x)
+  'long': 8 times (ratio: 3.6x)
+  'aspect': 5 times (ratio: 3.3x)
+  'salary': 5 times (ratio: 3.3x)
+  'route': 5 times (ratio: 3.3x)
+  'alcohol': 5 times (ratio: 3.3x)
+  'honestly': 7 times (ratio: 3.1x)
+
+
+======================================================================
+
+AI-DISCOVERED PATTERNS:
+Here are 9 language patterns distinguishing INTERESTED and NOT INTERESTED participants regarding SUD counseling careers:
+
+**PATTERN 1: Expressing Personal Connection/Experience with Therapy/Mental Health**
+
+- Marker: "My therapist," "I've been to therapy," "personal experience," "family member," "I've seen changes"
+- Group: INTERESTED
+- Example quotes: "My whole family pretty much just went to therapy and everyone has gotten better," "My own therapist actually motivated me to be one," "I've seen different changes in my family members through therapy."
+- Insight:  Indicates a deeper understanding and personal stake in mental health, suggesting a greater likelihood of empathy and connection with future clients.
+
+**PATTERN 2: Acknowledging the Emotional Demands and Pressure**
+
+- Marker: "Emotional pressure," "stressful," "intense," "demanding," "a lot of responsibility," "challenging," "intimidating"
+- Group: INTERESTED
+- Example quotes: "the amount of emotional pressure that comes with being a therapist," "It's probably a lot of pressure not just to get them over the substance," "it was a stressful job."
+- Insight:  Demonstrates a realistic awareness of the career's difficulties, suggesting they've considered the emotional toll and are prepared for the challenges.  
+
+**PATTERN 3: Focusing on Salary Concerns as a Barrier**
+
+- Marker: "Doesn't pay enough," "money," "financial stability," "50,000 a year," "lucrative"
+- Group: BOTH (but with different connotations)
+- INTERESTED Example: "I just don't think it's going to work out because it doesn't pay enough."
+- NOT_INTERESTED Example: "the average salary too, that's a huge thing I noticed."
+- Insight:  While both groups mention salary, INTERESTED participants frame it as a hurdle to *overcome*, while NOT_INTERESTED participants often present it as a *deterrent*, justifying disinterest.
+
+**PATTERN 4: Expressing Passion for Helping Others**
+
+- Marker: "Helping people," "passion," "make a difference," "support," "give back"
+- Group: INTERESTED
+- Example quotes: "I have a passion for it and helping people," "being able to like, help somebody in a very, like, personal way,"  "I love to help people."
+- Insight: Reveals a core motivation aligned with the values of the counseling profession, suggesting genuine interest in the work itself.
+
+**PATTERN 5: Discussing Career Exploration and Uncertainty**
+
+- Marker: "Considering," "exploring," "not sure," "many options," "narrowing it down"
+- Group: INTERESTED
+- Example quotes: "I'm just kind of not sure what area to go in, but I would definitely consider substance abuse counseling," "uncertainty right now is just there's so many options," "counseling is interesting to me."
+- Insight: Suggests active engagement with career possibilities and a willingness to learn more about the field.
+
+**PATTERN 6: Dismissing the Profession Outright**
+
+- Marker: "Not for me," "wouldn't be good at it," "not interested," "shocked," "don't believe in the future," "definitely not my field"
+- Group: NOT_INTERESTED
+- Example quotes: "I don't believe in the future that I would be a good counselor," "psychology is definitely not my field," "I don't really want to do it."
+- Insight:  Indicates a firm decision *against* the career, often based on perceived lack of skills or alignment with personal interests.
+
+**PATTERN 7:  Lack of Specific Knowledge about SUD Counseling**
+
+- Marker: "I don't know," "not sure what they do," "what exactly goes along with their job?"
+- Group: NOT_INTERESTED (more frequently and with less effort to elaborate)
+- Example quotes:  "I don't really know," "Like. Like what exactly? Like, goes along with their job? I don't really know."
+- Insight:  Reveals a lack of engagement with the profession, suggesting they haven't actively sought information or considered its nuances.
+
+**PATTERN 8: Using Abstract or General Language**
+
+- Marker: "It's a good thing," "noble cause," "interesting job," "seems like a big responsibility," "moral responsibility"
+- Group: NOT_INTERESTED (more prevalent)
+- Example quotes: "It's an interesting job," "They'd think that it's a noble cause," "it seems like it's like a really big responsibility"
+- Insight:  Reflects a surface-level understanding and limited personal reflection on the career's specifics, often relying on generic descriptions.
+
+**PATTERN 9:  Family Influence as a Deciding Factor (in different ways)**
+
+- Marker: "My parents," "family support," "my mom would be nervous," "financial stability is important to us"
+- Group: BOTH
+- INTERESTED Example: "My parents... want me to do what I love."
+- NOT_INTERESTED Example: "My mom... wants me to be financially independent."
+- Insight: While both groups mention family influence, INTERESTED participants express seeking family *support* for their passion, while NOT_INTERESTED participants highlight family *expectations* related to financial security as reasons *against* the career.
+
+
+These patterns, identifiable through specific language markers, reveal significant differences in the mindsets of those interested in and those not interested in SUD counseling careers.  The frequency can vary, but these patterns emerge consistently across the provided transcripts.  Further analysis with the complete data set would allow for more precise quantification of these trends.
+
+
+======================================================================
+
+EMOTIONAL LANGUAGE:
+## Analysis of Emotional Language in SUD Counseling Career Discussions
+
+Here's a comparison of the emotional language used by the two groups discussing SUD counseling careers:
+
+**1. Emotional Words Used:**
+
+| Group | Emotional Words | Count | Examples |
+|---|---|---|---|
+| **Interested** | pressure (4), love (2), passion, motivated, hopeful, support (2), great, better (2), improve, good, wrong, stopping, underrated, feasible, alternatives, interested | 21 | "amount of emotional pressure," "I love her," "passion for helping people," "hopeful," "support me" |
+| **Not Interested** | interesting (2), eager, positive (2), supportive, noble (2), demanding, great, easily, love | 12 | "interesting field," "positive emotions," "supportive," "noble cause," "demanding" |
+
+**Group 1 (Interested)** uses a wider range of emotion words, including both positive (love, passion, hopeful, support) and negative (pressure, wrong, stopping).  The repetition of "pressure" highlights a key concern.
+
+**Group 2 (Not Interested)** uses fewer emotion words overall, with a skew towards more neutral terms like "interesting" and "supportive."  While positive words like "noble" and "great" appear, they are often qualified or lacking strong personal connection.
+
+
+**2. Positive vs. Negative Sentiment:**
+
+| Group | Positive Sentiment | Negative Sentiment |
+|---|---|---|
+| **Interested** | Expressed about the act of helping, personal connection with therapists, potential for positive change in clients. Examples: "gotten better," "helping people," "I love her." | Focused on financial insecurity, workload, and emotional burden. Examples: "doesn't pay enough," "amount of emotional pressure," "send them over the edge." |
+| **Not Interested** |  Acknowledged the positive aspects of the career (noble, helping). Examples: "noble cause," "positive emotions," "helping people." |  Less direct negativity but more detachment and lack of enthusiasm. Examples: "less responsible," "doesn't seem like a bad job" (weak positive). |
+
+**Group 1 (Interested)** expresses stronger emotions, both positive and negative.  Their positive sentiment is directly tied to the impact of therapy, while negative sentiments relate to personal and financial anxieties.
+
+**Group 2 (Not Interested)** expresses milder positive sentiment, often detached and general.  Their lack of strong negative sentiment might reflect disinterest rather than a truly positive outlook.
+
+**3. Confidence vs. Uncertainty Markers:**
+
+| Group | Confidence Markers | Uncertainty Markers |
+|---|---|---|
+| **Interested** | "I wanted to be," "I have a passion for it," "she's very qualified," "it's possible" | "I don't really know," "I don't think it's going to work out," "unless," "I don't know if I'm going to be able to do it" |
+| **Not Interested** | "I know that," "I think it's an interesting" | "I would not be too eager,"  "I don't really know," "it honestly doesn't seem like a bad job" (hedging), "I guess" (used multiple times) |
+
+**Group 1 (Interested)** shows a mix of confidence and uncertainty. They express desire and passion, but also significant doubt stemming from financial concerns.
+
+**Group 2 (Not Interested)** displays more uncertainty and less confidence.  Their language is hesitant, using qualifiers like "I guess" and hedging their statements.
+
+**4. Personal Emotional Investment Language:**
+
+| Group | Examples |
+|---|---|
+| **Interested** | "My whole family...everyone has gotten better," "I love her," "my own therapist motivated me," "I wanted to take her spot," "my parents," "my friends support me" |
+| **Not Interested** | "They'd be all for it,"  "frequent visits to dentists," "fell in love with...dentistry" (different field), "for me personally" (focused on self rather than client impact)  |
+
+**Group 1 (Interested)** uses highly personal language, referencing family experiences, relationships with therapists, and the emotional influence of others. This reveals a deeper emotional connection to the field.
+
+**Group 2 (Not Interested)**  lacks the same level of personal emotional investment towards counseling. Their examples are either general ("They'd be all for it") or relate to other career paths, demonstrating a lack of personal connection with the specific topic of SUD counseling.
+
+
+In summary, Group 1 (Interested) exhibits a greater range and intensity of emotions, both positive and negative, intertwined with personal experiences and anxieties. Group 2 (Not Interested) displays less emotional engagement with the topic, using more neutral language and expressing more uncertainty.  This analysis highlights the significant role of emotional factors in career decision-making.
+
+
+======================================================================
+
+PHRASE PATTERNS:
+**INTERESTED GROUP PHRASES:**
+
+1. "I don't think" - 7 times (I don't think it's going to work out)
+2. "I don't know" - 6 times (I don't know if I'm going to be able to do it)
+3. "I want to" - 5 times (I want to do nursing)
+4. "help people" - 4 times (I am interested in, like, helping people)
+5. "I think it's" - 4 times (I think it's really important)
+6. "a lot of" - 4 times (It takes a lot of years)
+7. "like a" - 4 times (Like a family)
+8. "mental health" - 3 times (people who have mental health things)
+9. "they would be" - 3 times (they would be supportive)
+10. "make a lot of money" - 3 times (they don't make a lot of money)
+
+
+
+**NOT INTERESTED GROUP PHRASES:**
+
+1. "I think it's" - 6 times (I think it's an interesting job)
+2. "I don't think" - 4 times (I don't think it's a good idea)
+3. "I would say" - 4 times (I would say financials)
+4. "I feel like" - 4 times (I feel like it's a lot smaller)
+5. "I want to" - 3 times (I want to be an ER doctor)
+6. "a lot of" - 3 times (a lot of school and years coming)
+7. "I don't know" - 3 times (I don't know much of that area)
+8. "would be like" - 3 times (would be like, okay)
+9. "like a" - 3 times (like a similar path) 
+10. "mental health" - 3 times (battling with mental health)
+
+
+
+It's important to note that some phrases, like "I don't think," "I want to," "a lot of," "like a," "I don't know," and "mental health" appear frequently in *both* groups. While they meet the criteria of appearing at least 3 times within a group, they are not as distinctive between the groups as other phrases on the list.  I've included them for thoroughness, but the real differentiation comes from the other phrases that are more unique to each group.  For instance, "make a lot of money" is very specific to the Interested Group's concerns about the profession.

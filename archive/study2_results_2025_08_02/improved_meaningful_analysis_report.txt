@@ -1,0 +1,33 @@
+IMPROVED MEANINGFUL TOPIC ANALYSIS - SUD COUNSELING RESEARCH
+============================================================
+
+METHODOLOGY IMPROVEMENTS:
+• Enhanced phrase filtering (removed generic conversation patterns)
+• Semantic grouping and weighting of related phrases
+• Focused 3-topic model for clearest interpretation
+• Prioritized meaningful content over frequency
+• Meaningful phrases discovered: 17
+
+RESEARCH THEMES:
+------------------------------
+
+Mental Health & Substance Abuse Professional Interest (33.5%)
+  Key phrases: substance_abuse, medical_field, trying_help, little_bit
+  Key words: money, school, parents, friends, career, field
+
+Personal & Family Background Influence (32.5%)
+  Key phrases: mental_health, big_responsibility, personal_connection, family_member
+  Key words: people, someone, years, personal, field, patients
+
+Helping Others Through Personal Experience (34.0%)
+  Key phrases: helping_people, help_people, whole_family, parents_supportive, find_interesting
+  Key words: people, probably, different, person, anything, better
+
+MEANINGFUL PHRASES BY CATEGORY:
+-----------------------------------
+Career_Planning: career_path, medical_field
+Field_Focus: mental_health, people_mental_health, substance_abuse, substance_use
+Helping_Motivation: help_people, helping_people, parents_supportive, support_system, trying_help
+Other: find_interesting, people_lives
+Personal_Experience: family_member, personal_connection, whole_family
+Professional_Awareness: big_responsibility

@@ -1,0 +1,43 @@
+FINAL ROBUST TOPIC MODELING ANALYSIS
+================================================================================
+
+EXECUTIVE SUMMARY:
+• Algorithm: NMF
+• Topics identified: 5
+• Documents analyzed: 307
+• Vocabulary features: 492
+• Overall quality score: 0.743
+
+ROBUSTNESS METRICS:
+• Stability (seed consistency): 1.000
+• Coherence (semantic): 0.390
+• Coherence (intrinsic): -2.366
+• Topic diversity: 0.840
+
+IDENTIFIED THEMES:
+--------------------------------------------------------------------------------
+
+Helping & Service Orientation (44 docs)
+  • Stability score: 1.000
+  • Document count: 44
+  • Representative terms: re, help, tell, hard, trying, little, change, different, also, go, someone, every, saying, things, trying help
+
+Helping & Service Orientation (68 docs)
+  • Stability score: 1.000
+  • Document count: 68
+  • Representative terms: people, helping, help, helping people, important, big, said, help people, even, things, better, part, person, now, make
+
+Education & Training (67 docs)
+  • Stability score: 1.000
+  • Document count: 67
+  • Representative terms: don, remember, school, time, much, see, ve, someone, now, anything, didn, work, stage, becoming, interested
+
+Career & Professional Aspects (84 docs)
+  • Stability score: 1.000
+  • Document count: 84
+  • Representative terms: go, also, family, different, field, therapy, job, parents, went, personally, ve, career, working, one, take
+
+Helping & Service Orientation (44 docs)
+  • Stability score: 1.000
+  • Document count: 44
+  • Representative terms: get, good, job, don, ll, family, help, probably, pretty, work, high, get help, whole family, kids, else

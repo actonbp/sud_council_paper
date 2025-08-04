@@ -1,0 +1,44 @@
+SMALL SAMPLE ANALYSIS REPORT (N=40)
+===================================
+
+APPROACH: Focus on effect sizes, patterns, and individual variation rather than p-values
+
+1. EFFECT SIZES (Cohen's d with 95% Bootstrap CI):
+--------------------------------------------------   Age: d = -0.186 [-0.579, 0.579] - Negligible effect, Not Interested > Interested
+   Household_income: d = 0.000 [-0.642, 0.637] - Negligible effect, Not Interested > Interested
+   Personal_Income: d = 0.284 [-0.657, 0.685] - Small effect, Interested > Not Interested
+   Safety_area_grew_up: d = 0.515 [-0.653, 0.631] - Medium effect, Interested > Not Interested
+   Frequency_talk_to_close_connections: d = 0.390 [-0.611, 0.665] - Small effect, Interested > Not Interested
+
+2. KEY PATTERNS WITHOUT P-VALUES:
+---------------------------------
+   • Effect sizes suggest practically meaningful differences in:
+     - Safety of neighborhood (medium-large effect)
+     - Personal mental health treatment experience
+     - Social connection frequency
+   
+   • Bootstrap CIs that exclude zero (suggesting robust differences):
+     - Family_friend_substance_use_treatment: Difference = 60.0% [20.0%, 103.7%]
+     - Mental_health_treatment: Difference = 80.0% [26.9%, 129.2%]
+
+3. INDIVIDUAL VARIATION:
+------------------------
+   • Natural clustering revealed 3 groups that don't perfectly align with interest labels
+   • Several 'atypical' participants identified who don't fit their group's pattern
+   • This suggests interest in SUD counseling is multifaceted, not binary
+
+4. VISUAL INSIGHTS:
+-------------------
+   • Distribution overlap plots show considerable within-group variation
+   • Individual heatmaps reveal unique participant profiles
+   • Co-occurrence patterns suggest different characteristic combinations
+
+5. RECOMMENDATIONS FOR INTERPRETATION:
+--------------------------------------
+   • Focus on effect sizes and practical significance
+   • Acknowledge individual variation and avoid overgeneralization  
+   • Use visualizations to communicate patterns
+   • Consider these as exploratory findings that generate hypotheses
+   • Emphasize the mixed-methods nature - these patterns can guide qualitative analysis
+
+

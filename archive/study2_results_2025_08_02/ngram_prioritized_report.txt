@@ -1,0 +1,28 @@
+N-GRAM PRIORITIZED TOPIC ANALYSIS
+================================================================================
+
+N-GRAM FOCUSED CONFIGURATION:
+• Number of topics: 2
+• Algorithm: LDA
+• Documents analyzed: 229
+• N-gram focused score: 0.499
+
+N-GRAM METRICS:
+• N-gram ratio: 20.0%
+• N-gram quality score: 0.400
+• Topic diversity: 0.900
+• Topic coherence: 0.409
+• Total meaningful phrases detected: 182
+
+PHRASE-RICH THEMES:
+--------------------------------------------------------------------------------
+
+Helping & Service Motivation (117 docs)
+  • N-gram richness: 13.3%
+  • 2-word phrases: mental_health, help_people
+  • Supporting words: help, work, supportive, people, else, person, long, hard, field, different
+
+Helping & Service Motivation (112 docs)
+  • N-gram richness: 26.7%
+  • 2-word phrases: mental_health, helping_people, every_day, high_school
+  • Supporting words: people, mean, school, field, stuff, helping, never, talk, therapist, profession

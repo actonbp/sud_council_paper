@@ -1,0 +1,38 @@
+ROBUST TOPIC MODELING COMPREHENSIVE REPORT
+============================================================
+
+CONFIGURATION:
+Algorithm: NMF
+Number of topics: 5
+Documents analyzed: 307
+Features extracted: 150
+
+QUALITY METRICS:
+Overall stability: 1.000
+Coherence (C_v): 0.421
+Coherence (UMass): -12.084
+Topic diversity: 0.200
+Mean confidence: 1.000
+
+TOPICS WITH INTERPRETATIONS:
+------------------------------------------------------------
+
+Topic 1: Helping/Service (307 docs)
+  Documents: 307 | Stability: 1.000
+  Top 15 terms: you_know, in_general, idea_of, how_much, honestly, helping_people, helping, help_them, help_people, help, hear, health, having, haven, hard
+
+Topic 2: Helping/Service (0 docs)
+  Documents: 0 | Stability: 1.000
+  Top 15 terms: you_know, in_general, idea_of, how_much, honestly, helping_people, helping, help_them, help_people, help, hear, health, having, haven, hard
+
+Topic 3: Helping/Service (0 docs)
+  Documents: 0 | Stability: 1.000
+  Top 15 terms: you_know, in_general, idea_of, how_much, honestly, helping_people, helping, help_them, help_people, help, hear, health, having, haven, hard
+
+Topic 4: Helping/Service (0 docs)
+  Documents: 0 | Stability: 1.000
+  Top 15 terms: you_know, in_general, idea_of, how_much, honestly, helping_people, helping, help_them, help_people, help, hear, health, having, haven, hard
+
+Topic 5: Helping/Service (0 docs)
+  Documents: 0 | Stability: 1.000
+  Top 15 terms: you_know, in_general, idea_of, how_much, honestly, helping_people, helping, help_them, help_people, help, hear, health, having, haven, hard

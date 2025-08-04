@@ -1,0 +1,43 @@
+FINAL OPTIMAL TOPIC ANALYSIS FOR SUD COUNSELING RESEARCH
+============================================================
+
+METHODOLOGY:
+• Text preprocessing: Strategic domain term removal
+• Vectorization: TF-IDF with unigrams + bigrams
+• Topic modeling: Latent Dirichlet Allocation (LDA)
+• Topics (k): 4 (optimal balance of detail and interpretability)
+• Documents analyzed: 227
+
+RESEARCH FINDINGS:
+------------------------------
+
+Family Background Influence
+• Documents: 36 (15.9%)
+• Key terms: support, find, try, since, interesting, talk, alcohol, field, long, sort
+
+Altruistic Helping Motivation
+• Documents: 48 (21.1%)
+• Key terms: helping, years, school, love, interesting, medical, people, field, psychologist, important
+
+Family Background Influence
+• Documents: 41 (18.1%)
+• Key terms: supportive, little, parents, people, nervous, job, little bit, bit, hard, probably
+
+Altruistic Helping with Family Influence
+• Documents: 102 (44.9%)
+• Key terms: mental, people, health, mental health, help, mean, things, substance, better, money
+
+REPRESENTATIVE UTTERANCES:
+------------------------------
+
+Family Background Influence (P=0.913):
+"Well, I've been reading the description. I mean, it sounds like something I'd probably be like, pretty good at because I like talking to people and I like I don't know, I feel like I'm pretty consider..."
+
+Altruistic Helping Motivation (P=0.932):
+"I wanted to be a psychiatrist, but uh, I had like, I didn't want to do the six years of schooling right after college, too. It would just cost way too much money. And also, I want to have a career in ..."
+
+Family Background Influence (P=0.933):
+"I think that in terms of like future careers, for me, there's obviously the financial part of it, but it's also I need a career that's like not going to be stagnant. I'm not doing the same thing every..."
+
+Altruistic Helping with Family Influence (P=0.936):
+"My mom was a clinical social worker. She's like working now to get her degree back, just to get back in the field. And she just talked about, like her experience is a lot just about, like helping peop..."

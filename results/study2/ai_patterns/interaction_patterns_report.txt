@@ -1,0 +1,116 @@
+Demographic + Text Interaction Patterns
+Generated: 2025-08-02 15:16:21.676136
+======================================================================
+
+SIMPLE PATTERNS (Manually Calculated):
+
+Has mental health treatment + mentions "help":
+  N = 12, Accuracy = 75.0%
+
+No mental health treatment + mentions money/salary:
+  N = 12, Accuracy = 75.0%
+
+Family/friend SU treatment + mentions family:
+  N = 7, Accuracy = 100.0%
+
+Sophomore + mentions career/job:
+  N = 14, Accuracy = 57.1%
+
+High household income (7+) + mentions pressure/stress:
+  N = 11
+
+
+HYPOTHESIS TESTS:
+
+Women who mention family:
+  N = 9, Distribution = {'NOT_INTERESTED': 5, 'INTERESTED': 4}
+
+Has both MH + family SU treatment + mentions helping:
+  N = 8, Distribution = {'INTERESTED': 7, 'NOT_INTERESTED': 1}
+
+Low income (≤5) + mentions money:
+  N = 5, Distribution = {'INTERESTED': 3, 'NOT_INTERESTED': 2}
+
+Not employed + mentions career:
+  N = 19, Distribution = {'NOT_INTERESTED': 11, 'INTERESTED': 8}
+
+Multiracial + mentions pressure/stress:
+  N = 10, Distribution = {'INTERESTED': 8, 'NOT_INTERESTED': 2}
+
+
+COMPLEX PATTERNS (AI-Discovered):
+You haven't provided the full dataset, so I can't give you precise numbers or the top 5 most accurate interaction patterns.  However, I can demonstrate the *process* of finding these patterns using the provided 12 participants as an example.  You can then apply this same process to your full dataset.
+
+**Process for Finding Interaction Patterns:**
+
+1. **Create Contingency Tables:**  For each demographic variable and each text feature, create a contingency table showing the relationship with the "label" (INTERESTED/NOT_INTERESTED).  For example:
+
+    * **Gender x Mentions Family:**
+
+        | Gender | INTERESTED | NOT_INTERESTED |
+        |---|---|---|
+        | Female | 2 | 4 |
+        | Male | 2 | 4 |
+
+
+    * **MH Treatment x Mentions Help:**
+
+        | MH Treatment | INTERESTED | NOT_INTERESTED |
+        |---|---|---|
+        | True | 0 | 2 |
+        | False | 4 | 6 |
+
+2. **Calculate Percentages:** Within each cell of the contingency table, calculate the percentage of INTERESTED vs. NOT_INTERESTED.  Continuing the example above:
+
+    * **Gender x Mentions Family:**  No clear pattern emerges as the distribution is equal across genders.
+
+    * **MH Treatment x Mentions Help:**
+
+        | MH Treatment | INTERESTED | NOT_INTERESTED |
+        |---|---|---|
+        | True | 0% | 100% |
+        | False | 40% | 60% |
+
+3. **Identify Potential Patterns:** Look for cells with high percentages (e.g., 80% or higher) in one category (INTERESTED or NOT_INTERESTED).  These suggest potential interaction patterns.  In our small example, the "MH Treatment = True and Mentions Help = True" group shows a potential pattern (100% NOT_INTERESTED), but there are only 2 participants in this group, so it's not statistically significant.
+
+4. **Combine Demographics and Text Features:** Based on potential patterns observed in individual tables, combine demographics and text features to create new contingency tables. For example:
+
+   * **High Income (Household Income >= 9) x Mentions Money:** (This example combines a demographic and a text feature)
+
+       | High Income & Mentions Money | INTERESTED | NOT_INTERESTED |
+       |---|---|---|
+       | True | 0 | 2 |
+       | False | 4 | 6 |
+
+
+5. **Evaluate Accuracy and Significance:**  Calculate the percentage of INTERESTED vs. NOT_INTERESTED for each combined pattern.  Ensure the pattern has at least 5 participants and achieves at least 80% accuracy in predicting interest.  In our example, "High Income and Mentions Money" shows 100% NOT_INTERESTED (2 out of 2 participants). However, only 2 participants fit this pattern, so we need more data to confirm its significance.
+
+6. **Interpret Meaningful Patterns:**  Once you've identified accurate and significant interaction patterns, consider *why* these combinations might be meaningful. This requires careful interpretation based on the context of your research and the specific demographics and text features involved. For instance, if high-income students who mention money are often not interested in counseling, it could suggest they prioritize financially lucrative career paths.
+
+**Applying this to your full dataset:**
+
+You'll need to repeat this process with all possible combinations of your demographic variables and text features. A systematic approach using code (e.g., Python with Pandas and Numpy) is highly recommended for efficiently generating contingency tables, calculating percentages, and filtering for significant patterns.
+
+**Example Python Code Snippet (Illustrative):**
+
+```python
+import pandas as pd
+
+# Assuming your data is in a Pandas DataFrame called 'df'
+df['high_income'] = df['demographics'].apply(lambda x: x['household_income'] >= 9)
+
+contingency_table = pd.crosstab(
+    index=[df['high_income'], df['text_features'].apply(lambda x: x['mentions_money'])],
+    columns=df['label'],
+    normalize='index' # Calculate percentages within each combination
+)
+
+print(contingency_table)
+
+# Filter for patterns meeting the criteria (at least 5 participants, 80% accuracy)
+# ... (further filtering logic)
+```
+
+
+
+By following these steps and applying them to your complete dataset, you can effectively identify and analyze the interaction patterns that best predict interest in counseling. Remember to consider the limitations of your sample size and the potential for spurious correlations when interpreting your results.

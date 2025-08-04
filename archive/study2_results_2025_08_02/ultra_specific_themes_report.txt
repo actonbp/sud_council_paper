@@ -1,0 +1,66 @@
+ULTRA-SPECIFIC THEMES ANALYSIS
+================================================================================
+
+ULTRA-AGGRESSIVE FILTERING CONFIGURATION:
+• Number of ultra-specific themes: 3
+• Algorithm: LDA
+• Documents analyzed: 214
+• Ultra-specific score: 1.040
+
+ULTRA-AGGRESSIVE FILTERING IMPACT:
+• Total filtered terms: 234
+• Total term instances removed: 16032
+• Domain terms removed: 30
+• Generic career terms removed: 17
+• Filler/generic words removed: 37
+• Ultra-specific phrases discovered: 69
+
+QUALITY METRICS:
+• Specificity score: 1.533
+• Theme diversity: 0.967
+• Topic coherence: 0.500
+• Theme balance: 0.907
+
+ULTRA-SPECIFIC THEMES (ALL GENERIC TERMS REMOVED):
+--------------------------------------------------------------------------------
+
+People & Relationships (76 docs)
+  • Specificity level: 5/10
+  • Ultra-specific words: people, money, honestly, especially, talk, learned, choose, enjoy, year, place, situation, making
+
+Helping & Care Orientation (76 docs)
+  • Specificity level: 4/10
+  • Ultra-specific words: every, need, people, supportive, else, school, salary, major, terms, open, route, worry
+
+People & Relationships (62 docs)
+  • Specificity level: 8/10
+  • Ultra-specific phrases: people_need, high_school, path_choose, people_lives
+  • Ultra-specific words: change, person, life, parents, personal, care, wrong, deal
+
+TOP REMOVED TERMS (EXAMPLES):
+----------------------------------------
+   1. 'i' (FILLER): 2042x
+   2. 'like' (FILLER): 1392x
+   3. 'a' (FILLER): 715x
+   4. 'to' (FILLER): 625x
+   5. 'the' (FILLER): 586x
+   6. 'be' (FILLER): 501x
+   7. 'and' (FILLER): 467x
+   8. 'that' (FILLER): 392x
+   9. 'you' (FILLER): 369x
+  10. 're' (FILLER): 367x
+  11. 'of' (FILLER): 364x
+  12. 'in' (FILLER): 337x
+  13. 'so' (FILLER): 296x
+  14. 'just' (FILLER): 277x
+  15. 'me' (FILLER): 252x
+  16. 'go' (FILLER): 229x
+  17. 'think' (FILLER): 212x
+  18. 'know' (FILLER): 201x
+  19. 'my' (FILLER): 180x
+  20. 'but' (FILLER): 177x
+  21. 'they' (FILLER): 167x
+  22. 'he' (FILLER): 163x
+  23. 'some' (FILLER): 154x
+  24. 'do' (FILLER): 154x
+  25. 'have' (FILLER): 150x

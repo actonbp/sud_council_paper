@@ -1,0 +1,99 @@
+
+REPRODUCIBLE PATTERN ANALYSIS REPORT
+====================================
+Generated: 2025-08-02 15:47:18.310504
+
+This analysis uses deterministic rules to find patterns, ensuring
+complete reproducibility for peer review.
+
+HIGH-CONFIDENCE PATTERNS (≥75% accuracy, ≥5 participants):
+==========================================================
+
+1. Mentions research (text)
+   Rule: text contains "research"
+   Matches: 5 participants
+   Accuracy: 100.0%
+   Interested: 5/5
+   Not Interested: 0/5
+   Robustness Score: 0.737
+
+2. Both MH and Family SU Treatment (demographic)
+   Rule: Mental_health_treatment > 1 AND Family_friend_substance_use_treatment > 1
+   Matches: 9 participants
+   Accuracy: 88.9%
+   Interested: 8/9
+   Robustness Score: 0.690
+
+3. Both Treatments + Mentions Help (interaction)
+   Rule: MH > 1 AND Family SU > 1 AND mentions "help"
+   Matches: 8 participants
+   Accuracy: 87.5%
+   Interested: 7/8
+   Robustness Score: 0.672
+
+4. Sophomore + Employed (demographic)
+   Rule: Year_in_school = 2 AND Current_employement = 1
+   Matches: 6 participants
+   Accuracy: 83.3%
+   Interested: 5/6
+   Robustness Score: 0.628
+
+5. MH Treatment + Mentions Help (interaction)
+   Rule: Mental_health_treatment > 1 AND text contains "help"
+   Matches: 12 participants
+   Accuracy: 75.0%
+   Interested: 9/12
+   Robustness Score: 0.615
+
+6. No MH Treatment + Mentions Money (interaction)
+   Rule: Mental_health_treatment = 1 AND text contains money terms
+   Matches: 12 participants
+   Accuracy: 75.0%
+   Not Interested: 9/12
+   Robustness Score: 0.615
+
+7. Mentions patients (text)
+   Rule: text contains "patients"
+   Matches: 5 participants
+   Accuracy: 80.0%
+   Interested: 4/5
+   Not Interested: 1/5
+   Robustness Score: 0.597
+
+
+ALL PATTERNS TESTED:
+====================
+
+DEMOGRAPHIC PATTERNS:
+- Both MH and Family SU Treatment: 9 matches, 88.9% accuracy
+- No Mental Health Treatment: 26 matches, 65.4% accuracy
+- Sophomore + Employed: 6 matches, 83.3% accuracy
+- High Parent Education (College+): 15 matches, 40.0% accuracy
+
+TEXT PATTERNS:
+- Mentions research: 5 matches, 100.0% accuracy
+- Mentions "help": 33 matches, 54.5% accuracy
+- Mentions patients: 5 matches, 80.0% accuracy
+- Mentions pressure/stress: 21 matches, 61.9% accuracy
+- Mentions passion/love: 25 matches, 56.0% accuracy
+- Mentions family: 14 matches, 64.3% accuracy
+- Mentions career: 14 matches, 57.1% accuracy
+- Mentions money/salary: 17 matches, 52.9% accuracy
+
+INTERACTION PATTERNS:
+- Both Treatments + Mentions Help: 8 matches, 87.5% accuracy
+- MH Treatment + Mentions Help: 12 matches, 75.0% accuracy
+- No MH Treatment + Mentions Money: 12 matches, 75.0% accuracy
+- Sophomore + Mentions Career: 14 matches, 57.1% accuracy
+
+
+REPRODUCIBILITY GUARANTEE:
+=========================
+All patterns use exact, deterministic rules that can be verified:
+1. Download the merged dataset (results/study2/merged_demographics_interest.csv)
+2. Apply the rules exactly as specified
+3. Count matches and calculate accuracy
+4. Results will be identical
+
+This approach ensures complete transparency and reproducibility
+for peer review, addressing any concerns about AI-based analysis.

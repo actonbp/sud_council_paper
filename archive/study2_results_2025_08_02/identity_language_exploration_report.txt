@@ -1,0 +1,32 @@
+IDENTITY FORMATION LANGUAGE EXPLORATION - STUDY 2 DATA
+============================================================
+
+PURPOSE:
+Explore actual language patterns in focus group data to identify
+commitment vs uncertainty indicators for Study 1-2 linkage analysis
+
+DATA-DRIVEN FINDINGS:
+-------------------------
+• Commitment language instances: 103
+• Uncertainty language instances: 199
+• Career field mentions: 220
+• Comparison language instances: 214
+• Identity development phrases: 26
+
+Most common uncertainty words:
+  • or: 95 times
+  • could: 28 times
+  • don't know: 27 times
+  • maybe: 25 times
+  • might: 10 times
+  • not sure: 4 times
+  • thinking about: 4 times
+  • perhaps: 2 times
+  • instead of: 1 times
+  • figuring out: 1 times
+
+NEXT STEPS:
+1. Review CSV files to see actual language patterns
+2. Identify most meaningful indicators from real data
+3. Build refined dictionaries based on observed patterns
+4. Test refined approach on subset of data

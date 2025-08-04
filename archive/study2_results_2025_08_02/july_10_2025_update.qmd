@@ -1,0 +1,98 @@
+---
+title: "SUD Counseling Research Update"
+date: "July 10, 2025"
+format:
+  pdf:
+    geometry:
+      - top=1in
+      - bottom=1in
+      - left=1in
+      - right=1in
+---
+
+# Study 1 Results Summary
+
+We completed Study 1 with N=391 undergraduate students using machine learning (L1-regularized logistic regression) to predict interest in SUD counseling careers. The model achieved strong performance (ROC AUC = 0.787).
+
+## Key Findings
+
+**1. Career Uncertainty is the Strongest Predictor**
+- Students committed to mental health careers rarely consider SUD counseling (only 8.5% interested)
+- Students uncertain about mental health careers show much higher interest (33.3%)
+- Students with no mental health career plans show highest interest (64.0%)
+- This suggests SUD counseling attracts career explorers, not mental health specialists
+
+**2. Professional Exposure Matters**
+- Clear dose-response relationship:
+  - No familiarity with SUD counselors: 27.6% interested
+  - Some familiarity: 38.6% interested
+  - More familiarity: 56.1% interested
+
+**3. Timing Matters**
+- First-year students: 40.3% interested
+- Second-year students: 33.5% interested
+- Interest appears to decline in later years (though smaller samples limit conclusions)
+
+**What Wasn't Significant**: Religion/spirituality and race/ethnicity showed no statistically significant effects despite initial appearances.
+
+# Study 2 Analysis Plan
+
+Study 2 uses focus group data from 19 participants across 7 sessions. Given the small sample size, we're taking a different approach than originally planned.
+
+## New Approach: Person-Level Classification
+
+Instead of classifying individual utterances, we'll use Google Gemini to read ALL of each person's comments throughout the focus group and make a holistic judgment about their interest level.
+
+**Why This Makes Sense:**
+- We care about whether the PERSON is interested, not individual statements
+- People express mixed feelings - the LLM can weigh these naturally
+- Someone might show interest through questions without directly stating "I'm interested"
+- The full context provides a more accurate picture
+
+## Implementation Steps
+
+1. **Organize transcripts by person** - compile all utterances from each participant
+2. **Use Gemini for person-level classification**:
+   - INTERESTED: Shows genuine interest in SUD counseling career
+   - NOT_INTERESTED: Expresses disinterest or preference for other paths
+   - NEUTRAL/UNCLEAR: Cannot determine clear interest level
+3. **Extract supporting quotes** - have Gemini identify key utterances that support its classification
+4. **Analyze language patterns** between interested vs not-interested groups
+5. **Link to demographics** - examine if survey responses correlate with interest
+
+## Analysis Focus
+
+With only 19 people, we'll focus on:
+- **Descriptive patterns** rather than statistical prediction
+- **Rich examples** of how students express interest or disinterest
+- **Themes** that validate or extend Study 1 findings
+- **Practical insights** for recruitment messaging
+
+## Linking to Qualtrics Survey Data
+
+**Important**: A subset of focus group participants also completed a separate Qualtrics survey with additional questions about:
+- Demographics (age, year, major, etc.)
+- Career interests and plans
+- Personal experiences with mental health/substance use
+- Attitudes toward counseling professions
+
+We will link each person's focus group classification (INTERESTED/NOT_INTERESTED/NEUTRAL) to their survey responses to explore:
+- Whether demographic factors relate to interest patterns
+- How survey responses align with expressed interest in focus groups
+- Additional context about participants' backgrounds and experiences
+
+All analyses will be descriptive given the small sample size, focusing on patterns and examples rather than statistical significance.
+
+## Timeline
+
+Results should be ready for the next team meeting.
+
+## Expected Outcomes
+
+This approach will tell us:
+- How many focus group participants showed interest (base rate)
+- What language distinguishes interested from not-interested students
+- Whether themes align with Study 1's career uncertainty finding
+- Specific barriers and attractions in students' own words
+
+The combination of Study 1 (what predicts interest) and Study 2 (how interest is expressed) will provide actionable insights for SUD counseling recruitment efforts.

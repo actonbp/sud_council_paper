@@ -1,0 +1,39 @@
+FINAL MOTIVATION-FOCUSED TOPIC ANALYSIS - SUD COUNSELING RESEARCH
+=================================================================
+
+METHODOLOGY - PURE MOTIVATION FOCUS:
+• Complete removal of SUD/mental health domain terms
+• Focus on underlying motivations, not field content
+• Semantic weighting of motivational phrases
+• 3-topic model for clearest motivation themes
+• Domain term instances removed: 316
+• Pure motivational phrases discovered: 11
+
+UNDERLYING MOTIVATION THEMES:
+-----------------------------------
+
+Service Motivation from Personal Experience (79.3%)
+  Motivation phrases: helping_people, whole_family, parents_supportive, big_responsibility
+  Motivation words: supportive, career, family, support, supported, personality
+
+Service Motivation from Personal Experience (13.3%)
+  Motivation phrases: trying_help, people_lives, career_path, support_system
+  Motivation words: helping, family, personality, support, career, careers
+
+Service Motivation from Personal Experience (7.4%)
+  Motivation phrases: parents_supportive, career_path, family_member, helping_people
+  Motivation words: personal, personally, careers, support, family, career
+
+MOTIVATIONAL PHRASES BY CATEGORY:
+----------------------------------------
+Career_Development: career_path
+Helping_Service_Motivation: helping_people, parents_supportive, support_system, trying_help
+Impact_Motivation: people_lives
+Other_Motivation: someone_life
+Personal_Family_Influence: family_member, personal_connection, whole_family
+Responsibility_Awareness: big_responsibility
+
+KEY INSIGHT:
+These results reveal WHY students are drawn to SUD counseling,
+not just WHAT field they're interested in. The analysis shows
+underlying motivational drivers free from circular field terminology.

@@ -110,7 +110,13 @@ if (use_spacy) {
 # 4. Apply lexicon -----------------------------------------------------------
 # ---------------------------------------------------------------------------
 
-lexicon <- read_rds('results/study2/expanded_lexicon.rds')
+# Use final reviewed lexicon if available, otherwise expanded
+if (file.exists('results/study2/expanded_lexicon_final.csv')) {
+  lexicon <- read_csv('results/study2/expanded_lexicon_final.csv', show_col_types = FALSE)
+  message('Using AI-reviewed final lexicon')
+} else {
+  lexicon <- read_rds('results/study2/expanded_lexicon.rds')
+}
 
 scored <- tidy_tokens %>%
   inner_join(lexicon, by = c('lemma' = 'term')) %>%
